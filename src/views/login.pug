@@ -1,0 +1,66 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title Star Admin2 
+  // plugins:css
+  link(rel='stylesheet' href='../vendors/feather/feather.css')
+  link(rel='stylesheet' href='../vendors/mdi/css/materialdesignicons.min.css')
+  link(rel='stylesheet' href='../vendors/ti-icons/css/themify-icons.css')
+  link(rel='stylesheet' href='../vendors/typicons/typicons.css')
+  link(rel='stylesheet' href='../vendors/simple-line-icons/css/simple-line-icons.css')
+  link(rel='stylesheet' href='../vendors/css/vendor.bundle.base.css')
+  // endinject
+  // Plugin css for this page
+  // End plugin css for this page
+  // inject:css
+  link(rel='stylesheet' href='../css/style.css')
+  // endinject
+  link(rel='shortcut icon' href='../images/favicon.png')
+.container-scroller
+  .container-fluid.page-body-wrapper.full-page-wrapper
+    .content-wrapper.d-flex.align-items-center.auth.px-0
+      .row.w-100.mx-0
+        .col-lg-4.mx-auto
+          .auth-form-light.text-left.py-5.px-4.px-sm-5
+            .brand-logo
+              img(src='../images/logo.svg' alt='logo')
+            h4 Hello! let&apos;s get started
+            h6.fw-light Sign in to continue.
+            form.pt-3(action='/backend/logincheck', method='post' , id='form1')
+              .form-group
+                input#exampleInputEmail1.form-control.form-control-lg(type='email', name='mail', placeholder='mail address')
+              .form-group
+                input#exampleInputPassword1.form-control.form-control-lg(type='password', name='password', placeholder='Password')
+              .mt-3
+                button.btn.btn-block.btn-primary.btn-lg.font-weight-medium.auth-form-btn(type='submit',form='form1', value='submit') SIGN IN
+              .my-2.d-flex.justify-content-between.align-items-center
+                .form-check
+                  label.form-check-label.text-muted
+                    input.form-check-input(type='checkbox')
+                    |                       Keep me signed in
+                a.auth-link.text-black(href='#') Forgot password?
+              .mb-2
+                button.btn.btn-block.btn-facebook.auth-form-btn(type='button')
+                  i.ti-facebook.me-2
+                  | Connect using facebook
+              .text-center.mt-4.fw-light
+                | Don&apos;t have an account? 
+                a.text-primary(href='register.html') Create
+    // content-wrapper ends
+  // page-body-wrapper ends
+// container-scroller
+// plugins:js
+script(src='../vendors/js/vendor.bundle.base.js')
+// endinject
+// Plugin js for this page
+script(src='../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js',type='text/css')
+// End plugin js for this page
+// inject:js
+script(src='../js/off-canvas.js')
+script(src='../js/hoverable-collapse.js')
+script(src='../js/template.js')
+script(src='../js/settings.js')
+script(src='../js/todolist.js')
+// endinject

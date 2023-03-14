@@ -1,0 +1,879 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title Star Admin2 
+  // plugins:css
+  link(rel='stylesheet' href='../vendors/feather/feather.css')
+  link(rel='stylesheet' href='../vendors/mdi/css/materialdesignicons.min.css')
+  link(rel='stylesheet' href='../vendors/ti-icons/css/themify-icons.css')
+  link(rel='stylesheet' href='../vendors/typicons/typicons.css')
+  link(rel='stylesheet' href='../vendors/simple-line-icons/css/simple-line-icons.css')
+  link(rel='stylesheet' href='../vendors/css/vendor.bundle.base.css')
+  // endinject
+  // Plugin css for this page
+  link(rel='stylesheet' href='../vendors/datatables.net-bs4/dataTables.bootstrap4.css')
+  link(rel='stylesheet' href='../js/select.dataTables.min.css')
+  // End plugin css for this page
+  // inject:css
+  link(rel='stylesheet' href='../css/style.css')
+  // endinject
+  link(rel='shortcut icon' href='../images/favicon.png')
+.container-scroller
+  #proBanner.row.p-0.m-0.proBanner
+    .col-md-12.p-0.m-0
+      .card-body.card-body-padding.d-flex.align-items-center.justify-content-between
+        .ps-lg-1
+          .d-flex.align-items-center.justify-content-between
+            p.mb-0.font-weight-medium.me-3.buy-now-text Free 24/7 customer support, updates, and more with this template!
+            a.btn.me-2.buy-now-btn.border-0(href='https://www.bootstrapdash.com/product/star-admin-pro/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo' target='_blank') Get Pro
+        .d-flex.align-items-center.justify-content-between
+          a(href='https://www.bootstrapdash.com/product/star-admin-pro/')
+            i.mdi.mdi-home.me-3.text-white
+          button#bannerClose.btn.border-0.p-0
+            i.mdi.mdi-close.text-white.me-0
+  // partial:partials/_navbar.html
+  nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.align-items-top.flex-row
+    .text-center.navbar-brand-wrapper.d-flex.align-items-center.justify-content-start
+      .me-3
+        button.navbar-toggler.navbar-toggler.align-self-center(type='button' data-bs-toggle='minimize')
+          span.icon-menu
+      div
+        a.navbar-brand.brand-logo(href='index.html')
+          img(src='images/logo.svg' alt='logo')
+        a.navbar-brand.brand-logo-mini(href='index.html')
+          img(src='images/logo-mini.svg' alt='logo')
+    .navbar-menu-wrapper.d-flex.align-items-top
+      ul.navbar-nav
+        li.nav-item.font-weight-semibold.d-none.d-lg-block.ms-0
+          h1.welcome-text
+            | Good Morning, 
+            span.text-black.fw-bold John Doe
+          h3.welcome-sub-text Your performance summary this week 
+      ul.navbar-nav.ms-auto
+        li.nav-item.dropdown.d-none.d-lg-block
+          a#messageDropdown.nav-link.dropdown-bordered.dropdown-toggle.dropdown-toggle-split(href='#' data-bs-toggle='dropdown' aria-expanded='false')  Select Category 
+          .dropdown-menu.dropdown-menu-right.navbar-dropdown.preview-list.pb-0(aria-labelledby='messageDropdown')
+            a.dropdown-item.py-3
+              p.mb-0.font-weight-medium.float-left Select category
+            .dropdown-divider
+            a.dropdown-item.preview-item
+              .preview-item-content.flex-grow.py-2
+                p.preview-subject.ellipsis.font-weight-medium.text-dark Bootstrap Bundle 
+                p.fw-light.small-text.mb-0 This is a Bundle featuring 16 unique dashboards
+            a.dropdown-item.preview-item
+              .preview-item-content.flex-grow.py-2
+                p.preview-subject.ellipsis.font-weight-medium.text-dark Angular Bundle
+                p.fw-light.small-text.mb-0 Everything you&rsquo;ll ever need for your Angular projects
+            a.dropdown-item.preview-item
+              .preview-item-content.flex-grow.py-2
+                p.preview-subject.ellipsis.font-weight-medium.text-dark VUE Bundle
+                p.fw-light.small-text.mb-0 Bundle of 6 Premium Vue Admin Dashboard
+            a.dropdown-item.preview-item
+              .preview-item-content.flex-grow.py-2
+                p.preview-subject.ellipsis.font-weight-medium.text-dark React Bundle
+                p.fw-light.small-text.mb-0 Bundle of 8 Premium React Admin Dashboard
+        li.nav-item.d-none.d-lg-block
+          #datepicker-popup.input-group.date.datepicker.navbar-date-picker
+            span.input-group-addon.input-group-prepend.border-right
+              span.icon-calendar.input-group-text.calendar-icon
+            input.form-control(type='text')
+        li.nav-item
+          form.search-form(action='#')
+            i.icon-search
+            input.form-control(type='search' placeholder='Search Here' title='Search here')
+        li.nav-item.dropdown
+          a#notificationDropdown.nav-link.count-indicator(href='#' data-bs-toggle='dropdown')
+            i.icon-mail.icon-lg
+          .dropdown-menu.dropdown-menu-right.navbar-dropdown.preview-list.pb-0(aria-labelledby='notificationDropdown')
+            a.dropdown-item.py-3.border-bottom
+              p.mb-0.font-weight-medium.float-left You have 4 new notifications 
+              span.badge.badge-pill.badge-primary.float-right View all
+            a.dropdown-item.preview-item.py-3
+              .preview-thumbnail
+                i.mdi.mdi-alert.m-auto.text-primary
+              .preview-item-content
+                h6.preview-subject.fw-normal.text-dark.mb-1 Application Error
+                p.fw-light.small-text.mb-0  Just now 
+            a.dropdown-item.preview-item.py-3
+              .preview-thumbnail
+                i.mdi.mdi-settings.m-auto.text-primary
+              .preview-item-content
+                h6.preview-subject.fw-normal.text-dark.mb-1 Settings
+                p.fw-light.small-text.mb-0  Private message 
+            a.dropdown-item.preview-item.py-3
+              .preview-thumbnail
+                i.mdi.mdi-airballoon.m-auto.text-primary
+              .preview-item-content
+                h6.preview-subject.fw-normal.text-dark.mb-1 New user registration
+                p.fw-light.small-text.mb-0  2 days ago 
+        li.nav-item.dropdown
+          a#countDropdown.nav-link.count-indicator(href='#' data-bs-toggle='dropdown' aria-expanded='false')
+            i.icon-bell
+            span.count
+          .dropdown-menu.dropdown-menu-right.navbar-dropdown.preview-list.pb-0(aria-labelledby='countDropdown')
+            a.dropdown-item.py-3
+              p.mb-0.font-weight-medium.float-left You have 7 unread mails 
+              span.badge.badge-pill.badge-primary.float-right View all
+            .dropdown-divider
+            a.dropdown-item.preview-item
+              .preview-thumbnail
+                img.img-sm.profile-pic(src='images/faces/face10.jpg' alt='image')
+              .preview-item-content.flex-grow.py-2
+                p.preview-subject.ellipsis.font-weight-medium.text-dark Marian Garner 
+                p.fw-light.small-text.mb-0  The meeting is cancelled 
+            a.dropdown-item.preview-item
+              .preview-thumbnail
+                img.img-sm.profile-pic(src='images/faces/face12.jpg' alt='image')
+              .preview-item-content.flex-grow.py-2
+                p.preview-subject.ellipsis.font-weight-medium.text-dark David Grey 
+                p.fw-light.small-text.mb-0  The meeting is cancelled 
+            a.dropdown-item.preview-item
+              .preview-thumbnail
+                img.img-sm.profile-pic(src='images/faces/face1.jpg' alt='image')
+              .preview-item-content.flex-grow.py-2
+                p.preview-subject.ellipsis.font-weight-medium.text-dark Travis Jenkins 
+                p.fw-light.small-text.mb-0  The meeting is cancelled 
+        li.nav-item.dropdown.d-none.d-lg-block.user-dropdown
+          a#UserDropdown.nav-link(href='#' data-bs-toggle='dropdown' aria-expanded='false')
+            img.img-xs.rounded-circle(src='images/faces/face8.jpg' alt='Profile image')
+          .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
+            .dropdown-header.text-center
+              img.img-md.rounded-circle(src='images/faces/face8.jpg' alt='Profile image')
+              p.mb-1.mt-3.font-weight-semibold Allen Moreno
+              p.fw-light.text-muted.mb-0 allenmoreno@gmail.com
+            a.dropdown-item
+              i.dropdown-item-icon.mdi.mdi-account-outline.text-primary.me-2
+              |  My Profile 
+              span.badge.badge-pill.badge-danger 1
+            a.dropdown-item
+              i.dropdown-item-icon.mdi.mdi-message-text-outline.text-primary.me-2
+              |  Messages
+            a.dropdown-item
+              i.dropdown-item-icon.mdi.mdi-calendar-check-outline.text-primary.me-2
+              |  Activity
+            a.dropdown-item
+              i.dropdown-item-icon.mdi.mdi-help-circle-outline.text-primary.me-2
+              |  FAQ
+            a.dropdown-item
+              i.dropdown-item-icon.mdi.mdi-power.text-primary.me-2
+              | Sign Out
+      button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-bs-toggle='offcanvas')
+        span.mdi.mdi-menu
+  // partial
+  .container-fluid.page-body-wrapper
+    // partial:partials/_settings-panel.html
+    .theme-setting-wrapper
+      #settings-trigger
+        i.ti-settings
+      #theme-settings.settings-panel
+        i.settings-close.ti-close
+        p.settings-heading SIDEBAR SKINS
+        #sidebar-light-theme.sidebar-bg-options.selected
+          .img-ss.rounded-circle.bg-light.border.me-3
+          | Light
+        #sidebar-dark-theme.sidebar-bg-options
+          .img-ss.rounded-circle.bg-dark.border.me-3
+          | Dark
+        p.settings-heading.mt-2 HEADER SKINS
+        .color-tiles.mx-0.px-4
+          .tiles.success
+          .tiles.warning
+          .tiles.danger
+          .tiles.info
+          .tiles.dark
+          .tiles.default
+    #right-sidebar.settings-panel
+      i.settings-close.ti-close
+      ul#setting-panel.nav.nav-tabs.border-top(role='tablist')
+        li.nav-item
+          a#todo-tab.nav-link.active(data-bs-toggle='tab' href='#todo-section' role='tab' aria-controls='todo-section' aria-expanded='true') TO DO LIST
+        li.nav-item
+          a#chats-tab.nav-link(data-bs-toggle='tab' href='#chats-section' role='tab' aria-controls='chats-section') CHATS
+      #setting-content.tab-content
+        #todo-section.tab-pane.fade.show.active.scroll-wrapper(role='tabpanel' aria-labelledby='todo-section')
+          .add-items.d-flex.px-3.mb-0
+            form.form.w-100
+              .form-group.d-flex
+                input.form-control.todo-list-input(type='text' placeholder='Add To-do')
+                button#add-task.add.btn.btn-primary.todo-list-add-btn(type='submit') Add
+          .list-wrapper.px-3
+            ul.d-flex.flex-column-reverse.todo-list
+              li
+                .form-check
+                  label.form-check-label
+                    input.checkbox(type='checkbox')
+                    |                       Team review meeting at 3.00 PM
+                i.remove.ti-close
+              li
+                .form-check
+                  label.form-check-label
+                    input.checkbox(type='checkbox')
+                    |                       Prepare for presentation
+                i.remove.ti-close
+              li
+                .form-check
+                  label.form-check-label
+                    input.checkbox(type='checkbox')
+                    |                       Resolve all the low priority tickets due today
+                i.remove.ti-close
+              li.completed
+                .form-check
+                  label.form-check-label
+                    input.checkbox(type='checkbox' checked='')
+                    |                       Schedule meeting for next week
+                i.remove.ti-close
+              li.completed
+                .form-check
+                  label.form-check-label
+                    input.checkbox(type='checkbox' checked='')
+                    |                       Project review
+                i.remove.ti-close
+          h4.px-3.text-muted.mt-5.fw-light.mb-0 Events
+          .events.pt-4.px-3
+            .wrapper.d-flex.mb-2
+              i.ti-control-record.text-primary.me-2
+              span Feb 11 2018
+            p.mb-0.font-weight-thin.text-gray Creating component page build a js
+            p.text-gray.mb-0 The total number of sessions
+          .events.pt-4.px-3
+            .wrapper.d-flex.mb-2
+              i.ti-control-record.text-primary.me-2
+              span Feb 7 2018
+            p.mb-0.font-weight-thin.text-gray Meeting with Alisa
+            p.text-gray.mb-0 Call Sarah Graves
+        // To do section tab ends
+        #chats-section.tab-pane.fade(role='tabpanel' aria-labelledby='chats-section')
+          .d-flex.align-items-center.justify-content-between.border-bottom
+            p.settings-heading.border-top-0.mb-3.pl-3.pt-0.border-bottom-0.pb-0 Friends
+            small.settings-heading.border-top-0.mb-3.pt-0.border-bottom-0.pb-0.pr-3.fw-normal See All
+          ul.chat-list
+            li.list.active
+              .profile
+                img(src='images/faces/face1.jpg' alt='image')
+                span.online
+              .info
+                p Thomas Douglas
+                p Available
+              small.text-muted.my-auto 19 min
+            li.list
+              .profile
+                img(src='images/faces/face2.jpg' alt='image')
+                span.offline
+              .info
+                .wrapper.d-flex
+                  p Catherine
+                p Away
+              .badge.badge-success.badge-pill.my-auto.mx-2 4
+              small.text-muted.my-auto 23 min
+            li.list
+              .profile
+                img(src='images/faces/face3.jpg' alt='image')
+                span.online
+              .info
+                p Daniel Russell
+                p Available
+              small.text-muted.my-auto 14 min
+            li.list
+              .profile
+                img(src='images/faces/face4.jpg' alt='image')
+                span.offline
+              .info
+                p James Richardson
+                p Away
+              small.text-muted.my-auto 2 min
+            li.list
+              .profile
+                img(src='images/faces/face5.jpg' alt='image')
+                span.online
+              .info
+                p Madeline Kennedy
+                p Available
+              small.text-muted.my-auto 5 min
+            li.list
+              .profile
+                img(src='images/faces/face6.jpg' alt='image')
+                span.online
+              .info
+                p Sarah Graves
+                p Available
+              small.text-muted.my-auto 47 min
+        // chat tab ends
+    // partial
+    // partial:partials/_sidebar.html
+    nav#sidebar.sidebar.sidebar-offcanvas
+      ul.nav
+        li.nav-item
+          a.nav-link(href='index.html')
+            i.mdi.mdi-grid-large.menu-icon
+            span.menu-title Dashboard
+        li.nav-item.nav-category UI Elements
+        li.nav-item
+          a.nav-link(data-bs-toggle='collapse' href='#ui-basic' aria-expanded='false' aria-controls='ui-basic')
+            i.menu-icon.mdi.mdi-floor-plan
+            span.menu-title UI Elements
+            i.menu-arrow
+          #ui-basic.collapse
+            ul.nav.flex-column.sub-menu
+              li.nav-item
+                a.nav-link(href='pages/ui-features/buttons.html') Buttons
+              li.nav-item
+                a.nav-link(href='pages/ui-features/dropdowns.html') Dropdowns
+              li.nav-item
+                a.nav-link(href='pages/ui-features/typography.html') Typography
+        li.nav-item.nav-category Forms and Datas
+        li.nav-item
+          a.nav-link(data-bs-toggle='collapse' href='#form-elements' aria-expanded='false' aria-controls='form-elements')
+            i.menu-icon.mdi.mdi-card-text-outline
+            span.menu-title Form elements
+            i.menu-arrow
+          #form-elements.collapse
+            ul.nav.flex-column.sub-menu
+              li.nav-item
+                a.nav-link(href='pages/forms/basic_elements.html') Basic Elements
+        li.nav-item
+          a.nav-link(data-bs-toggle='collapse' href='#charts' aria-expanded='false' aria-controls='charts')
+            i.menu-icon.mdi.mdi-chart-line
+            span.menu-title Charts
+            i.menu-arrow
+          #charts.collapse
+            ul.nav.flex-column.sub-menu
+              li.nav-item
+                a.nav-link(href='pages/charts/chartjs.html') ChartJs
+        li.nav-item
+          a.nav-link(data-bs-toggle='collapse' href='#tables' aria-expanded='false' aria-controls='tables')
+            i.menu-icon.mdi.mdi-table
+            span.menu-title Tables
+            i.menu-arrow
+          #tables.collapse
+            ul.nav.flex-column.sub-menu
+              li.nav-item
+                a.nav-link(href='/backend/tables') Basic table
+        li.nav-item
+          a.nav-link(data-bs-toggle='collapse' href='#icons' aria-expanded='false' aria-controls='icons')
+            i.menu-icon.mdi.mdi-layers-outline
+            span.menu-title Icons
+            i.menu-arrow
+          #icons.collapse
+            ul.nav.flex-column.sub-menu
+              li.nav-item
+                a.nav-link(href='pages/icons/mdi.html') Mdi icons
+        li.nav-item.nav-category pages
+        li.nav-item
+          a.nav-link(data-bs-toggle='collapse' href='#auth' aria-expanded='false' aria-controls='auth')
+            i.menu-icon.mdi.mdi-account-circle-outline
+            span.menu-title User Pages
+            i.menu-arrow
+          #auth.collapse
+            ul.nav.flex-column.sub-menu
+              li.nav-item
+                a.nav-link(href='pages/samples/login.html')  Login 
+        li.nav-item.nav-category help
+        li.nav-item
+          a.nav-link(href='http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html')
+            i.menu-icon.mdi.mdi-file-document
+            span.menu-title Documentation
+    // partial
+    .main-panel
+      .content-wrapper
+        .row
+          .col-sm-12
+            .home-tab
+              .d-sm-flex.align-items-center.justify-content-between.border-bottom
+                ul.nav.nav-tabs(role='tablist')
+                  li.nav-item
+                    a#home-tab.nav-link.active.ps-0(data-bs-toggle='tab' href='#overview' role='tab' aria-controls='overview' aria-selected='true') Overview
+                  li.nav-item
+                    a#profile-tab.nav-link(data-bs-toggle='tab' href='#audiences' role='tab' aria-selected='false') Audiences
+                  li.nav-item
+                    a#contact-tab.nav-link(data-bs-toggle='tab' href='#demographics' role='tab' aria-selected='false') Demographics
+                  li.nav-item
+                    a#more-tab.nav-link.border-0(data-bs-toggle='tab' href='#more' role='tab' aria-selected='false') More
+                div
+                  .btn-wrapper
+                    a.btn.btn-otline-dark.align-items-center(href='#')
+                      i.icon-share
+                      |  Share
+                    a.btn.btn-otline-dark(href='#')
+                      i.icon-printer
+                      |  Print
+                    a.btn.btn-primary.text-white.me-0(href='#')
+                      i.icon-download
+                      |  Export
+              .tab-content.tab-content-basic
+                #overview.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='overview')
+                  .row
+                    .col-sm-12
+                      .statistics-details.d-flex.align-items-center.justify-content-between
+                        div
+                          p.statistics-title Bounce Rate
+                          h3.rate-percentage 32.53%
+                          p.text-danger.d-flex
+                            i.mdi.mdi-menu-down
+                            span -0.5%
+                        div
+                          p.statistics-title Page Views
+                          h3.rate-percentage 7,682
+                          p.text-success.d-flex
+                            i.mdi.mdi-menu-up
+                            span +0.1%
+                        div
+                          p.statistics-title New Sessions
+                          h3.rate-percentage 68.8
+                          p.text-danger.d-flex
+                            i.mdi.mdi-menu-down
+                            span 68.8
+                        .d-none.d-md-block
+                          p.statistics-title Avg. Time on Site
+                          h3.rate-percentage 2m:35s
+                          p.text-success.d-flex
+                            i.mdi.mdi-menu-down
+                            span +0.8%
+                        .d-none.d-md-block
+                          p.statistics-title New Sessions
+                          h3.rate-percentage 68.8
+                          p.text-danger.d-flex
+                            i.mdi.mdi-menu-down
+                            span 68.8
+                        .d-none.d-md-block
+                          p.statistics-title Avg. Time on Site
+                          h3.rate-percentage 2m:35s
+                          p.text-success.d-flex
+                            i.mdi.mdi-menu-down
+                            span +0.8%
+                  .row
+                    .col-lg-8.d-flex.flex-column
+                      .row.flex-grow
+                        .col-12.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body
+                              .d-sm-flex.justify-content-between.align-items-start
+                                div
+                                  h4.card-title.card-title-dash Market Overview
+                                  p.card-subtitle.card-subtitle-dash Lorem ipsum dolor sit amet consectetur adipisicing elit
+                                div
+                                  .dropdown
+                                    button#dropdownMenuButton2.btn.btn-secondary.dropdown-toggle.toggle-dark.btn-lg.mb-0.me-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')  This month 
+                                    .dropdown-menu(aria-labelledby='dropdownMenuButton2')
+                                      h6.dropdown-header Settings
+                                      a.dropdown-item(href='#') Action
+                                      a.dropdown-item(href='#') Another action
+                                      a.dropdown-item(href='#') Something else here
+                                      .dropdown-divider
+                                      a.dropdown-item(href='#') Separated link
+                              .d-sm-flex.align-items-center.mt-1.justify-content-between
+                                .d-sm-flex.align-items-center.mt-4.justify-content-between
+                                  h2.me-2.fw-bold $36,2531.00
+                                  h4.me-2 USD
+                                  h4.text-success (+1.37%)
+                                .me-3
+                                  #marketing-overview-legend
+                              .chartjs-bar-wrapper.mt-3
+                                canvas#marketingOverview
+                      .row.flex-grow
+                        .col-12.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body
+                              .d-sm-flex.justify-content-between.align-items-start
+                                div
+                                  h4.card-title.card-title-dash Pending Requests
+                                  p.card-subtitle.card-subtitle-dash You have 50+ new requests
+                                div
+                                  button.btn.btn-primary.btn-lg.text-white.mb-0.me-0(type='button')
+                                    i.mdi.mdi-account-plus
+                                    | Add new member
+                              .table-responsive.mt-1
+                                table.table.select-table
+                                  thead
+                                    tr
+                                      th
+                                        .form-check.form-check-flat.mt-0
+                                          label.form-check-label
+                                            input.form-check-input(type='checkbox' aria-checked='false')
+                                            i.input-helper
+                                      th Customer
+                                      th Company
+                                      th Progress
+                                      th Status
+                                  tbody
+                                    tr
+                                      td
+                                        .form-check.form-check-flat.mt-0
+                                          label.form-check-label
+                                            input.form-check-input(type='checkbox' aria-checked='false')
+                                            i.input-helper
+                                      td
+                                        .d-flex
+                                          img(src='images/faces/face1.jpg' alt='')
+                                          div
+                                            h6 Brandon Washington
+                                            p Head admin
+                                      td
+                                        h6 Company name 1
+                                        p company type
+                                      td
+                                        div
+                                          .d-flex.justify-content-between.align-items-center.mb-1.max-width-progress-wrap
+                                            p.text-success 79%
+                                            p 85/162
+                                          .progress.progress-md
+                                            .progress-bar.bg-success(role='progressbar' style='width: 85%' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100')
+                                      td
+                                        .badge.badge-opacity-warning In progress
+                                    tr
+                                      td
+                                        .form-check.form-check-flat.mt-0
+                                          label.form-check-label
+                                            input.form-check-input(type='checkbox' aria-checked='false')
+                                            i.input-helper
+                                      td
+                                        .d-flex
+                                          img(src='images/faces/face2.jpg' alt='')
+                                          div
+                                            h6 Laura Brooks
+                                            p Head admin
+                                      td
+                                        h6 Company name 1
+                                        p company type
+                                      td
+                                        div
+                                          .d-flex.justify-content-between.align-items-center.mb-1.max-width-progress-wrap
+                                            p.text-success 65%
+                                            p 85/162
+                                          .progress.progress-md
+                                            .progress-bar.bg-success(role='progressbar' style='width: 65%' aria-valuenow='65' aria-valuemin='0' aria-valuemax='100')
+                                      td
+                                        .badge.badge-opacity-warning In progress
+                                    tr
+                                      td
+                                        .form-check.form-check-flat.mt-0
+                                          label.form-check-label
+                                            input.form-check-input(type='checkbox' aria-checked='false')
+                                            i.input-helper
+                                      td
+                                        .d-flex
+                                          img(src='images/faces/face3.jpg' alt='')
+                                          div
+                                            h6 Wayne Murphy
+                                            p Head admin
+                                      td
+                                        h6 Company name 1
+                                        p company type
+                                      td
+                                        div
+                                          .d-flex.justify-content-between.align-items-center.mb-1.max-width-progress-wrap
+                                            p.text-success 65%
+                                            p 85/162
+                                          .progress.progress-md
+                                            .progress-bar.bg-warning(role='progressbar' style='width: 38%' aria-valuenow='38' aria-valuemin='0' aria-valuemax='100')
+                                      td
+                                        .badge.badge-opacity-warning In progress
+                                    tr
+                                      td
+                                        .form-check.form-check-flat.mt-0
+                                          label.form-check-label
+                                            input.form-check-input(type='checkbox' aria-checked='false')
+                                            i.input-helper
+                                      td
+                                        .d-flex
+                                          img(src='images/faces/face4.jpg' alt='')
+                                          div
+                                            h6 Matthew Bailey
+                                            p Head admin
+                                      td
+                                        h6 Company name 1
+                                        p company type
+                                      td
+                                        div
+                                          .d-flex.justify-content-between.align-items-center.mb-1.max-width-progress-wrap
+                                            p.text-success 65%
+                                            p 85/162
+                                          .progress.progress-md
+                                            .progress-bar.bg-danger(role='progressbar' style='width: 15%' aria-valuenow='15' aria-valuemin='0' aria-valuemax='100')
+                                      td
+                                        .badge.badge-opacity-danger Pending
+                                    tr
+                                      td
+                                        .form-check.form-check-flat.mt-0
+                                          label.form-check-label
+                                            input.form-check-input(type='checkbox' aria-checked='false')
+                                            i.input-helper
+                                      td
+                                        .d-flex
+                                          img(src='images/faces/face5.jpg' alt='')
+                                          div
+                                            h6 Katherine Butler
+                                            p Head admin
+                                      td
+                                        h6 Company name 1
+                                        p company type
+                                      td
+                                        div
+                                          .d-flex.justify-content-between.align-items-center.mb-1.max-width-progress-wrap
+                                            p.text-success 65%
+                                            p 85/162
+                                          .progress.progress-md
+                                            .progress-bar.bg-success(role='progressbar' style='width: 65%' aria-valuenow='65' aria-valuemin='0' aria-valuemax='100')
+                                      td
+                                        .badge.badge-opacity-success Completed
+                      .row.flex-grow
+                        .col-md-6.col-lg-6.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body.card-rounded
+                              h4.card-title.card-title-dash Recent Events
+                              .list.align-items-center.border-bottom.py-2
+                                .wrapper.w-100
+                                  p.mb-2.font-weight-medium
+                                    | Change in Directors
+                                  .d-flex.justify-content-between.align-items-center
+                                    .d-flex.align-items-center
+                                      i.mdi.mdi-calendar.text-muted.me-1
+                                      p.mb-0.text-small.text-muted Mar 14, 2019
+                              .list.align-items-center.border-bottom.py-2
+                                .wrapper.w-100
+                                  p.mb-2.font-weight-medium
+                                    | Other Events
+                                  .d-flex.justify-content-between.align-items-center
+                                    .d-flex.align-items-center
+                                      i.mdi.mdi-calendar.text-muted.me-1
+                                      p.mb-0.text-small.text-muted Mar 14, 2019
+                              .list.align-items-center.border-bottom.py-2
+                                .wrapper.w-100
+                                  p.mb-2.font-weight-medium
+                                    | Quarterly Report
+                                  .d-flex.justify-content-between.align-items-center
+                                    .d-flex.align-items-center
+                                      i.mdi.mdi-calendar.text-muted.me-1
+                                      p.mb-0.text-small.text-muted Mar 14, 2019
+                              .list.align-items-center.border-bottom.py-2
+                                .wrapper.w-100
+                                  p.mb-2.font-weight-medium
+                                    | Change in Directors
+                                  .d-flex.justify-content-between.align-items-center
+                                    .d-flex.align-items-center
+                                      i.mdi.mdi-calendar.text-muted.me-1
+                                      p.mb-0.text-small.text-muted Mar 14, 2019
+                              .list.align-items-center.pt-3
+                                .wrapper.w-100
+                                  p.mb-0
+                                    a.fw-bold.text-primary(href='#')
+                                      | Show all 
+                                      i.mdi.mdi-arrow-right.ms-2
+                        .col-md-6.col-lg-6.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body
+                              .d-flex.align-items-center.justify-content-between.mb-3
+                                h4.card-title.card-title-dash Activities
+                                p.mb-0 20 finished, 5 remaining
+                              ul.bullet-line-list
+                                li
+                                  .d-flex.justify-content-between
+                                    div
+                                      span.text-light-green Ben Tossell
+                                      |  assign you a task
+                                    p Just now
+                                li
+                                  .d-flex.justify-content-between
+                                    div
+                                      span.text-light-green Oliver Noah
+                                      |  assign you a task
+                                    p 1h
+                                li
+                                  .d-flex.justify-content-between
+                                    div
+                                      span.text-light-green Jack William
+                                      |  assign you a task
+                                    p 1h
+                                li
+                                  .d-flex.justify-content-between
+                                    div
+                                      span.text-light-green Leo Lucas
+                                      |  assign you a task
+                                    p 1h
+                                li
+                                  .d-flex.justify-content-between
+                                    div
+                                      span.text-light-green Thomas Henry
+                                      |  assign you a task
+                                    p 1h
+                                li
+                                  .d-flex.justify-content-between
+                                    div
+                                      span.text-light-green Ben Tossell
+                                      |  assign you a task
+                                    p 1h
+                                li
+                                  .d-flex.justify-content-between
+                                    div
+                                      span.text-light-green Ben Tossell
+                                      |  assign you a task
+                                    p 1h
+                              .list.align-items-center.pt-3
+                                .wrapper.w-100
+                                  p.mb-0
+                                    a.fw-bold.text-primary(href='#')
+                                      | Show all 
+                                      i.mdi.mdi-arrow-right.ms-2
+                    .col-lg-4.d-flex.flex-column
+                      .row.flex-grow
+                        .col-12.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body
+                              .row
+                                .col-lg-12
+                                  .d-flex.justify-content-between.align-items-center
+                                    h4.card-title.card-title-dash Todo list
+                                    .add-items.d-flex.mb-0
+                                      // <input type="text" class="form-control todo-list-input" placeholder="What do you need to do today?">
+                                      button.add.btn.btn-icons.btn-rounded.btn-primary.todo-list-add-btn.text-white.me-0.pl-12p
+                                        i.mdi.mdi-plus
+                                  .list-wrapper
+                                    ul.todo-list.todo-list-rounded
+                                      li.d-block
+                                        .form-check.w-100
+                                          label.form-check-label
+                                            input.checkbox(type='checkbox')
+                                            |  Lorem Ipsum is simply dummy text of the printing 
+                                            i.input-helper.rounded
+                                          .d-flex.mt-2
+                                            .ps-4.text-small.me-3 24 June 2020
+                                            .badge.badge-opacity-warning.me-3 Due tomorrow
+                                            i.mdi.mdi-flag.ms-2.flag-color
+                                      li.d-block
+                                        .form-check.w-100
+                                          label.form-check-label
+                                            input.checkbox(type='checkbox')
+                                            |  Lorem Ipsum is simply dummy text of the printing 
+                                            i.input-helper.rounded
+                                          .d-flex.mt-2
+                                            .ps-4.text-small.me-3 23 June 2020
+                                            .badge.badge-opacity-success.me-3 Done
+                                      li
+                                        .form-check.w-100
+                                          label.form-check-label
+                                            input.checkbox(type='checkbox')
+                                            |  Lorem Ipsum is simply dummy text of the printing 
+                                            i.input-helper.rounded
+                                          .d-flex.mt-2
+                                            .ps-4.text-small.me-3 24 June 2020
+                                            .badge.badge-opacity-success.me-3 Done
+                                      li.border-bottom-0
+                                        .form-check.w-100
+                                          label.form-check-label
+                                            input.checkbox(type='checkbox')
+                                            |  Lorem Ipsum is simply dummy text of the printing 
+                                            i.input-helper.rounded
+                                          .d-flex.mt-2
+                                            .ps-4.text-small.me-3 24 June 2020
+                                            .badge.badge-opacity-danger.me-3 Expired
+                      .row.flex-grow
+                        .col-12.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body
+                              .row
+                                .col-lg-12
+                                  .d-flex.justify-content-between.align-items-center.mb-3
+                                    h4.card-title.card-title-dash Type By Amount
+                                  canvas#doughnutChart.my-auto(height='200')
+                                  #doughnut-chart-legend.mt-5.text-center
+                      .row.flex-grow
+                        .col-12.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body
+                              .row
+                                .col-lg-12
+                                  .d-flex.justify-content-between.align-items-center.mb-3
+                                    div
+                                      h4.card-title.card-title-dash Leave Report
+                                    div
+                                      .dropdown
+                                        button#dropdownMenuButton3.btn.btn-secondary.dropdown-toggle.toggle-dark.btn-lg.mb-0.me-0(type='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false')  Month Wise 
+                                        .dropdown-menu(aria-labelledby='dropdownMenuButton3')
+                                          h6.dropdown-header week Wise
+                                          a.dropdown-item(href='#') Year Wise
+                                  .mt-3
+                                    canvas#leaveReport
+                      .row.flex-grow
+                        .col-12.grid-margin.stretch-card
+                          .card.card-rounded
+                            .card-body
+                              .row
+                                .col-lg-12
+                                  .d-flex.justify-content-between.align-items-center.mb-3
+                                    div
+                                      h4.card-title.card-title-dash Top Performer
+                                  .mt-3
+                                    .wrapper.d-flex.align-items-center.justify-content-between.py-2.border-bottom
+                                      .d-flex
+                                        img.img-sm.rounded-10(src='images/faces/face1.jpg' alt='profile')
+                                        .wrapper.ms-3
+                                          p.ms-1.mb-1.fw-bold Brandon Washington
+                                          small.text-muted.mb-0 162543
+                                      .text-muted.text-small
+                                        | 1h ago
+                                    .wrapper.d-flex.align-items-center.justify-content-between.py-2.border-bottom
+                                      .d-flex
+                                        img.img-sm.rounded-10(src='images/faces/face2.jpg' alt='profile')
+                                        .wrapper.ms-3
+                                          p.ms-1.mb-1.fw-bold Wayne Murphy
+                                          small.text-muted.mb-0 162543
+                                      .text-muted.text-small
+                                        | 1h ago
+                                    .wrapper.d-flex.align-items-center.justify-content-between.py-2.border-bottom
+                                      .d-flex
+                                        img.img-sm.rounded-10(src='images/faces/face3.jpg' alt='profile')
+                                        .wrapper.ms-3
+                                          p.ms-1.mb-1.fw-bold Katherine Butler
+                                          small.text-muted.mb-0 162543
+                                      .text-muted.text-small
+                                        | 1h ago
+                                    .wrapper.d-flex.align-items-center.justify-content-between.py-2.border-bottom
+                                      .d-flex
+                                        img.img-sm.rounded-10(src='images/faces/face4.jpg' alt='profile')
+                                        .wrapper.ms-3
+                                          p.ms-1.mb-1.fw-bold Matthew Bailey
+                                          small.text-muted.mb-0 162543
+                                      .text-muted.text-small
+                                        | 1h ago
+                                    .wrapper.d-flex.align-items-center.justify-content-between.pt-2
+                                      .d-flex
+                                        img.img-sm.rounded-10(src='images/faces/face5.jpg' alt='profile')
+                                        .wrapper.ms-3
+                                          p.ms-1.mb-1.fw-bold Rafell John
+                                          small.text-muted.mb-0 Alaska, USA
+                                      .text-muted.text-small
+                                        | 1h ago
+      // content-wrapper ends
+      // partial:partials/_footer.html
+      footer.footer
+        .d-sm-flex.justify-content-center.justify-content-sm-between
+          span.text-muted.text-center.text-sm-left.d-block.d-sm-inline-block
+            | Premium 
+            a(href='https://www.bootstrapdash.com/' target='_blank') Bootstrap admin template
+            |  from BootstrapDash.
+          span.float-none.float-sm-right.d-block.mt-1.mt-sm-0.text-center Copyright &copy; 2021. All rights reserved.
+      // partial
+    // main-panel ends
+  // page-body-wrapper ends
+// container-scroller
+// plugins:js
+script(src='../vendors/js/vendor.bundle.base.js')
+// endinject
+// Plugin js for this page
+script(src='../vendors/chart.js/Chart.min.js')
+script(src='../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')
+script(src='../vendors/progressbar.js/progressbar.min.js')
+// End plugin js for this page
+// inject:js
+script(src='js/off-canvas.js')
+script(src='js/hoverable-collapse.js')
+script(src='js/template.js')
+script(src='js/settings.js')
+script(src='js/todolist.js')
+// endinject
+// Custom js for this page
+script(src='js/jquery.cookie.js' type='text/javascript')
+script(src='js/dashboard.js')
+script(src='js/Chart.roundedBarCharts.js')
+// End custom js for this page
