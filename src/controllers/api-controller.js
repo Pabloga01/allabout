@@ -1,25 +1,46 @@
 const apiController = {};
 const { select } = require('../models/operations');
-const express = require("express");
 const { querySelectAllUsers } = require('../models/User');
+const express = require("express");
 const app = express();
 const User = require('../models/User');
+const Event = require('../models/Event');
+const Publication = require('../models/Publication');
+
+const storage = require('node-sessionstorage')
 
 
 apiController.getAllUsers = (req, res) => {
-    // let allUsers = querySelectAllUsers();
-    // console.log(allUsers);
-    // if (typeof allUsers !== 'undefined') {
-    //     res.json(allUsers);
-    // }
+    let user = new User();
+    (async () => {
+        let allUsers = await user.getAllUsers();
+        if (typeof allUsers !== 'undefined' && allUsers != false) {
+            res.json(allUsers);
+        }
+    })()
+
+};
+
+apiController.getAllEvents = (req, res) => {
+    let event = new Event();
+    (async () => {
+        let allEvents = await event.getAllEvents();
+        if (typeof allEvents !== 'undefined' && allEvents != false) {
+            res.json(allEvents);
+        }
+    })()
+
+};
 
 
-    let user=new User();
-    let allUsers = user.querySelectAllUsers();
-    console.log(allUsers);
-    if (typeof allUsers !== 'undefined') {
-        res.json(allUsers);
-    }
+apiController.getAllPublications = (req, res) => {
+    let publication = new Publication();
+    (async () => {
+        let allPublications = await publication.getAllPublications();
+        if (typeof allPublications !== 'undefined' && allPublications != false) {
+            res.json(allPublications);
+        }
+    })()
 
 };
 

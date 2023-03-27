@@ -109,6 +109,7 @@
         }
       }
     });
+    
     if ($.cookie('staradmin2-free-banner')!="true") {
       document.querySelector('#proBanner').classList.add('d-flex');
       document.querySelector('.navbar').classList.remove('fixed-top');

@@ -19,5 +19,8 @@ router.get('/backend/tables', controller.tables);
 
 
 //api routes
-router.get('/backend/api/allusers', apicontroller.getAllUsers)
+router.get('/backend/api/users', apicontroller.getAllUsers)
+router.get('/backend/api/events', apicontroller.getAllEvents)
+router.get('/backend/api/publications', apicontroller.getAllPublications)
+
 module.exports = router

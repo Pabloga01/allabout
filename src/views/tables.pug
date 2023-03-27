@@ -35,7 +35,7 @@ head
         li.nav-item.font-weight-semibold.d-none.d-lg-block.ms-0
           h1.welcome-text
             | Good Morning, 
-            span.text-black.fw-bold John Doe
+            span#userName.text-black.fw-bold User
           h3.welcome-sub-text Your performance summary this week 
       ul.navbar-nav.ms-auto
         li.nav-item.dropdown.d-none.d-lg-block
@@ -369,8 +369,7 @@ head
               .card-body
                 h4.card-title Users table
                 p.card-description
-                  | Add class 
-                  code .table
+                  | Users data
                 .table-responsive
                   table.table
                     thead
@@ -384,92 +383,47 @@ head
                         th Password
                         th Address 
                     tbody#bodyUserContent
-                      tr
-                        td Jacob
-                        td 53275531
-                        td 12 May 2017
-                        td
-                          label.badge.badge-danger Pending
-                      tr
-                        td Messsy
-                        td 53275532
-                        td 15 May 2017
-                        td
-                          label.badge.badge-warning In progress
-                      tr
-                        td John
-                        td 53275533
-                        td 14 May 2017
-                        td
-                          label.badge.badge-info Fixed
-                      tr
-                        td Peter
-                        td 53275534
-                        td 16 May 2017
-                        td
-                          label.badge.badge-success Completed
-                      tr
-                        td Dave
-                        td 53275535
-                        td 20 May 2017
-                        td
-                          label.badge.badge-warning In progress
-          .col-lg-6.grid-margin.stretch-card
+                     
+          .col-lg-12.grid-margin.stretch-card
             .card
               .card-body
-                h4.card-title Hoverable Table
+                h4.card-title Events Table
                 p.card-description
-                  | Add class 
-                  code .table-hover
+                  | Events Data 
                 .table-responsive
                   table.table.table-hover
                     thead
                       tr
-                        th User
-                        th Product
-                        th Sale
-                        th Status
-                    tbody
+                        th Title
+                        th Content
+                        th Category 
+                        th Date 
+                        th Upvotes 
+                        th Description 
+                        th Latitude
+                        th Longitude
+                    tbody#bodyEventContent
+                     
+          .col-lg-12.grid-margin.stretch-card
+            .card
+              .card-body
+                h4.card-title Publications Table
+                p.card-description
+                  | Publications Data 
+                .table-responsive
+                  table.table.table-hover
+                    thead
                       tr
-                        td Jacob
-                        td Photoshop
-                        td.text-danger
-                          | 28.76% 
-                          i.ti-arrow-down
-                        td
-                          label.badge.badge-danger Pending
-                      tr
-                        td Messsy
-                        td Flash
-                        td.text-danger
-                          | 21.06% 
-                          i.ti-arrow-down
-                        td
-                          label.badge.badge-warning In progress
-                      tr
-                        td John
-                        td Premier
-                        td.text-danger
-                          | 35.00% 
-                          i.ti-arrow-down
-                        td
-                          label.badge.badge-info Fixed
-                      tr
-                        td Peter
-                        td After effects
-                        td.text-success
-                          | 82.00% 
-                          i.ti-arrow-up
-                        td
-                          label.badge.badge-success Completed
-                      tr
-                        td Dave
-                        td 53275535
-                        td.text-success
-                          | 98.05% 
-                          i.ti-arrow-up
-                        td
-                          label.badge.badge-warning In progress
+                        th Content
+                        th User owner 
+                        th Category 
+                        th Date 
+                        th Upvotes 
+                        th Description 
+                        th Latitude
+                        th Longitude
+                    tbody#bodyPublicationContent
+
           .col-lg-12.grid-margin.stretch-card
             .card
               .card-body
@@ -591,7 +545,7 @@ head
 // container-scroller
 // plugins:js
 script(src='../vendors/js/vendor.bundle.base.js')
-script(src='../vendors/js2/tables.js')
+script(src='../js2/tables.js' )
 
 // endinject
 // Plugin js for this page
