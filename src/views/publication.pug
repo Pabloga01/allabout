@@ -1,0 +1,74 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  base(href="http://localhost:3000/")
+  link(rel='stylesheet' href='../css/userFields.css')
+  title Tables 
+  include template.pug
+    .content-wrapper.d-flex.justify-content-center
+      .row#row.col-8.mt-4
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Content
+          div.col-8.text-center   
+            input#inputField.w-50.content(type="text", name="",value= publication ? publication._content : '')
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Description
+          div.col-8.text-center   
+            textarea#inputField.w-50.description(type="text", name="")= publication ? publication._description : ''
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Latitude
+          div.col-8.text-center   
+            input#inputField.w-50.latitude(type="text", name="",value= publication ? publication._latitude : '')
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Longitude
+          div.col-8.text-center   
+            input#inputField.w-50.longitude(type="text", name="",value= publication ? publication._longitude : '')
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Date
+          div.col-8.text-center   
+            input#inputField.w-50.date(type="date", name="",value= publication ? publication._date : '')
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 User creator
+          div.col-8.text-center   
+            input#inputField.w-50.id_user(type="text", name="",value= publication ? publication._id_user : '')    
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Category
+          div.col-8.text-center   
+            input#inputField.w-50.id_category(type="text", name="",value= publication ? publication._id_category : '')    
+        div#buttonsDiv.d-flex.justify-content-center
+          button#button.btnBack.btn-dark.btn Go back
+          if mode== add
+            button#button.buttonAdd.btn-primary.btn Add publication
+          else
+            button#button.buttonEdit.btn-primary.btn Edit publication
+
+
+// Button trigger modal
+// page-body-wrapper ends
+// container-scroller
+// plugins:js
+script(src='../vendors/js/vendor.bundle.base.js')
+script(type='module' src='../js2/publication-fields.js')
+
+// endinject
+// Plugin js for this page
+script(src='../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')
+// End plugin js for this page
+// inject:js
+script(src='../../js/off-canvas.js')
+script(src='../../js/hoverable-collapse.js')
+script(src='../../js/template.js')
+script(src='../../js/settings.js')
+script(src='../../js/todolist.js')
+// endinject
+// Custom js for this page
+// End custom js for this page

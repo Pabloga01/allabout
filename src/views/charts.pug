@@ -1,0 +1,54 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  title Tables 
+  include template.pug
+    .content-wrapper
+        .row
+        .col-lg-12.grid-margin.stretch-card
+            .card.mt-3
+                h1.card-title.text-center.mt-3 Users by Country
+                canvas#pieChart.pb-2
+        .col-lg-12.grid-margin.stretch-card
+            .card.mt-3
+                h1.card-title.text-center.mt-3 Publications by Category
+                canvas#pieChartCategory.pb-2
+        .col-lg-12.grid-margin.stretch-card
+            .card
+                h1.card-title.text-center.mt-3 Area chart
+                canvas#areaChart.p-2.w-100
+  // content-wrapper ends
+  // partial:../../partials/_footer.html
+  footer.footer
+    .d-sm-flex.justify-content-center.justify-content-sm-between
+      span.text-muted.text-center.text-sm-left.d-block.d-sm-inline-block
+        | Premium 
+        a(href='https://www.bootstrapdash.com/' target='_blank') Bootstrap admin template
+        |  from BootstrapDash.
+      span.float-none.float-sm-right.d-block.mt-1.mt-sm-0.text-center Copyright &copy; 2021. All rights reserved.
+  // partial
+
+        
+  // Button trigger modal
+  // page-body-wrapper ends
+// container-scroller
+// plugins:js
+script(src='../vendors/js/vendor.bundle.base.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js')
+script(type='module' src='../js2/charts.js')
+
+// endinject
+// Plugin js for this page
+script(src='../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')
+// End plugin js for this page
+// inject:js
+script(src='../../js/off-canvas.js')
+script(src='../../js/hoverable-collapse.js')
+script(src='../../js/template.js')
+script(src='../../js/settings.js')
+script(src='../../js/todolist.js')
+// endinject
+// Custom js for this page
+// End custom js for this page
