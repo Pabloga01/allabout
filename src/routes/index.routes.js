@@ -58,4 +58,8 @@ router.get('/backend/api/userdelete/:mail', apicontroller.deleteUser)
 router.get('/backend/api/eventdelete/:id', apicontroller.deleteEvent)
 router.get('/backend/api/publicationdelete/:id', apicontroller.deletePublication)
 
+//api rsc operations
+router.get('/backend/api/geodata', apicontroller.geoJson)
+
+
 module.exports = router

@@ -5,7 +5,10 @@ const express = require("express");
 const app = express();
 const User = require('../models/User');
 const Event = require('../models/Event');
-const Publication= require('../models/Publication');
+const Publication = require('../models/Publication');
+const fs = require('fs');
+const geoJson = require('../rsc/geojson.json')
+
 
 const storage = require('node-sessionstorage')
 
@@ -85,7 +88,7 @@ apiController.updateUser = (req, res) => {
     })()
 };
 
-apiController.updateEvent = (req, res) => {   
+apiController.updateEvent = (req, res) => {
     let event = new Event();
     (async () => {
         let allEvents = await event.updateEvent(req.body);
@@ -145,7 +148,7 @@ apiController.deletePublication = (req, res) => {
 
 
 //queries
-apiController.userquerybymail = (req, res) => { 
+apiController.userquerybymail = (req, res) => {
     const user = new User({ mail: req.params.mail });
     (async () => {
         const userQ = await user.getUserByMail();
@@ -157,10 +160,10 @@ apiController.userquerybymail = (req, res) => {
     })()
 }
 
-apiController.eventQueryById = (req, res) => { 
+apiController.eventQueryById = (req, res) => {
     const event = new Event({ id_event: req.params.id });
     (async () => {
-        const eventQ= await event.getEventById();
+        const eventQ = await event.getEventById();
         if (eventQ != false) {
             res.json(eventQ);
         } else {
@@ -169,10 +172,10 @@ apiController.eventQueryById = (req, res) => {
     })()
 }
 
-apiController.publicationQueryById = (req, res) => { 
+apiController.publicationQueryById = (req, res) => {
     const publication = new Publication({ id_publication: req.params.id });
     (async () => {
-        const publicationQ= await publication.getPublicationById();
+        const publicationQ = await publication.getPublicationById();
         if (publicationQ != false) {
             res.json(publicationQ);
         } else {
@@ -181,10 +184,10 @@ apiController.publicationQueryById = (req, res) => {
     })()
 }
 
-apiController.usersByCountry = (req, res) => { 
+apiController.usersByCountry = (req, res) => {
     const user = new User();
     (async () => {
-        const publicationQ= await user.getUserCountriesCount();
+        const publicationQ = await user.getUserCountriesCount();
         if (publicationQ != false) {
             res.json(publicationQ);
         } else {
@@ -193,16 +196,22 @@ apiController.usersByCountry = (req, res) => {
     })()
 }
 
-apiController.publicationsByCategory = (req, res) => { 
+apiController.publicationsByCategory = (req, res) => {
     const publication = new Publication();
     (async () => {
-        const publicationQ= await publication.getPublicationCategoriesCount();
+        const publicationQ = await publication.getPublicationCategoriesCount();
         if (publicationQ != false) {
             res.json(publicationQ);
         } else {
             res.json(false);
         }
     })()
+}
+
+
+
+apiController.geoJson = async (req, res) => {
+    res.send(geoJson);
 }
 
 
