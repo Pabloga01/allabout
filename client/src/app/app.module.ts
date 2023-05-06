@@ -6,6 +6,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home-component/home-component.component';
 import { ForumComponent } from './components/forum/forum.component';
 
+import { RouterModule, Routes } from '@angular/router';
+
+
+//Rutas
+import { app_routing } from "./app.routes";
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +22,8 @@ import { ForumComponent } from './components/forum/forum.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    app_routing,
   ],
   providers: [],
   bootstrap: [AppComponent]

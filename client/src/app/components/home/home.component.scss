@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    background-image: radial-gradient(ellipse farthest-corner at 45px 45px, #0c002a 0%, black 50%, #0c002a 95%);
+}
+
+body:hover {
+    cursor: pointer;
+}
+
+.country {
+    transition: fill 0.5s;
+}
+
+.selectedCountry {
+    z-index: 10;
+}
+
+.deselectedCountry {
+    z-index: 0;
+}
+
+.globe {
+    background-color: blueviolet;
+}
+
+#menu {
+    margin: 2%;
+
+    width: 220px;
+    height: 50%;
+    margin-top: 450px;
+    position: absolute;
+    z-index: 10;
+    background-color: aliceblue;
+    border-radius: 15px;
+    cursor: default;
+}
+
+
+
+
+
+.info {
+    position: fixed;
+    top: 0;
+    margin-top: 2%;
+    margin-left: 2%;
+
+    color: black;
+    padding: 30px;
+    background-color: aliceblue;
+    border-radius: 20px;
+}
+
+
+svg {
+    position: absolute;
+}
+
+canvas {
+    position: absolute;
+    opacity: 0.5;
+    z-index: 1;
+}
+
+.graticule {
+    background-color: navy;
+    z-index: -3;
+}
+
+
+.sphere {
+    cursor: pointer;
+}
