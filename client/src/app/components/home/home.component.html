@@ -42,7 +42,7 @@
 
             </ul>
         </nav> -->
-        <nav class="navbar navbar-light  justify-content-center mb-4">
+        <nav class="navbar navbar-light  justify-content-center mb-3">
             <a class="navbar-brand mx-2">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="50" height="30"
                     class="d-inline-block align-top elm" alt="" id="spotifyButton">
@@ -59,8 +59,22 @@
             </a>
         </nav>
 
-        <div *ngIf="divContent==='spotify'">
+        <div *ngIf="divContent!=='spotify'">
             <p>mostrando seccion</p>
+        </div>
+
+        <div id="spotifySection" >
+            <div id="headerSection" class="d-flex justify-content-around mt-3 text-center">
+                <h5 class="pt-2">Spotify </h5>
+                <select class="form-select w-50" id="spotifyQuery" aria-label="Default select example">
+                    <option value="popular">Top songs</option>
+                    <option value="popular">Top artist</option>
+                    <option value="popular">Top playlists</option>
+                    <option value="popular">Top genres</option>
+                </select>
+            </div>
+            <section class="scrollableSection">
+            </section>
         </div>
 
     </div>
