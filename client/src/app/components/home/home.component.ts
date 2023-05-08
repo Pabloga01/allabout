@@ -14,12 +14,14 @@ export class HomeComponent {
   public title!: string;
   public comment!: string;
   public year!: number;
+  public divContent!: string;
 
 
   constructor() {
     this.title = 'Titulo de la pantalla home';
     this.comment = 'Subtitulo de la pantalla home';
     this.year = 2023;
+    this.divContent = 'spotify';
     console.log('component working')
   }
 }
@@ -319,7 +321,7 @@ function checkIntersect(event: any) {
     // intersects[0].object.material.color.set(0xff0000);
     // countryFocus(intersects[0].object);
     console.log(intersects[0].object)
-
+    countryInfo(intersects[0].object.userData)
   } else {
     // Si no hay intersecciones, el mouse no está sobre ningún objeto
     // Restablece el color de los objetos a su estado original
@@ -347,3 +349,84 @@ function animate() {
   controls.update();
 }
 animate();
+
+
+
+
+
+
+
+function countryInfo(data: any) {
+  const countryName = document.querySelector('#countryName');
+
+  let dataCountry = data.NAME;
+  if (dataCountry === 'United States of America') dataCountry = 'USA'
+  countryName!.innerHTML = dataCountry;
+  let continent = data.REGION_UN;
+  if (continent === 'Americas') continent = 'America';
+  getCountryDetails(data.NAME, continent);
+  // countryHour!.innerHTML = data.NAME;
+}
+
+function getCountryDetails(countryName: string, continent: string) {
+  const countryHour = document.querySelector('#countryHour');
+  const countryResume = document.querySelector('#countryResume');
+  const options = {
+    method: 'GET',
+  };
+  const url = 'https://restcountries.com/v2/name/' + countryName;
+
+  fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+
+      loadFlag(data[0].flags.png);
+      console.log(data[0].capital);
+
+      let capital = data[0].capital;
+      countryResume!.innerHTML = capital;
+      capital = removeAccents(capital);
+      if (capital === 'Washington, D.C.') capital = 'New_york';
+      else if (capital === 'Ottawa') capital = 'Toronto';
+      else if (capital === 'Brasilia') capital = 'Sao_Paulo'
+      else if (capital === 'Canberra') capital = 'Melbourne'
+      else if (capital === 'Beijing') capital = 'Shanghai'
+      capital = capital.replaceAll("'", '').replaceAll(" ", '_');
+
+      if (continent === 'Oceania') continent = 'Australia';
+      const url2 = 'http://worldtimeapi.org/api/timezone/' + continent + "/" + capital;
+      fetch(url2, options)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data.datetime);
+          if (typeof data.datetime !== 'undefined') {
+            const hour = data.datetime;
+            countryHour!.innerHTML = hour.substring(11, 16);
+          }
+        });
+    })
+    .catch(error => console.error(error));
+}
+
+function loadFlag(urlFlag: string) {
+  let imageFlag = document.querySelector('#countryFlag');
+
+  imageFlag!.setAttribute('src', urlFlag)
+  console.log(imageFlag);
+}
+
+const removeAccents = (str: string) => {
+  return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+
+
+
+const spotifyButton = document.querySelector('#spotifyButton');
+spotifyButton?.addEventListener('click', () => { loadSpotifyData })
+
+function loadSpotifyData(this: any) {
+  this.divContent = 'spotify';
+
+}

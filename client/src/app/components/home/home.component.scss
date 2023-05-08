@@ -29,17 +29,23 @@ body:hover {
 #menu {
     margin: 2%;
 
-    width: 220px;
+    width: 340px;
     height: 50%;
-    margin-top: 450px;
+    margin-top: 425px;
     position: absolute;
     z-index: 10;
     background-color: aliceblue;
     border-radius: 15px;
     cursor: default;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
-
+.local_hour {
+    padding-left: 120px;
+}
 
 
 
@@ -73,5 +79,21 @@ canvas {
 
 
 .sphere {
+    cursor: pointer;
+}
+
+#countryFlag {
+    width: 65px;
+    height: 40px;
+    padding-top: 3px;
+    padding-left: 15px;
+}
+
+.elm {
+
+}
+
+.elm:hover {
+    opacity: 0.5;
     cursor: pointer;
 }

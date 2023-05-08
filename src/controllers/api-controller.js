@@ -52,7 +52,7 @@ apiController.insertUser = (req, res) => {
         let insert = await user.insertUser(req.body);
         if (typeof insert !== 'undefined' && insert != false) {
             res.json(insert);
-        }
+        } 
     })()
 };
 
