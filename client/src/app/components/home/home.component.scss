@@ -90,7 +90,11 @@ canvas {
 }
 
 .elm {
-
+    // width: 10px;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .elm:hover {
@@ -98,12 +102,29 @@ canvas {
     cursor: pointer;
 }
 
-.scrollableSection{
-    background-color: beige;
+.scrollableSection {
+    background-color: rgb(39, 35, 43);
     display: flex;
     justify-content: center;
     width: 100%;
     height: 270px;
     margin-top: 4%;
     overflow: scroll;
+}
+
+.song-grid {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: 60px;
+    gap: 10px;
+}
+
+.song-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
 }

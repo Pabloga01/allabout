@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/back-controller');
 const apicontroller = require('../controllers/api-controller');
+const apiSpotifyController = require('../controllers/api-spotify-controller');
 const bodyParser = require('body-parser');
 const path = require("path");
 const app = express();
@@ -62,4 +63,10 @@ router.get('/backend/api/publicationdelete/:id', apicontroller.deletePublication
 router.get('/backend/api/geodata', apicontroller.geoJson)
 
 
-module.exports = router
+//spotify api requests
+router.get('/backend/api/spotify/topsongs/:country', apiSpotifyController.getPopularSongs);
+router.get('/backend/api/spotify/topartists/:country', apiSpotifyController.getPopularArtists);
+router.get('/backend/api/spotify/topplaylists/:country', apiSpotifyController.getPopularPlaylists);
+router.get('/backend/api/spotify/topgenres/:country', apiSpotifyController.getPopularGenres);
+
+module.exports = router;

@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
 
 })
 
-export class HomeComponent {
+export class HomeComponent2 {
     public title!: string;
     public comment!: string;
     public year!: number;
