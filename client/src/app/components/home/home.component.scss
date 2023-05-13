@@ -6,9 +6,13 @@ body {
     background-image: radial-gradient(ellipse farthest-corner at 45px 45px, #0c002a 0%, black 50%, #0c002a 95%);
 }
 
-body:hover {
+
+
+canvas:hover {
     cursor: pointer;
 }
+
+
 
 .country {
     transition: fill 0.5s;
@@ -28,12 +32,11 @@ body:hover {
 
 #menu {
     margin: 2%;
-
     width: 340px;
     height: 50%;
     margin-top: 425px;
     position: absolute;
-    z-index: 10;
+    z-index: 15;
     background-color: aliceblue;
     border-radius: 15px;
     cursor: default;
@@ -43,8 +46,17 @@ body:hover {
 
 }
 
+#menu :hover {}
+
+
 .local_hour {
     padding-left: 120px;
+}
+
+.title_song {
+    font-family: sans-serif;
+    font-size: large;
+    font-weight: 600;
 }
 
 
@@ -54,7 +66,6 @@ body:hover {
     top: 0;
     margin-top: 2%;
     margin-left: 2%;
-
     color: black;
     padding: 30px;
     background-color: aliceblue;
@@ -68,8 +79,8 @@ svg {
 
 canvas {
     position: absolute;
-    opacity: 0.5;
-    z-index: 1;
+    z-index: 5;
+
 }
 
 .graticule {
@@ -108,17 +119,18 @@ canvas {
     justify-content: center;
     width: 100%;
     height: 270px;
-    margin-top: 4%;
     overflow: scroll;
 }
 
 .song-grid {
-    margin-top: 15px;
+    margin-top: 10px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-auto-rows: 60px;
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    grid-auto-rows: 70px;
+    gap: 3px;
+    margin-bottom: 10px;
 }
+
 
 .song-item {
     display: flex;
@@ -127,4 +139,76 @@ canvas {
     justify-content: center;
     text-align: center;
     color: white;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+    // height: 75px;
+}
+
+.song-preview {
+    color: white;
+    transition: transform 0.3s ease-in-out;
+    
+}
+
+.song-preview :hover {
+    transform: scale(1.2);
+    color: rgb(30 215 96);
+    cursor: pointer;
+
+}
+
+.header-spotify {
+    height: 4em;
+}
+
+#spotify-section {
+    background-color: rgb(23, 21, 25);
+    color: rgb(30 215 96);
+    margin-top: 2%;
+}
+
+.spotify-select {
+    background-color: rgb(39, 35, 43);
+    color: white;
+    cursor: pointer;
+}
+
+.back-menu {
+    transition: transform 0.15s ease-in-out;
+    border-radius: 50px;
+    background-color: rgb(39, 35, 43);
+    width: 10%;
+    cursor: pointer;
+    color: rgb(30 215 96);
+}
+
+.back-menu:hover {
+    transform: scale(1.15);
+    color: rgba(255, 255, 255, 0.915);
+}
+
+.title-movable {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    white-space: nowrap;
+    animation: rotar 5s linear infinite;
+    transform-origin: left center;
+}
+
+@keyframes rotation-text {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.playlist-link{
+
 }

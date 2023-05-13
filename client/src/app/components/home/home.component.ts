@@ -15,9 +15,14 @@ export class HomeComponent {
   public title!: string;
   public comment!: string;
   public year!: number;
-  public divContent!: string;
-  public countryCodeSelected: string = 'es';
+  public divContent: string = 'none';
+  public section: string = 'none';
+  public countryCodeSelected: string = 'none';
   public songs: { title: string, artist: string, urlPreview: string, songImage: string }[] = [];
+  public playlists: { name: string, href: string, image: string, owner: string, tracksUrl: string }[] = [];
+  public genres: { name: string, href: string, image: string }[] = [];
+
+
   loadedState: boolean = true;
 
 
@@ -25,12 +30,12 @@ export class HomeComponent {
     this.title = 'Titulo de la pantalla home';
     this.comment = 'Subtitulo de la pantalla home';
     this.year = 2023;
-    this.divContent = 'spotify';
   }
 
 
   ngOnInit(): void {
     this.loadInteractiveEarth(this);
+    this.upperMenu();
   }
 
 
@@ -60,9 +65,14 @@ export class HomeComponent {
         console.log(data);
         this.loadFlag(data[0].flags.png);
         console.log(data[0].capital);
-        this.countryCodeSelected = data[0].alpha2Code;
 
-        this.loadSpotifyData(data[0].alpha2Code);
+        if (this.countryCodeSelected.toUpperCase() !== data[0].alpha2Code) {
+          this.countryCodeSelected = data[0].alpha2Code;
+          const url = 'http://localhost:3000/backend/api/spotify/topsongs/'
+          // this.loadSpotifyData(data[0].alpha2Code, url, 'songs');
+          this.loadSpotifyOption();
+        }
+
         let capital = data[0].capital;
         countryResume!.innerHTML = capital;
         capital = this.removeAccents(capital);
@@ -105,28 +115,53 @@ export class HomeComponent {
   //   createCells();
   // })
 
-  loadSpotiData() {
-    this.loadSpotifyData(this.countryCodeSelected)
+
+  loadSpotifyOption() {
+    const selectElement: any = document.querySelector('.spotify-select');
+    let value = 'songs';
+    if (selectElement != null) value = selectElement.value;
+
+    let url = ''
+    if (value === 'songs')
+      url = 'http://localhost:3000/backend/api/spotify/topsongs/';
+    else if (value === 'playlists')
+      url = 'http://localhost:3000/backend/api/spotify/topplaylists/';
+    else if (value === 'genres')
+      url = 'http://localhost:3000/backend/api/spotify/topgenres/';
+    else
+      url = 'http://localhost:3000/backend/api/spotify/topartists/';
+
+    this.loadSpotifyData(this.countryCodeSelected, url, value);
   }
 
-  loadSpotifyData(countryCode: string) {
-    const url = 'http://localhost:3000/backend/api/spotify/topsongs/' + countryCode;
+  loadSpotifyData(countryCode: string, urlLink: string, type: string) {
+    urlLink += countryCode;
+    //const url = 'http://localhost:3000/backend/api/spotify/topsongs/' + countryCode;
     this.songs = [];
+    this.genres = [];
+    this.playlists = [];
 
-    fetch(url, {
+    fetch(urlLink, {
       mode: 'cors'
     })
       .then(response => response.json())
       .then((data) => {
         console.log(data);
-        this.loadSpotifyPane(data);
+        if (type === 'songs') this.loadSpotifySongsPane(data);
+        else if (type === 'playlists') this.loadSpotifyPlaylistsPane(data);
+        else if (type === 'artists') this.loadSpotifyArtistsPane(data);
+        else this.loadSpotifyGenresPane(data);
+
+
       })
       .catch(function (error) {
       });
-
   }
 
-  loadSpotifyPane(data: any) {
+
+
+
+  loadSpotifySongsPane(data: any) {
     console.log(data);
     data.tracks.items.forEach((item: any) => {
       const songName = item.track.name;
@@ -137,13 +172,48 @@ export class HomeComponent {
       this.songs.push(json);
     });
     this.loadedState = true;
+    this.divContent = 'spotify';
+    this.section = 'spotify_songs';
     console.log(this.songs);
     console.log(this.loadedState);
   }
 
+  loadSpotifyPlaylistsPane(data: any) {
+    console.log(data);
+    data.playlists.items.forEach((item: any) => {
+      const playlistHref = item.href;
+      const playlistImage = item.images[0].url;
+      const playlistName = item.name;
+      const owner = item.owner.display_name;
+      const tracks = item.external_urls.spotify;
 
+      const json = { name: playlistName, href: playlistHref, image: playlistImage, owner: owner, tracksUrl: tracks }
+      this.playlists.push(json);
+    });
+    this.loadedState = true;
+    this.divContent = 'spotify';
+    this.section = 'spotify_playlists';
+    console.log(this.playlists);
+    console.log(this.loadedState);
+  }
 
+  loadSpotifyGenresPane(data: any) {
+    console.log(data);
+    data.categories.items.forEach((item: any) => {
+      const playlistHref = item.href;
+      const playlistImage = item.icons[0].url;
+      const playlistName = item.name;
+      const json = { name: playlistName, href: playlistHref, image: playlistImage }
+      this.genres.push(json);
+    });
+    this.loadedState = true;
+    this.divContent = 'spotify';
+    this.section = 'spotify_genres';
+    console.log(this.genres);
+    console.log(this.loadedState);
+  }
 
+  loadSpotifyArtistsPane(data: any) { }
 
 
 
@@ -151,6 +221,8 @@ export class HomeComponent {
 
 
   public loadInteractiveEarth(scope: any) {
+
+
 
     // const { json, select, selectAll, geoOrthographic, geoPath, geoGraticule, timer, range, pairs, rotation = { x: 0, y: 0 } } = d3;
     const pairs: any = 0;
@@ -164,10 +236,10 @@ export class HomeComponent {
     camera.updateMatrix();
     window.addEventListener('resize', onWindowResize);
 
+    const canvas = document.querySelector('#globe') as HTMLCanvasElement;
 
-    const rendered = new THREE.WebGLRenderer({ antialias: true });
+    const rendered = new THREE.WebGLRenderer({ canvas, antialias: true });
     rendered.setPixelRatio(window.devicePixelRatio);
-    document.body.appendChild(rendered.domElement);
     rendered.setSize(innerWidth, innerHeight);
     document.body.appendChild(rendered.domElement);
 
@@ -402,17 +474,35 @@ export class HomeComponent {
       controls.update();
     }
     animate();
+  }
 
+  upperMenu() {
+    const menuDiv = document.querySelector('#menu');
+    menuDiv!.addEventListener('click', function (event) {
+      event.stopPropagation();
+    });
+  }
 
-
+  adjustTextToDiv() {
+    const songstitles = document.querySelectorAll('.title_song');
+    songstitles.forEach(function (title) {
+      const titleLength = title.innerHTML.length;
+      if (titleLength > 20) title.classList.add('title-movable');
+    });
+  }
+  onLastItem() {
+    console.log('Se ha terminado de iterar el bucle ngFor');
+    this.adjustTextToDiv();
   }
 
 }
+
 
 
 // countryInfo({
 //   NAME: 'Spain',
 //   REGION_UN: 'Europe',
 // })
+
 
 

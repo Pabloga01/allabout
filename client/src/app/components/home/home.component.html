@@ -10,12 +10,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 
-
-
-    <title>D3 Library</title>
+    <title>Home</title>
 </head>
 
 <body>
+    <canvas id="globe"></canvas>
     <div id="menu">
         <div class="d-flex row justify-content-center m-2 mx-3">
             <div class="d-flex ">
@@ -29,21 +28,8 @@
                 <h5 class="col-8" id="countryHour" class="local_hour"></h5>
             </div>
         </div>
-        <!-- <nav>
-            <ul class="d-flex">
-                <li>
-                    <div><i class="fas fa-home"></i></div>
-                </li>
-                <li>
-                    <div><i class="fas fa-home"></i></div>
-                </li>
-                <li>
-                    <div><i class="fas fa-home"></i></div>
-                </li>
 
-            </ul>
-        </nav> -->
-        <nav class="navbar navbar-light d-flex justify-content-center mb-3">
+        <nav class="navbar navbar-light d-flex justify-content-center">
             <a class="d-flex navbar-brand mx-2">
                 <div class="   elm ">
                     <img src=" https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="50"
@@ -76,56 +62,84 @@
             </a>
         </nav>
 
-        <div *ngIf="divContent!=='spotify'">
-            <p>mostrando seccion</p>
-        </div>
-
-        <div id="spotifySection">
-            <div id="headerSection" class="d-flex justify-content-around mt-3 text-center">
-                <h5 class="pt-2">Spotify </h5>
-                <select class="form-select w-50" id="spotifyQuery" aria-label="Default select example">
-                    <option value="popular">Top songs</option>
-                    <option value="popular">Top artist</option>
-                    <option value="popular">Top playlists</option>
-                    <option value="popular">Top genres</option>
-                </select>
-            </div>
-            <section class="scrollableSection">
-                <div class="song-grid col-12">
-                    <ng-container *ngIf="loadedState">
-                        <div *ngFor="let song of songs"
-                            class="song-item d-flex justify-content-center col-12 container row">
-                            <div class="img_div col-2">
-                                <img class="pb-2" src="{{ song.songImage }}" width="60" height="60">
-                            </div>
-                            <div class="col-7 d-flex row text-start">
-                                <h5>{{ song.title }}</h5>
-                                <div class=" d-flex col text-start ">
-                                    <p>{{ song.artist }}</p>
-                                    <!-- <p class="px-2">Album</p> -->
+        <ng-container *ngIf="divContent === 'none'">
+        </ng-container>
+        <ng-container *ngIf="divContent === 'spotify'">
+            <div id="spotify-section" class="">
+                <div class="header-spotify d-flex justify-content-around align-items-center  text-center">
+                    <div class="back-menu d-flex align-items-center">
+                        <i class="fas fa-arrow-left"></i>
+                    </div>
+                    <select (change)="loadSpotifyOption()" class="spotify-select form-select w-50 pt-2"
+                        id="spotifyQuery" aria-label="Default select example">
+                        <option value="songs">Top songs</option>
+                        <option value="artists">Top artist</option>
+                        <option value="playlists">Top playlists</option>
+                        <option value="genres">Top genres</option>
+                    </select>
+                </div>
+                <section class="scrollableSection">
+                    <ng-container *ngIf="section === 'spotify_songs'">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let song of songs" class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-3">
+                                    <img class="pb-2" src="{{ song.songImage }}" width="65" height="62">
                                 </div>
-                            </div>
-                            <div class="col-1 text-start">
-                                <i class="fas fa-play"></i>
+                                <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{ song.title }}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{ song.artist }}</p>
+                                        <!-- <p class="px-2">Album</p> -->
+                                    </div>
+                                </div>
+                                <div class="song-preview pt-3 col-2 text-start">
+                                    <i class=" fas fa-play"></i>
+                                </div>
                             </div>
                         </div>
                     </ng-container>
-
-
-                    <!-- <div class="song-item d-flex justify-content-center col-12 container row">
-                        <div class="img_div col-3">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="50"
-                                height="30">
+                    <ng-container *ngIf="section === 'spotify_playlists'">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let playlist of playlists"
+                                class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-3">
+                                    <img class="pb-2" src="{{ playlist.image }}" width="65" height="62">
+                                </div>
+                                <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{ playlist.name }}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{ playlist.owner }}</p>
+                                        <!-- <p class="px-2">Album</p> -->
+                                    </div>
+                                </div>
+                                <div class="song-preview playlist-link pt-3 col-2 text-start">
+                                    <a href="{{ playlist.tracksUrl }}" class="song-preview">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <h5>Titulo</h5>
-                        <p>Artista</p>
-                    </div> -->
-                </div>
-            </section>
-        </div>
+                    </ng-container>
+                    <ng-container *ngIf="section === 'spotify_genres'">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let genre of genres"
+                                class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-3">
+                                    <img class="pb-2" src="{{ genre.image }}" width="65" height="62">
+                                </div>
+                                <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{ genre.name }}</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </ng-container>
+                </section>
+            </div>
+            <ng-container (click)="adjustTextToDiv()"></ng-container>
+        </ng-container>
 
     </div>
-    <canvas id="globe"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/230399/threeGeoJSON.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
