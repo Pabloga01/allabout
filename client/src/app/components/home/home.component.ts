@@ -213,7 +213,11 @@ export class HomeComponent {
     console.log(this.loadedState);
   }
 
-  loadSpotifyArtistsPane(data: any) { }
+  loadSpotifyArtistsPane(data: any) {
+    data.tracks.items.forEach((item: any) => {
+
+    });
+  }
 
 
 
