@@ -117,7 +117,7 @@ apiSpotifyController.getPopularPlaylists = (req, res) => {
 }
 
 apiSpotifyController.getPopularArtists = (req, res) => {
-    const arJson = [];
+    let jsonAr = [];
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
@@ -153,23 +153,35 @@ apiSpotifyController.getPopularArtists = (req, res) => {
             console.log(country);
             console.log(token);
 
-            fetch('https://api.spotify.com/v1/browse/categories/toplists/playlists?country=es', options)
+            fetch('https://api.spotify.com/v1/browse/categories/toplists/playlists?country=' + country, options)
                 .then(response => response.json())
                 .then(data => {
                     const urlMostPopularSongs = data.playlists.items[0].href;
                     fetch(urlMostPopularSongs, options)
                         .then(response => response.json())
                         .then(data => {
+                            const length = data.tracks.items.length;
+                            let cont = 0;
                             data.tracks.items.forEach(element => {
                                 const artistUrl = element.track.artists[0].href;
                                 fetch(artistUrl, options)
                                     .then(response => response.json())
                                     .then(data => {
-                                        arJson.push(data);
+                                        jsonAr.push(data);
+                                        if (length - 1 <= cont) {
+                                            console.log(jsonAr)
+                                            const uniqueArray = jsonAr.filter((item, index) => {
+                                                return index === jsonAr.findIndex(obj => {
+                                                    return JSON.stringify(obj) === JSON.stringify(item);
+                                                });
+                                            });
+                                            jsonAr = uniqueArray.sort((a, b) => b.popularity - a.popularity);
+
+                                            res.json(jsonAr);
+                                        }
+                                        cont++;
                                     });
-                            })
-                            arJson = JSON.stringify(arJson);
-                            res.json(arJson);
+                            });
                         });
                 })
                 .catch(error => console.error(error));

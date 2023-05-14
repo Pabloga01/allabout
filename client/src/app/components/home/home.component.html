@@ -63,17 +63,87 @@
         </nav>
 
         <ng-container *ngIf="divContent === 'none'">
+            <section class="scrollableMainSection ">
+                <div id="item-song" class="song-grid col-12">
+                    <div (click)="loadSpotifyOption()"
+                        class="menu-item song-item d-flex justify-content-center col-12 row">
+                        <div class="img_div col-2 mb-2">
+                            <img src=" https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="60"
+                                height="40" alt="" id="spotifyButton">
+                        </div>
+                        <div class="pt-2 col-10 d-flex row text-start justify-content-start align-items-start mt-2">
+                            <h6 class="title_song">Spotify Tendencies</h6>
+                            <div class=" d-flex col  ">
+                                <p class="main-menu-subtitle">Popular music trends</p>
+                                <!-- <p class="px-2">Album</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                        <div class="img_div col-2 mb-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/GNOME_Weather_icon_2018.svg"
+                                width="60" height="40" alt="" id="spotifyButton">
+                        </div>
+                        <div class="pt-2 col-10 d-flex row text-start justify-content-start align-items-start mt-2">
+                            <h6 class="title_song">Weather</h6>
+                            <div class=" d-flex col  ">
+                                <p class="main-menu-subtitle">Weather on real time</p>
+                                <!-- <p class="px-2">Album</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                        <div class="img_div col-2 mb-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/News_Paper_Flat_Icon.svg"
+                                width="60" height="40" alt="" id="spotifyButton">
+                        </div>
+                        <div class="pt-2 col-10 d-flex row text-start justify-content-start align-items-start mt-2">
+                            <h6 class="title_song">Breaking News</h6>
+                            <div class=" d-flex col  ">
+                                <p class="main-menu-subtitle">About whats happening</p>
+                                <!-- <p class="px-2">Album</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                        <div class="img_div col-2 mb-2 px-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/1024px-YouTube_social_red_circle_%282017%29.svg.png"
+                                width="35" height="35" alt="" id="spotifyButton">
+                        </div>
+                        <div class="pt-2 col-10 d-flex row text-start justify-content-start align-items-start mt-2">
+                            <h6 class="title_song">Youtube Tendencies</h6>
+                            <div class=" d-flex col  ">
+                                <p class="main-menu-subtitle">Popular videos</p>
+                                <!-- <p class="px-2">Album</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                        <div class="img_div col-2 mb-2">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"
+                                width="55" height="35" alt="" id="spotifyButton">
+                        </div>
+                        <div class="pt-2 col-10 d-flex row text-start justify-content-start align-items-start mt-2">
+                            <h6 class="title_song">Twitter Tendencies</h6>
+                            <div class=" d-flex col  ">
+                                <p class="main-menu-subtitle">The most viral tweets</p>
+                                <!-- <p class="px-2">Album</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </ng-container>
         <ng-container *ngIf="divContent === 'spotify'">
             <div id="spotify-section" class="">
                 <div class="header-spotify d-flex justify-content-around align-items-center  text-center">
-                    <div class="back-menu d-flex align-items-center">
+                    <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center">
                         <i class="fas fa-arrow-left"></i>
                     </div>
                     <select (change)="loadSpotifyOption()" class="spotify-select form-select w-50 pt-2"
                         id="spotifyQuery" aria-label="Default select example">
                         <option value="songs">Top songs</option>
-                        <option value="artists">Top artist</option>
+                        <option value="artists">Top artists</option>
                         <option value="playlists">Top playlists</option>
                         <option value="genres">Top genres</option>
                     </select>
@@ -92,7 +162,7 @@
                                         <!-- <p class="px-2">Album</p> -->
                                     </div>
                                 </div>
-                                <div class="song-preview pt-3 col-2 text-start">
+                                <div (click)="playPreview()" id="{{ song.urlPreview }}"  class="song-preview pt-3 col-2 text-start">
                                     <i class=" fas fa-play"></i>
                                 </div>
                             </div>
@@ -131,6 +201,29 @@
                                     <h6 class="title_song px-1">{{ genre.name }}</h6>
                                 </div>
 
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="section === 'spotify_artists'">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let artist of artists"
+                                class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-3">
+                                    <img class="pb-2" src="{{ artist.image }}" width="52" height="55">
+                                </div>
+                                <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{ artist.name }}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{ artist.followers }}</p>
+                                        <!-- <p class="px-2">Album</p> -->
+                                    </div>
+                                </div>
+                                <div class="song-preview pt-3 col-2 text-start">
+                                    <a href="{{ artist.artistPage }}" class="song-preview">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </ng-container>

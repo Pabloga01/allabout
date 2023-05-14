@@ -113,12 +113,21 @@ canvas {
     cursor: pointer;
 }
 
+.scrollableMainSection {
+    background-color: rgb(39, 35, 43);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 337px;
+    overflow: scroll;
+}
+
 .scrollableSection {
     background-color: rgb(39, 35, 43);
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 270px;
+    height: 255px;
     overflow: scroll;
 }
 
@@ -131,6 +140,9 @@ canvas {
     margin-bottom: 10px;
 }
 
+.main-menu-subtitle {
+    font-size: 17px;
+}
 
 .song-item {
     display: flex;
@@ -144,10 +156,20 @@ canvas {
     // height: 75px;
 }
 
+.menu-item {
+    cursor: pointer;
+}
+
+.menu-item:hover {
+    
+    opacity: 0.85;
+    background-color: rgba(0, 0, 0, 0.786);
+}
+
 .song-preview {
     color: white;
     transition: transform 0.3s ease-in-out;
-    
+
 }
 
 .song-preview :hover {
@@ -209,6 +231,4 @@ canvas {
     }
 }
 
-.playlist-link{
-
-}
+.playlist-link {}

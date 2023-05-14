@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'src/assets/three/OrbitControls.js';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
+import { AudioPreview } from '../../classes/Audio'
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,10 @@ export class HomeComponent {
   public songs: { title: string, artist: string, urlPreview: string, songImage: string }[] = [];
   public playlists: { name: string, href: string, image: string, owner: string, tracksUrl: string }[] = [];
   public genres: { name: string, href: string, image: string }[] = [];
+  public artists: { name: string, genres: string[], image: string, followers: string, artistPage: string }[] = [];
+  public audio = new AudioPreview();
+
+
 
 
   loadedState: boolean = true;
@@ -68,9 +73,7 @@ export class HomeComponent {
 
         if (this.countryCodeSelected.toUpperCase() !== data[0].alpha2Code) {
           this.countryCodeSelected = data[0].alpha2Code;
-          const url = 'http://localhost:3000/backend/api/spotify/topsongs/'
-          // this.loadSpotifyData(data[0].alpha2Code, url, 'songs');
-          this.loadSpotifyOption();
+          if (this.divContent == 'spotify') this.loadSpotifyOption();
         }
 
         let capital = data[0].capital;
@@ -140,7 +143,7 @@ export class HomeComponent {
     this.songs = [];
     this.genres = [];
     this.playlists = [];
-
+    this.artists = []
     fetch(urlLink, {
       mode: 'cors'
     })
@@ -214,9 +217,28 @@ export class HomeComponent {
   }
 
   loadSpotifyArtistsPane(data: any) {
-    data.tracks.items.forEach((item: any) => {
+    data.forEach((item: any) => {
+      const name = item.name;
+      const artistPage = item.external_urls.spotify;
+      let followers = item.followers.total;
+      if (followers.toString().length > 6) {
+        const millions = followers.toString().substring(0, 2);
+        const decs = Math.floor(followers.toString().substring(2, 4));
+        if (decs == 0)
+          followers = millions + ' M';
+        else
+          followers = millions + '.' + decs + ' M';
+      }
+      followers += ' followers';
+      const genres = item.genres;
+      const artistImage = item.images[0].url;
 
+      const json = { name: name, genres: genres, image: artistImage, followers: followers, artistPage: artistPage }
+      this.artists.push(json);
     });
+    this.loadedState = true;
+    this.divContent = 'spotify';
+    this.section = 'spotify_artists';
   }
 
 
@@ -494,9 +516,18 @@ export class HomeComponent {
       if (titleLength > 20) title.classList.add('title-movable');
     });
   }
-  onLastItem() {
-    console.log('Se ha terminado de iterar el bucle ngFor');
-    this.adjustTextToDiv();
+
+
+  loadMainMenu() {
+    this.audio.stopAudio();
+    this.divContent = 'none';
+    this.section = 'none';
+  }
+
+  playPreview() {
+    const element: any = event?.target;
+    const previewUrl = element.parentNode.id;
+    this.audio.play(previewUrl);
   }
 
 }
