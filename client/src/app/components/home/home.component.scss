@@ -161,7 +161,7 @@ canvas {
 }
 
 .menu-item:hover {
-    
+
     opacity: 0.85;
     background-color: rgba(0, 0, 0, 0.786);
 }
@@ -169,15 +169,39 @@ canvas {
 .song-preview {
     color: white;
     transition: transform 0.3s ease-in-out;
-
 }
+
+.weather-icon {
+    color: rgb(246, 246, 227) !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.weather-icon :hover {
+    transform: scale(1.2);
+    color: rgb(30, 95, 215);
+    cursor: pointer;
+}
+
+.weather-item {
+    opacity: 0.85;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.weather-item:hover {
+    opacity: 0.85;
+    background-color: rgb(49, 48, 48);
+}
+
+
 
 .song-preview :hover {
     transform: scale(1.2);
     color: rgb(30 215 96);
     cursor: pointer;
-
 }
+
+
 
 .header-spotify {
     height: 4em;
@@ -232,3 +256,18 @@ canvas {
 }
 
 .playlist-link {}
+
+
+
+.header-weather-file {
+    background-color: rgb(39, 35, 43);
+    height: 3em;
+}
+
+.weather-file-content{
+    background-color: rgb(244, 241, 241) ;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 337px;
+}

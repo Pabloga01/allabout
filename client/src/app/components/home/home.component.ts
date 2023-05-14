@@ -19,12 +19,15 @@ export class HomeComponent {
   public divContent: string = 'none';
   public section: string = 'none';
   public countryCodeSelected: string = 'none';
+  public countryName: string = 'none';
   public songs: { title: string, artist: string, urlPreview: string, songImage: string }[] = [];
   public playlists: { name: string, href: string, image: string, owner: string, tracksUrl: string }[] = [];
   public genres: { name: string, href: string, image: string }[] = [];
   public artists: { name: string, genres: string[], image: string, followers: string, artistPage: string }[] = [];
   public audio = new AudioPreview();
-
+  public cities: any[] | undefined = [];
+  public citiesSelected: any[] | undefined = [];
+  public weatherFile!: any;
 
 
 
@@ -48,6 +51,7 @@ export class HomeComponent {
   countryInfo(data: any) {
     const countryName = document.querySelector('#countryName');
     let dataCountry = data.NAME;
+    this.countryName = data.NAME;
     if (dataCountry === 'United States of America') dataCountry = 'USA'
     countryName!.innerHTML = dataCountry;
     let continent = data.REGION_UN;
@@ -143,7 +147,7 @@ export class HomeComponent {
     this.songs = [];
     this.genres = [];
     this.playlists = [];
-    this.artists = []
+    this.artists = [];
     fetch(urlLink, {
       mode: 'cors'
     })
@@ -247,13 +251,8 @@ export class HomeComponent {
 
 
   public loadInteractiveEarth(scope: any) {
-
-
-
     // const { json, select, selectAll, geoOrthographic, geoPath, geoGraticule, timer, range, pairs, rotation = { x: 0, y: 0 } } = d3;
     const pairs: any = 0;
-
-
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
@@ -392,11 +391,7 @@ export class HomeComponent {
         // mesh.rotation.z = 220;
         mesh.userData = features[i].properties;
         countries.push(mesh);
-
-
-
         sphere.add(mesh);
-
       }
     });
 
@@ -483,17 +478,6 @@ export class HomeComponent {
 
     var countryCode = '';
 
-    // function countryFocus(mesh) {
-    //   // mesh.position.x += 0.25;
-    //   // mesh.position.y += 0.25;
-
-    // }
-
-    // function countryFocusOut(mesh) {
-    //   mesh.position.y -= 10;
-    //   mesh.position.z += 5;
-    // }
-
     function animate() {
       requestAnimationFrame(animate);
       rendered.render(scene, camera);
@@ -530,10 +514,75 @@ export class HomeComponent {
     this.audio.play(previewUrl);
   }
 
+
+
+
+  loadCitiesByCountry() {
+    this.cities = [];
+    this.citiesSelected = [];
+    fetch('http://localhost:3000/backend/api/openweathermap/cities/' + this.countryName, {
+      mode: 'cors'
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        this.cities = data;
+        this.citiesSelected = data;
+
+      })
+      .catch(function (error) {
+      });
+    this.divContent = 'weather';
+    this.section = 'weather_grid';
+  }
+
+
+  loadSpecificCity() {
+    this.citiesSelected = this.cities;
+    const input: any = event?.target;
+    const valueInput = input.value.toLowerCase();
+    if (valueInput != '') {
+      this.citiesSelected = this.cities?.filter(item => item.toLowerCase().includes(valueInput));
+    }
+  }
+
+
+  weatherForCity() {
+    const div: any = event?.target;
+    const cityName = div.id;
+
+    fetch('http://localhost:3000/backend/api/openweathermap/weather/' + cityName, {
+      mode: 'cors'
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        this.loadWeatherFile(data, cityName);
+
+      })
+      .catch(function (error) {
+      });
+  }
+
+  loadWeatherFile(data: any, cityName: String) {
+
+    const temperature = data.main.temp;
+    const windSpeed = data.wind.speed;
+    const humidity = data.main.humidity;
+    const description = data.weather[0].description;
+    const pressure = data.main.pressure;
+    const icon = data.weather[0].icon;
+    const iconRsc = " http://openweathermap.org/img/w/" + icon + ".png"
+    console.log(iconRsc);
+
+    const json = { city: cityName, temperature: temperature, windSpeed: windSpeed, humidity: humidity, description: description, pressure: pressure, icon: iconRsc }
+    this.weatherFile = json;
+
+    this.divContent = 'weather';
+    this.section = 'weather_file';
+  }
+
 }
-
-
-
 // countryInfo({
 //   NAME: 'Spain',
 //   REGION_UN: 'Europe',

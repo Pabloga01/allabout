@@ -3,6 +3,8 @@ const router = express.Router();
 const controller = require('../controllers/back-controller');
 const apicontroller = require('../controllers/api-controller');
 const apiSpotifyController = require('../controllers/api-spotify-controller');
+const apiOpenWeatherMap = require('../controllers/api-openweathermap-controller');
+
 const bodyParser = require('body-parser');
 const path = require("path");
 const app = express();
@@ -68,5 +70,11 @@ router.get('/backend/api/spotify/topsongs/:country', apiSpotifyController.getPop
 router.get('/backend/api/spotify/topartists/:country', apiSpotifyController.getPopularArtists);
 router.get('/backend/api/spotify/topplaylists/:country', apiSpotifyController.getPopularPlaylists);
 router.get('/backend/api/spotify/topgenres/:country', apiSpotifyController.getPopularGenres);
+
+
+//open weather api requests
+router.get('/backend/api/openweathermap/cities/:country', apiOpenWeatherMap.getCitiesByCountry);
+router.get('/backend/api/openweathermap/weather/:city', apiOpenWeatherMap.getWeatherByCity);
+
 
 module.exports = router;

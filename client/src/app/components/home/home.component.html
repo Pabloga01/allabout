@@ -79,7 +79,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                    <div (click)="loadCitiesByCountry()"
+                        class="menu-item song-item d-flex justify-content-center col-12 row">
                         <div class="img_div col-2 mb-2">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/GNOME_Weather_icon_2018.svg"
                                 width="60" height="40" alt="" id="spotifyButton">
@@ -135,6 +136,7 @@
             </section>
         </ng-container>
         <ng-container *ngIf="divContent === 'spotify'">
+
             <div id="spotify-section" class="">
                 <div class="header-spotify d-flex justify-content-around align-items-center  text-center">
                     <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center">
@@ -162,7 +164,8 @@
                                         <!-- <p class="px-2">Album</p> -->
                                     </div>
                                 </div>
-                                <div (click)="playPreview()" id="{{ song.urlPreview }}"  class="song-preview pt-3 col-2 text-start">
+                                <div (click)="playPreview()" id="{{ song.urlPreview }}"
+                                    class="song-preview pt-3 col-2 text-start">
                                     <i class=" fas fa-play"></i>
                                 </div>
                             </div>
@@ -230,6 +233,68 @@
                 </section>
             </div>
             <ng-container (click)="adjustTextToDiv()"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="divContent === 'weather'">
+            <ng-container *ngIf="section === 'weather_grid'">
+                <div id="spotify-section" class="">
+                    <div class="header-spotify d-flex justify-content-around align-items-center text-center">
+                        <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center"
+                            style="color:rgb(29, 29, 208)">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                        <input type="text" (keyup)="loadSpecificCity()" id="search-weather-input" name="q"
+                            placeholder="Search...">
+                    </div>
+                    <section class="scrollableSection">
+                        <div id="item-song" class="song-grid col-12">
+                            <div (click)="weatherForCity()" id="{{city}}" *ngFor="let city of citiesSelected"
+                                class="weather-item song-item d-flex justify-content-center col-12 row">
+                                <div id="{{city}}" class="img_div col-3">
+                                    <img id="{{city}}" class="pb-2" src="https://www.svgrepo.com/show/159325/city.svg"
+                                        width="52" height="55">
+                                </div>
+                                <div id="{{city}}"
+                                    class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 id="{{city}}" class="title_song px-1">{{city}}</h6>
+                                    <div id="{{city}}" class=" d-flex col px-1 ">
+                                        <p></p>
+                                        <!-- <p class="px-2">Album</p> -->
+                                    </div>
+                                </div>
+                                <div class="weather-icon pt-3 col-2 text-start">
+                                    <a href="" class="weather-icon">
+                                        <i class="fas fa-cloud-moon"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="section === 'weather_file'">
+                <div>
+                    <div class="header-weather-file d-flex justify-content-around align-items-center text-center">
+                        <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center"
+                            style="color:rgb(29, 29, 208)">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                        <div class="d-flex align-items-center pt-2" style="color: aliceblue;">
+                            <h3>{{weatherFile.city}}</h3>
+                        </div>
+                    </div>
+                    <section class="weather-file-content">
+                        <div class="d-flex row justify-content-center m-2 mx-3">
+                            <div class="col-4">
+                                <img class="pb-2" src="{{weatherFile.icon}}" width="52" height="55">
+                            </div>
+                            <div class=" col-8">
+                                <h4>{{weatherFile.temperature}}</h4>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </ng-container>
         </ng-container>
 
     </div>
