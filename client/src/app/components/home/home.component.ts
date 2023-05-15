@@ -29,7 +29,9 @@ export class HomeComponent {
   public citiesSelected: any[] | undefined = [];
   public weatherFile!: any;
   public news: { author: string, url: string, source: string, title: string, published: string, country: string }[] = []
-
+  public videos: { channel: string, title: string, description: string, thumbnails: string }[] = [];
+  public channels: {} = [];
+  public categories: { category: string }[] = [];
 
 
   loadedState: boolean = true;
@@ -80,6 +82,8 @@ export class HomeComponent {
           this.countryCodeSelected = data[0].alpha2Code;
           if (this.divContent == 'spotify') this.loadSpotifyOption();
           if (this.divContent == 'news') this.loadNewsByCountry();
+          if (this.divContent == 'youtube') this.loadYoutubeOption();
+
         }
 
         let capital = data[0].capital;
@@ -625,6 +629,112 @@ export class HomeComponent {
     this.divContent = 'news';
     this.section = 'news_grid';
   }
+
+
+
+  loadYoutubeOption() {
+    const selectElement: any = document.querySelector('.youtube-select');
+    let value = 'videos';
+    if (selectElement != null) value = selectElement.value;
+
+    let url = ''
+    if (value === 'videos')
+      url = 'http://localhost:3000/backend/api/youtube/topvideos/';
+    else if (value === 'categories')
+      url = 'http://localhost:3000/backend/api/youtube/topcategories/';
+    else if (value === 'channels')
+      url = 'http://localhost:3000/backend/api/youtube/topchannels/';
+
+    this.loadYoutubeData(this.countryCodeSelected, url, value);
+  }
+
+  loadYoutubeData(countryCode: string, urlLink: string, type: string) {
+    urlLink += countryCode;
+    this.videos = [];
+    this.channels = [];
+    this.categories = [];
+    fetch(urlLink, {
+      mode: 'cors'
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        if (type === 'videos') this.loadVideoData(data);
+        else if (type === 'channels') this.loadChannelsData(data);
+        else if (type === 'categories') this.loadCategoriesData(data);
+
+
+      })
+      .catch(function (error) {
+      });
+  }
+
+  // loadVideosByCountry() {
+  //   this.videos = [];
+  //   fetch('http://localhost:3000/backend/api/youtube/topvideos/' + this.countryCodeSelected, {
+  //   })
+  //     .then(response => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       this.loadVideoData(data, this.countryCodeSelected);
+  //     })
+  //     .catch(function (error) {
+  //     });
+  //   this.divContent = 'youtube';
+  //   this.section = 'youtube_grid';
+  // }
+
+
+
+  loadVideoData(data: any) {
+    console.log(data);
+    data.items.forEach((item: any) => {
+      const channel = item.snippet.channelTitle;
+      const title = item.snippet.title;
+      const thumbnails = item.snippet.thumbnails.standard.url;
+      const description = item.snippet.description;
+
+      const json = { channel: channel, title: title, description: description, thumbnails: thumbnails }
+      this.videos.push(json);
+    });
+
+    this.divContent = 'youtube';
+    this.section = 'youtube_videos';
+  }
+
+
+  loadChannelsData(data: any) {
+    console.log(data);
+    data.items.forEach((item: any) => {
+      const channel = item.snippet.channelTitle;
+      const title = item.snippet.title;
+      const thumbnails = item.snippet.thumbnails.standard.url;
+      const description = item.snippet.description;
+
+      // const json = { channel: channel, title: title, description: description, thumbnails: thumbnails }
+      // this.channels.push(json);
+    });
+
+    this.divContent = 'youtube';
+    this.section = 'youtube_videos';
+  }
+
+
+  loadCategoriesData(data: any) {
+    console.log(data);
+    data.items.forEach((item: any) => {
+      const category = item.snippet.title;
+
+      const json = { category: category }
+      this.categories.push(json);
+    });
+
+    this.divContent = 'youtube';
+    this.section = 'youtube_categories';
+  }
+
+
+
 }
 
 

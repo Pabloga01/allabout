@@ -59,6 +59,17 @@ canvas:hover {
     font-weight: 600;
 }
 
+.title_video {
+    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.subtitle_video {
+    font-family: sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+}
 
 
 .info {
@@ -219,6 +230,12 @@ canvas {
     cursor: pointer;
 }
 
+.youtube-select {
+    background-color: #9d2622;
+    color: white;
+    cursor: pointer;
+}
+
 .back-menu {
     transition: transform 0.15s ease-in-out;
     border-radius: 50px;
@@ -286,4 +303,14 @@ canvas {
 
 .text-shadow {
     text-shadow: 2px 2px 4px #06011c;
+}
+
+.video-youtube {
+    margin-left: -45px !important;
+}
+
+.header-youtube {
+    height: 4em;
+    background-color: #c4302b;
+
 }

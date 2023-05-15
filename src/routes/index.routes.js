@@ -5,6 +5,7 @@ const apicontroller = require('../controllers/api-controller');
 const apiSpotifyController = require('../controllers/api-spotify-controller');
 const apiOpenWeatherMap = require('../controllers/api-openweathermap-controller');
 const apiNews = require('../controllers/api-newsapi-controller');
+const apiYoutube = require('../controllers/api-youtube-controller');
 
 const bodyParser = require('body-parser');
 const path = require("path");
@@ -80,5 +81,13 @@ router.get('/backend/api/openweathermap/weather/:city', apiOpenWeatherMap.getWea
 
 //newscatcher api requests
 router.get('/backend/api/news/topnews/:country', apiNews.getNewsByCountry)
+
+
+
+//youtube api request
+router.get('/backend/api/youtube/topvideos/:country', apiYoutube.getPopularVideosByCountry)
+router.get('/backend/api/youtube/topchannels/:country', apiYoutube.getPopularChannelsByCountry)
+router.get('/backend/api/youtube/topcategories/:country', apiYoutube.getPopularCategoriesByCountry)
+// router.get('/backend/api/youtube/topvideos/:country', apiYoutube.getNewsByCountry)
 
 module.exports = router;

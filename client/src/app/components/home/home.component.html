@@ -107,7 +107,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                    <div (click)="loadYoutubeOption()"
+                        class="menu-item song-item d-flex justify-content-center col-12 row">
                         <div class="img_div col-2 mb-2 px-4">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/1024px-YouTube_social_red_circle_%282017%29.svg.png"
                                 width="35" height="35" alt="" id="spotifyButton">
@@ -136,8 +137,8 @@
                 </div>
             </section>
         </ng-container>
-        <ng-container *ngIf="divContent === 'spotify'">
 
+        <ng-container *ngIf="divContent === 'spotify'">
             <div id="spotify-section" class="">
                 <div class="header-spotify d-flex justify-content-around align-items-center  text-center">
                     <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center">
@@ -281,7 +282,7 @@
                         </div>
                     </div>
                     <section class="weather-file-content gradient">
-                        <div class="d-flex justify-content-center row text-center pt-3 px-3 title-weather ">
+                        <div class="d-flex justify-content-center row text-center pt-2 px-3 title-weather ">
                             <div class="d-flex justify-content-center  w-25" style="color: aliceblue;">
                                 <h2 class="">{{weatherFile.city}}</h2>
                             </div>
@@ -295,7 +296,7 @@
                             </div>
                             <div class="d-flex row justify-content-center col-12 mx-2 ">
                                 <div class="col-9 d-flex justify-content-center ">
-                                    <div class="col-12 pt-1 pb-3">
+                                    <div class="col-12 pt-1 pb-2">
                                         <h4 style="color: rgb(0, 0, 52); text-transform: capitalize; ">
                                             <strong>{{weatherFile.description}}</strong>
                                         </h4>
@@ -364,6 +365,107 @@
                 </div>
 
             </ng-container>
+        </ng-container>
+
+
+        <ng-container *ngIf="divContent === 'youtube'">
+            <div id="youtube-section" class="">
+                <div class="header-youtube d-flex justify-content-around align-items-center  text-center">
+                    <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center">
+                        <i style="color:white" class="fas fa-arrow-left"></i>
+                    </div>
+                    <select (change)="loadYoutubeOption()" class="youtube-select form-select w-50 pt-2"
+                        id="spotifyQuery" aria-label="Default select example">
+                        <option value="videos"><strong>Top videos</strong></option>
+                        <option value="channels"><strong>Top channels</strong></option>
+                        <option value="categories"><strong>Top categories</strong></option>
+                    </select>
+                </div>
+                <section class="scrollableSection">
+                    <ng-container *ngIf="section === 'youtube_videos'">
+                        <div id="item-song" class="song-grid col-12">
+
+                            <div *ngFor="let video of videos"
+                                class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-2 justify-content-start video-youtube">
+                                    <img class="pb-2" src="{{ video.thumbnails }}" width="97" height="75">
+                                </div>
+                                <div
+                                    class="pt-2 col-7 px-2 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_video px-1">{{ video.title }}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{ video.channel }}</p>
+                                        <!-- <p class="px-2">{{video.description}}</p> -->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="section === 'youtube_playlists'">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let playlist of playlists"
+                                class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-3">
+                                    <img class="pb-2" src="{{ playlist.image }}" width="65" height="62">
+                                </div>
+                                <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{ playlist.name }}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{ playlist.owner }}</p>
+                                        <!-- <p class="px-2">Album</p> -->
+                                    </div>
+                                </div>
+                                <div class="song-preview playlist-link pt-3 col-2 text-start">
+                                    <a href="{{ playlist.tracksUrl }}" class="song-preview">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngIf="section === 'youtube_categories'">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let category of categories"
+                                class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-3">
+                                    <img class="pb-2"
+                                        src="https://i.pinimg.com/564x/e3/80/68/e38068e8c569dda6fbf9a7619b7b32e1.jpg"
+                                        width="65" height="62">
+                                </div>
+                                <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{ category.category }}</h6>
+                                </div>
+
+                            </div>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="section === 'youtube_channels'">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let artist of artists"
+                                class="song-item d-flex justify-content-center col-12 row">
+                                <div class="img_div col-3">
+                                    <img class="pb-2" src="{{ artist.image }}" width="52" height="55">
+                                </div>
+                                <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{ artist.name }}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{ artist.followers }}</p>
+                                        <!-- <p class="px-2">Album</p> -->
+                                    </div>
+                                </div>
+                                <div class="song-preview pt-3 col-2 text-start">
+                                    <a href="{{ artist.artistPage }}" class="song-preview">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </section>
+            </div>
+            <ng-container (click)="adjustTextToDiv()"></ng-container>
         </ng-container>
 
     </div>
