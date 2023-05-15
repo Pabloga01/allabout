@@ -28,6 +28,7 @@ export class HomeComponent {
   public cities: any[] | undefined = [];
   public citiesSelected: any[] | undefined = [];
   public weatherFile!: any;
+  public news: { author: string, url: string, source: string, title: string, published: string, country: string }[] = []
 
 
 
@@ -78,6 +79,7 @@ export class HomeComponent {
         if (this.countryCodeSelected.toUpperCase() !== data[0].alpha2Code) {
           this.countryCodeSelected = data[0].alpha2Code;
           if (this.divContent == 'spotify') this.loadSpotifyOption();
+          if (this.divContent == 'news') this.loadNewsByCountry();
         }
 
         let capital = data[0].capital;
@@ -587,7 +589,44 @@ export class HomeComponent {
     this.divContent = 'weather';
     this.section = 'weather_grid';
   }
+
+  loadNewsByCountry() {
+    console.log(this.countryCodeSelected);
+    this.news = [];
+    const countryCode = this.countryCodeSelected;
+    fetch('http://localhost:3000/backend/api/news/topnews/' + countryCode, {
+      mode: 'cors'
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        this.loadNews(data, countryCode);
+
+      })
+      .catch(function (error) {
+      });
+  }
+
+  loadNews(data: any, country: string) {
+    data.forEach((item: any) => {
+      let author = item.author;
+      const url = item.url;
+      const source = item.source.id;
+      if (author.length > 13) {
+        author = author.split(',')[0];
+        // source = source[0];
+      }
+      const title = item.title;
+      const publishedDate = item.publishedAt;
+      const json = { author: author, url: url, source: source, title: title, published: publishedDate, country: country }
+      this.news.push(json);
+    });
+
+    this.divContent = 'news';
+    this.section = 'news_grid';
+  }
 }
+
 
 // countryInfo({
 //   NAME: 'Spain',

@@ -93,7 +93,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                    <div (click)="loadNewsByCountry()"
+                        class="menu-item song-item d-flex justify-content-center col-12 row">
                         <div class="img_div col-2 mb-2">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/News_Paper_Flat_Icon.svg"
                                 width="60" height="40" alt="" id="spotifyButton">
@@ -278,7 +279,6 @@
                         <div (click)="loadCitiesGrid()" class="back-menu " style="color:rgb(29, 29, 208)">
                             <i class="fas fa-arrow-left"></i>
                         </div>
-
                     </div>
                     <section class="weather-file-content gradient">
                         <div class="d-flex justify-content-center row text-center pt-3 px-3 title-weather ">
@@ -329,6 +329,40 @@
                         </div>
                     </section>
                 </div>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="divContent==='news'">
+            <ng-container *ngIf="section === 'news_grid'">
+                <div id="spotify-section" class="">
+                    <div class="header-spotify d-flex justify-content-around align-items-center text-center">
+                        <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center"
+                            style="color:rgb(29, 29, 208)">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                        <input type="text" (keyup)="loadSpecificCity()" id="search-weather-input" name="q"
+                            placeholder="Search...">
+                    </div>
+                    <section class="scrollableSection">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let new of news"
+                                class="weather-item song-item d-flex justify-content-center col-12 row">
+                                <div class="pt-2 col-9 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{new.title}}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{new.author}}</p>
+                                        <p class="px-2">{{new.source}}</p>
+                                    </div>
+                                </div>
+                                <div class="weather-icon pt-4 col-2 text-start">
+                                    <a href="{{new.url}}" class="weather-icon">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
             </ng-container>
         </ng-container>
 

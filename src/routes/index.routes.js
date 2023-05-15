@@ -4,6 +4,7 @@ const controller = require('../controllers/back-controller');
 const apicontroller = require('../controllers/api-controller');
 const apiSpotifyController = require('../controllers/api-spotify-controller');
 const apiOpenWeatherMap = require('../controllers/api-openweathermap-controller');
+const apiNews = require('../controllers/api-newsapi-controller');
 
 const bodyParser = require('body-parser');
 const path = require("path");
@@ -76,5 +77,8 @@ router.get('/backend/api/spotify/topgenres/:country', apiSpotifyController.getPo
 router.get('/backend/api/openweathermap/cities/:country', apiOpenWeatherMap.getCitiesByCountry);
 router.get('/backend/api/openweathermap/weather/:city', apiOpenWeatherMap.getWeatherByCity);
 
+
+//newscatcher api requests
+router.get('/backend/api/news/topnews/:country', apiNews.getNewsByCountry)
 
 module.exports = router;
