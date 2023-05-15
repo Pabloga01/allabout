@@ -273,23 +273,58 @@
                 </div>
             </ng-container>
             <ng-container *ngIf="section === 'weather_file'">
-                <div>
-                    <div class="header-weather-file d-flex justify-content-around align-items-center text-center">
-                        <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center"
-                            style="color:rgb(29, 29, 208)">
+                <div class=" ">
+                    <div class="header-weather-file d-flex justify-start align-items-center text-center">
+                        <div (click)="loadCitiesGrid()" class="back-menu " style="color:rgb(29, 29, 208)">
                             <i class="fas fa-arrow-left"></i>
                         </div>
-                        <div class="d-flex align-items-center pt-2" style="color: aliceblue;">
-                            <h3>{{weatherFile.city}}</h3>
-                        </div>
+
                     </div>
-                    <section class="weather-file-content">
-                        <div class="d-flex row justify-content-center m-2 mx-3">
-                            <div class="col-4">
-                                <img class="pb-2" src="{{weatherFile.icon}}" width="52" height="55">
+                    <section class="weather-file-content gradient">
+                        <div class="d-flex justify-content-center row text-center pt-3 px-3 title-weather ">
+                            <div class="d-flex justify-content-center  w-25" style="color: aliceblue;">
+                                <h2 class="">{{weatherFile.city}}</h2>
                             </div>
-                            <div class=" col-8">
-                                <h4>{{weatherFile.temperature}}</h4>
+                            <div class="d-flex row justify-content-space-between ">
+                                <div class="col-6">
+                                    <img class="" src="{{weatherFile.iconUrl}}" width="60" height="60">
+                                </div>
+                                <div class=" d-flex col-6 text-start align-items-center ">
+                                    <h4 class=" text-shadow">{{weatherFile.temperature}} º</h4>
+                                </div>
+                            </div>
+                            <div class="d-flex row justify-content-center col-12 mx-2 ">
+                                <div class="col-9 d-flex justify-content-center ">
+                                    <div class="col-12 pt-1 pb-3">
+                                        <h4 style="color: rgb(0, 0, 52); text-transform: capitalize; ">
+                                            <strong>{{weatherFile.description}}</strong>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-space-between ">
+                                    <div class="col-6">
+                                        <h5>Wind Speed </h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5 class="temperature w-100 ">{{weatherFile.windSpeed}} km / h</h5>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-space-between ">
+                                    <div class="col-6">
+                                        <h5>Humidity </h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5 class="temperature w-100 ">{{weatherFile.humidity}} %</h5>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-space-between ">
+                                    <div class="col-6">
+                                        <h5>Pressure </h5>
+                                    </div>
+                                    <div class="col-6 ">
+                                        <h5 class="temperature w-100 ">{{weatherFile.pressure}} mBar</h5>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>

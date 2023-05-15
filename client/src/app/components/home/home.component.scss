@@ -118,7 +118,7 @@ canvas {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 337px;
+    height: 345px;
     overflow: scroll;
 }
 
@@ -261,13 +261,29 @@ canvas {
 
 .header-weather-file {
     background-color: rgb(39, 35, 43);
-    height: 3em;
+    height: 2em;
 }
 
-.weather-file-content{
-    background-color: rgb(244, 241, 241) ;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+.weather-file-content {
+
+    width: 105%;
     height: 337px;
+}
+
+.gradient {
+    background: linear-gradient(to bottom, #122b58, #5791d4);
+}
+
+.title-weather {
+    height: 30px;
+    color: aliceblue;
+    width: 100%;
+}
+
+.temperature {
+    box-shadow: 2px 2px 4px #06011c;
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 4px #06011c;
 }

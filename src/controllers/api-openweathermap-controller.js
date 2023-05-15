@@ -23,9 +23,6 @@ apiOpenWeatherMap.getCitiesByCountry = (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
 
     const country = req.params.country;
-    let countries;
-    let cities = [];
-
     fetch('https://countriesnow.space/api/v0.1/countries')
         .then(response => response.json())
         .then(data => {

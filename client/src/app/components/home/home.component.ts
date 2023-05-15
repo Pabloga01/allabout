@@ -526,6 +526,7 @@ export class HomeComponent {
       .then(response => response.json())
       .then((data) => {
         console.log(data);
+        data.push('Logroño');
         this.cities = data;
         this.citiesSelected = data;
 
@@ -565,24 +566,29 @@ export class HomeComponent {
   }
 
   loadWeatherFile(data: any, cityName: String) {
-
     const temperature = data.main.temp;
     const windSpeed = data.wind.speed;
     const humidity = data.main.humidity;
     const description = data.weather[0].description;
     const pressure = data.main.pressure;
     const icon = data.weather[0].icon;
-    const iconRsc = " http://openweathermap.org/img/w/" + icon + ".png"
+    const iconRsc = "https://openweathermap.org/img/w/" + icon + ".png";
+
     console.log(iconRsc);
 
-    const json = { city: cityName, temperature: temperature, windSpeed: windSpeed, humidity: humidity, description: description, pressure: pressure, icon: iconRsc }
+    const json = { city: cityName, temperature: temperature, windSpeed: windSpeed, humidity: humidity, description: description, pressure: pressure, iconUrl: iconRsc }
     this.weatherFile = json;
 
     this.divContent = 'weather';
     this.section = 'weather_file';
   }
 
+  loadCitiesGrid() {
+    this.divContent = 'weather';
+    this.section = 'weather_grid';
+  }
 }
+
 // countryInfo({
 //   NAME: 'Spain',
 //   REGION_UN: 'Europe',
