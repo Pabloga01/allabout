@@ -28,6 +28,7 @@ canvas:hover {
 
 .globe {
     background-color: blueviolet;
+    background-image: '../../../assets/img/stars.jpg';
 }
 
 #menu {
@@ -129,7 +130,7 @@ canvas {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 345px;
+    height: 331px;
     overflow: scroll;
 }
 
@@ -193,6 +194,17 @@ canvas {
     cursor: pointer;
 }
 
+.reddit-icon {
+    color: rgb(246, 246, 227) !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.reddit-icon :hover {
+    transform: scale(1.2);
+    color: #FF5700;
+    cursor: pointer;
+}
+
 .weather-item {
     opacity: 0.85;
     color: rgb(255, 255, 255);
@@ -233,6 +245,12 @@ canvas {
 .youtube-select {
     background-color: #9d2622;
     color: white;
+    cursor: pointer;
+}
+
+.reddit-select {
+    background-color: #EFF7FF;
+    color: #100e0d;
     cursor: pointer;
 }
 
@@ -312,5 +330,9 @@ canvas {
 .header-youtube {
     height: 4em;
     background-color: #c4302b;
+}
 
+.header-reddit {
+    height: 4em;
+    background-color: #FF5700;
 }
