@@ -1,0 +1,40 @@
+.publications-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 500px; /* Establece la altura máxima del contenedor */
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .publication {
+    display: flex;
+    margin-bottom: 16px;
+  }
+  
+  .image-container {
+    width: 100px;
+    height: 100px;
+    margin-right: 16px;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .publication-content {
+    flex: 1;
+  }
+  
+  .publication-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .publication-description {
+    font-size: 14px;
+    color: #888;
+  }

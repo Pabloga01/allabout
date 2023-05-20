@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <mat-card>
+        <mat-card-content>
+            <div class="publications-container">
+                <div class="publication" *ngFor="let publication of publications">
+                    <div class="image-container">
+                        <img [src]="" alt="Publication Image">
+                    </div>
+                    <div class="publication-content">
+                        <h3 class="publication-title">{{ publication.title }}</h3>
+                        <p class="publication-description">{{ publication.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</body>
+
+</html>

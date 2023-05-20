@@ -8,7 +8,8 @@ import { AudioPreview } from '../../classes/Audio'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+
 })
 
 export class HomeComponent {
@@ -91,7 +92,8 @@ export class HomeComponent {
         }
 
         let capital = data[0].capital;
-        countryResume!.innerHTML = capital;
+        if (capital == undefined) capital ='';
+          countryResume!.innerHTML = capital;
         capital = this.removeAccents(capital);
         if (capital === 'Washington, D.C.') capital = 'New_york';
         else if (capital === 'Ottawa') capital = 'Toronto';
