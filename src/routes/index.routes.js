@@ -6,9 +6,12 @@ const apiSpotifyController = require('../controllers/api-spotify-controller');
 const apiOpenWeatherMap = require('../controllers/api-openweathermap-controller');
 const apiNews = require('../controllers/api-newsapi-controller');
 const apiYoutube = require('../controllers/api-youtube-controller');
+const apiReddit = require('../controllers/api-reddit-controller');
+
 
 const bodyParser = require('body-parser');
 const path = require("path");
+const apiTwitterController = require('../controllers/api-reddit-controller');
 const app = express();
 
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -89,5 +92,14 @@ router.get('/backend/api/youtube/topvideos/:country', apiYoutube.getPopularVideo
 router.get('/backend/api/youtube/topchannels/:country', apiYoutube.getPopularChannelsByCountry)
 router.get('/backend/api/youtube/topcategories/:country', apiYoutube.getPopularCategoriesByCountry)
 // router.get('/backend/api/youtube/topvideos/:country', apiYoutube.getNewsByCountry)
+
+
+
+//twitter api request
+router.get('/backend/api/reddit/posts/:country', apiReddit.getRedditCountryPopularPosts);
+router.get('/backend/api/reddit/categories/:country', apiReddit.getRedditCountryPopularCategories);
+
+
+
 
 module.exports = router;

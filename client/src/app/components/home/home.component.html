@@ -52,8 +52,7 @@
                         width="29" height="26" alt="">
                 </div>
                 <div class=" elm">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" width="50"
-                        height="30" alt="">
+                    <img src="http://svgur.com/i/2SL.svg" width="50" height="30" alt="">
                 </div>
                 <div class=" elm">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Soccer_ball.svg" width="50"
@@ -121,15 +120,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="menu-item song-item d-flex justify-content-center col-12 row">
+                    <div (click)="fetchRedditPosts()"
+                        class="menu-item song-item d-flex justify-content-center col-12 row">
                         <div class="img_div col-2 mb-2">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg"
-                                width="55" height="35" alt="" id="spotifyButton">
+                            <img src="http://svgur.com/i/2SL.svg" width="55" height="35" alt="" id="spotifyButton">
                         </div>
                         <div class="pt-2 col-10 d-flex row text-start justify-content-start align-items-start mt-2">
-                            <h6 class="title_song">Twitter Tendencies</h6>
+                            <h6 class="title_song">Reddit Populars</h6>
                             <div class=" d-flex col  ">
-                                <p class="main-menu-subtitle">The most viral tweets</p>
+                                <p class="main-menu-subtitle">Posts with most interaction </p>
                                 <!-- <p class="px-2">Album</p> -->
                             </div>
                         </div>
@@ -440,7 +439,6 @@
                             </div>
                         </div>
                     </ng-container>
-
                     <ng-container *ngIf="section === 'youtube_channels'">
                         <div id="item-song" class="song-grid col-12">
                             <div *ngFor="let artist of artists"
@@ -466,6 +464,44 @@
                 </section>
             </div>
             <ng-container (click)="adjustTextToDiv()"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="divContent === 'reddit'">
+            <ng-container *ngIf="section === 'reddit_grid'">
+                <div id="spotify-section" class="">
+                    <div class="header-reddit d-flex justify-content-around align-items-center text-center">
+                        <div (click)="loadMainMenu()" class="back-menu d-flex align-items-center"
+                            style="color:rgb(255, 255, 255)">
+                            <i class="fas fa-arrow-left"></i>
+                        </div>
+                        <select class="reddit-select form-select w-50 pt-2"
+                            id="spotifyQuery" aria-label="Default select example">
+                            <option value="month"><strong>Month</strong></option>
+                            <option value="week"><strong>Week</strong></option>
+                            <option value="year"><strong>Year</strong></option>
+                        </select>
+                    </div>
+                    <section class="scrollableSection">
+                        <div id="item-song" class="song-grid col-12">
+                            <div *ngFor="let post of redditPosts"
+                                class="weather-item song-item d-flex justify-content-center col-12 row">
+                                <div class="pt-2 col-9 d-flex row text-start justify-content-start align-items-start">
+                                    <h6 class="title_song px-1">{{post.title}}</h6>
+                                    <div class=" d-flex col px-1 ">
+                                        <p>{{post.author}}</p>
+                                        <p class="px-2">{{post.score}} score</p>
+                                    </div>
+                                </div>
+                                <div class="weather-icon pt-4 col-2 text-start">
+                                    <a href="{{post.url}}" class="reddit-icon">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+            </ng-container>
         </ng-container>
 
     </div>

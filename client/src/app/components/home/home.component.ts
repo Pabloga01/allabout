@@ -32,6 +32,7 @@ export class HomeComponent {
   public videos: { channel: string, title: string, description: string, thumbnails: string }[] = [];
   public channels: {} = [];
   public categories: { category: string }[] = [];
+  public redditPosts: { title: string, author: string, thumbnail: string, url: string, score: string }[] = [];
 
 
   loadedState: boolean = true;
@@ -81,8 +82,11 @@ export class HomeComponent {
         if (this.countryCodeSelected.toUpperCase() !== data[0].alpha2Code) {
           this.countryCodeSelected = data[0].alpha2Code;
           if (this.divContent == 'spotify') this.loadSpotifyOption();
-          if (this.divContent == 'news') this.loadNewsByCountry();
-          if (this.divContent == 'youtube') this.loadYoutubeOption();
+          else if (this.divContent == 'news') this.loadNewsByCountry();
+          else if (this.divContent == 'youtube') this.loadYoutubeOption();
+          else if (this.divContent == 'reddit') this.fetchRedditPosts();
+          else if (this.divContent == 'weather') this.loadCitiesByCountry();
+
 
         }
 
@@ -276,6 +280,8 @@ export class HomeComponent {
 
 
     var controls = new OrbitControls(camera, rendered.domElement);
+    controls.enablePan = false;
+
     // controls.maxDistance = 10;
     // controls.minDistance = 7;
     // controls.dampingFactor = 0.1;
@@ -319,12 +325,31 @@ export class HomeComponent {
     var loader = new THREE.FileLoader();
 
 
+    // Create a new texture loader
+    const loader2 = new THREE.TextureLoader();
+    // Load the image
+    const texture = loader2.load('../../../assets/img/8k_stars.jpg');
+    // Set the background of the scene to the loaded texture
+    scene.background = texture;
+
+
+    //>22 displays hours night earth texture
+    const actualDate = new Date();
+    const targetTime = new Date(actualDate);
+    targetTime.setHours(22, 0, 0, 0); // Set target time to 22:00:00
+    let earthTexture = '../../../assets/img/day16k.jpg';
+    if (actualDate.getTime() <= targetTime.getTime()) {
+      earthTexture = '../../../assets/img/day16k.jpg';
+    } else {
+      earthTexture = '../../../assets/img/night16k.jpg';
+    }
+
     sphere = new THREE.Mesh(new THREE.SphereGeometry(10, 100, 100),
       new THREE.MeshBasicMaterial({
         //color: 0xffffff,
         side: THREE.DoubleSide,
         visible: true,
-        map: new THREE.TextureLoader().load('../../../assets/img/day16k.jpg')
+        map: new THREE.TextureLoader().load(earthTexture)
       }));
 
     sphere.rotation.y = 4.602;
@@ -731,6 +756,39 @@ export class HomeComponent {
 
     this.divContent = 'youtube';
     this.section = 'youtube_categories';
+  }
+
+
+
+  fetchRedditPosts() {
+    fetch('http://localhost:3000/backend/api/reddit/posts/' + this.countryCodeSelected, {
+      mode: 'cors'
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        this.loadRedditPosts(data);
+      })
+      .catch(function (error) {
+      });
+
+  }
+
+  loadRedditPosts(data: any) {
+    this.redditPosts = [];
+    data.data.children.forEach((element: any) => {
+      const title = element.data.title;
+      const author = element.data.author_fullname;
+      const thumbnail = element.data.thumbnail;
+      const url = element.data.url;
+      const score = element.data.score;
+
+      const json = { title: title, author: author, thumbnail: thumbnail, url: url, score: score };
+      this.redditPosts.push(json);
+    });
+
+    this.divContent = 'reddit';
+    this.section = 'reddit_grid';
   }
 
 
