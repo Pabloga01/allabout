@@ -1,20 +1,35 @@
-.mat-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .app-title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 16px;
-  }
-  
-  nav a.active {
-    font-weight: bold;
-  }
+nav {
+  background-color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-icon {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav li {
+  margin-right: 10px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+nav a:hover {
+  background-color: #555;
+}
+

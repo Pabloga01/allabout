@@ -1,0 +1,50 @@
+<mat-card>
+    <mat-card-header>
+        <div class="container-logo">
+            <img class='img-logo' src="../../../assets/img/allaboutletter.png">
+        </div>
+        <mat-card-title>
+            <p class="font">Sign up</p>
+        </mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput type="text" placeholder="Enter your name" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Surname</mat-label>
+                <input matInput type="text" placeholder="Enter your surname" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Usertag</mat-label>
+                <input matInput type="text" placeholder="Enter your usertag" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" placeholder="Add your password" />
+            </mat-form-field>
+            <mat-form-field class="form-field">
+                <mat-select>
+                    <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Add your mail" />
+            </mat-form-field>
+            <div class="signup-container">
+                <a href="#" class="signup">You already have an account?</a>
+            </div>
+            <button mat-raised-button color="primary">SIGN UP</button>
+        </form>
+    </mat-card-content>
+</mat-card>
+<div class="bg-animation">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <div id="stars4"></div>
+</div>

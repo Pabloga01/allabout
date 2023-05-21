@@ -4,13 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 //Rutas
 import { app_routing } from "./app.routes";
 import { PublicationComponent } from './components/publication/publication.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './components/login/login.component';
+import { NavHeaderComponent } from './components/nav-header/nav-header.component';
+import { PublicationListComponent } from './components/publication-list/publication-list.component';
 
-import { BrowserModule } from '@angular/platform-browser';
 
 //material 
 import { FormsModule } from '@angular/forms';
@@ -19,8 +21,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PublicationsUserListComponent } from './components/publications-user-list/publications-user-list.component';
-import { NavHeaderComponent } from './components/nav-header/nav-header.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -29,8 +32,9 @@ import { NavHeaderComponent } from './components/nav-header/nav-header.component
     HomeComponent,
     PublicationComponent,
     LoginComponent,
-    PublicationsUserListComponent,
     NavHeaderComponent,
+    PublicationListComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +48,8 @@ import { NavHeaderComponent } from './components/nav-header/nav-header.component
     MatFormFieldModule,
     BrowserAnimationsModule,
     MatCardModule,
+    MatIconModule,
+    MatButtonModule,
 
   ],
   providers: [],

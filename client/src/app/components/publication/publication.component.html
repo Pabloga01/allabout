@@ -14,7 +14,19 @@
 </head>
 
 <body>
-    <nav class="nav-menu"></nav>
+    <nav class="nav-menu">
+        <ul>
+            <li><a routerLink="/home">Home</a></li>
+            <li><a routerLink="/publicationlist">Your Publications</a></li>
+        </ul>
+        <div class="pt-2 user-icon">
+            <mat-icon>person</mat-icon>
+            <a href="" class="">
+                <mat-icon class="mx-2  ">exit_to_app</mat-icon>
+            </a>
+        </div>
+    </nav>
+
     <div class="form">
         <h2 class="mb-5 text-center title-text">Add your publication </h2>
         <form>
@@ -75,7 +87,7 @@
                         Drag an image for the publication
                     </div>
                 </div>
-                <button class="mt-5"type="submit">Add Publication</button>
+                <button class="mt-5" type="submit">Add Publication</button>
             </div>
         </form>
     </div>
