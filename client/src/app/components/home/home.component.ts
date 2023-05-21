@@ -689,8 +689,6 @@ export class HomeComponent {
         if (type === 'videos') this.loadVideoData(data);
         else if (type === 'channels') this.loadChannelsData(data);
         else if (type === 'categories') this.loadCategoriesData(data);
-
-
       })
       .catch(function (error) {
       });

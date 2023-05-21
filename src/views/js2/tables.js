@@ -21,7 +21,7 @@ const tablePublicationsContent = document.querySelector('#bodyPublicationContent
 //loads data user values
 loadUsers().then(userList => {
     console.log(userList);
-    const headerList = ['name', 'surname', 'usertag','nationality', 'rank', 'admin', 'mail', 'password', 'address']
+    const headerList = ['name', 'surname', 'usertag', 'nationality', 'rank', 'admin', 'mail', 'password', 'address']
     userList.forEach(user => {
         let tr = document.createElement('tr');
         headerList.forEach(headerName => {
@@ -45,7 +45,7 @@ loadUsers().then(userList => {
                     (async () => {
                         const response = await fetch('http://localhost:3000/backend/api/userquerybymail/' + mailOnRow);
                         const data = await response.json();
-                        if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/useredit/'+data._id_user;
+                        if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/useredit/' + data._id_user;
                     })()
                 };
             } else {
@@ -92,7 +92,7 @@ loadEvent().then(eventList => {
                     (async () => {
                         const response = await fetch('http://localhost:3000/backend/api/eventQueryById/' + idOnRow);
                         const data = await response.json();
-                        if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/eventedit/'+data._id_event;
+                        if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/eventedit/' + data._id_event;
                     })()
                 };
             } else {
@@ -117,7 +117,7 @@ async function loadEvent() {
 //loads data publication values
 loadPublication().then(publicationList => {
     console.log(publicationList);
-    const headerList = ['id_publication', 'content', 'usertag', 'cat_name', 'date', 'upvotes', 'description', 'latitude', 'longitude']
+    const headerList = ['id_publication', 'content', 'usertag', 'cat_name', 'date', 'upvotes', 'description', 'country']
     publicationList.forEach(publication => {
         let tr = document.createElement('tr');
         headerList.forEach(headerName => {
@@ -141,7 +141,7 @@ loadPublication().then(publicationList => {
                     (async () => {
                         const response = await fetch('http://localhost:3000/backend/api/publicationquerybyid/' + idOnRow);
                         const data = await response.json();
-                        if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/publicationedit/'+data._id_publication;
+                        if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/publicationedit/' + data._id_publication;
                     })()
                 };
             } else {

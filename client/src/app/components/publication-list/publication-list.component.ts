@@ -7,12 +7,34 @@ import { Component } from '@angular/core';
 })
 export class PublicationListComponent {
   item = { title: 'pub1', description: 'a description' }
-  publications = [this.item, this.item, this.item,this.item,this.item]
+  publications = [this.item, this.item, this.item, this.item, this.item]
 
-
+  ngOnInit() {
+    this.loadUserPublications();
+  }
 
   options = ['Opción 1', 'Opción 2', 'Opción 3'];
   selectedOption: string | undefined;
   imagen = "";
 
+
+  loadUserPublications() {
+
+
+
+
+
+
+    fetch('http://localhost:3000/backend/api/publicationsbyuser/' + 1)
+      .then(response => response.json())
+      .then(data => {
+        this.publications = [];
+        console.log(data);
+        data.forEach((element: any) => {
+          this.publications.push({ title: element.content, description: element.description });
+          this.options = data;
+        })
+      })
+
+  }
 }

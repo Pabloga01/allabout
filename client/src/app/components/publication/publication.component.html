@@ -37,7 +37,7 @@
                     </div>
                     <mat-form-field class="form-field">
                         <mat-label>Add a title </mat-label>
-                        <input id="titulo" name="titulo" matInput>
+                        <input id="titulo" class="input-title" name="titulo" matInput>
                     </mat-form-field>
                 </div>
                 <div class="form-field">
@@ -45,7 +45,8 @@
                         <label for="contenido">Content:</label>
                     </div>
                     <mat-form-field class="form-field">
-                        <textarea matInput placeholder="Publication content" id="contenido" name="contenido"></textarea>
+                        <textarea class="input-content" matInput placeholder="Publication content" id="contenido"
+                            name="contenido"></textarea>
                     </mat-form-field>
                 </div>
                 <div class="form-field">
@@ -54,8 +55,9 @@
                     </div>
                     <mat-form-field class="form-field">
                         <mat-label>Select a category</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+                        <mat-select class="input-category">
+                            <mat-option *ngFor="let option of options"
+                                [value]="option">{{option.id}}-{{option.name}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -64,7 +66,7 @@
                         <label for="contenido">Date:</label>
                     </div>
                     <div class="div-date">
-                        <input type="date" id="date" class="date-field" name="date">
+                        <input type="date" id="date" class="date-field input-date" name="date">
                     </div>
                 </div>
                 <div class="form-field description-container">
@@ -73,8 +75,8 @@
                     </div>
                     <mat-form-field class="form-field">
                         <mat-label>Select a country</mat-label>
-                        <mat-select>
-                            <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
+                        <mat-select class="input-country">
+                            <mat-option *ngFor="let option of countryOptions" [value]="option">{{ option }}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -84,10 +86,10 @@
                     </div>
                     <div class="drag-drop">
                         <!-- (dragover)="allowDrop($event)" (drop)="handleDrop($event)"> -->
-                        Drag an image for the publication
+                        Drag an image here
                     </div>
                 </div>
-                <button class="mt-5" type="submit">Add Publication</button>
+                <button (click)="submitForm()" class="mt-5" type="submit">Add Publication</button>
             </div>
         </form>
     </div>
@@ -97,7 +99,9 @@
         <div id="stars3"></div>
         <div id="stars4"></div>
     </div>
-    <footer class="footer-content"></footer>
+    <footer class="footer-content">
+
+    </footer>
 
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.136.0/build/three.min.js"></script>

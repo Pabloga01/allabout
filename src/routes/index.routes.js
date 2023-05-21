@@ -43,6 +43,7 @@ router.get('/backend/publicationedit/:id', controller.editPublication);
 router.get('/backend/api/users', apicontroller.getAllUsers)
 router.get('/backend/api/events', apicontroller.getAllEvents)
 router.get('/backend/api/publications', apicontroller.getAllPublications)
+router.get('/backend/api/categories', apicontroller.getAllCategories)
 
 
 //api queries
@@ -51,12 +52,17 @@ router.get('/backend/api/eventquerybyid/:id', apicontroller.eventQueryById);
 router.get('/backend/api/publicationquerybyid/:id', apicontroller.publicationQueryById);
 router.get('/backend/api/usersbycountry', apicontroller.usersByCountry);
 router.get('/backend/api/publicationsbycategory', apicontroller.publicationsByCategory);
+router.get('/backend/api/publicationsbyuser/:id', apicontroller.publicationsByUser);
 
+//'/users/:userId/books/:bookId'
+router.get('/backend/api/insertpublication2/:data', apicontroller.insertPublication2)
 
 //api operations
 router.post('/backend/api/insertuser', apicontroller.insertUser)
 router.post('/backend/api/insertevent', apicontroller.insertEvent)
 router.post('/backend/api/insertpublication', apicontroller.insertPublication)
+
+
 
 router.post('/backend/api/updateuser', apicontroller.updateUser)
 router.post('/backend/api/updateevent', apicontroller.updateEvent)

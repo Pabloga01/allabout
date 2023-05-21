@@ -6,10 +6,9 @@ const app = express();
 const User = require('../models/User');
 const Event = require('../models/Event');
 const Publication = require('../models/Publication');
+const Category = require('../models/Category');
 const fs = require('fs');
 const geoJson = require('../rsc/geojson.json')
-
-
 const storage = require('node-sessionstorage')
 
 
@@ -44,6 +43,19 @@ apiController.getAllPublications = (req, res) => {
     })()
 };
 
+apiController.getAllCategories = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    let category = new Category();
+    (async () => {
+        let allCategories = await category.getAllCategories();
+        if (typeof allCategories !== 'undefined' && allCategories != false) {
+            res.json(allCategories);
+        }
+    })()
+};
 
 //insert operations all tables
 apiController.insertUser = (req, res) => {
@@ -52,7 +64,7 @@ apiController.insertUser = (req, res) => {
         let insert = await user.insertUser(req.body);
         if (typeof insert !== 'undefined' && insert != false) {
             res.json(insert);
-        } 
+        }
     })()
 };
 
@@ -66,10 +78,49 @@ apiController.insertEvent = (req, res) => {
     })()
 };
 
+
+apiController.getPublication2 = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    let category = new Category();
+    (async () => {
+        let allCategories = await category.getAllCategories();
+        if (typeof allCategories !== 'undefined' && allCategories != false) {
+            res.json(allCategories);
+        }
+    })()
+};
+
+
+
 apiController.insertPublication = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
     let publication = new Publication();
     (async () => {
         let insertPublication = await publication.insertPublication(req.body);
+        if (typeof insertPublication !== 'undefined' && insertPublication != false) {
+            res.json(insertPublication);
+        }
+    })()
+};
+
+apiController.insertPublication2 = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    console.log('dentro');
+    const json = JSON.parse(req.params.data);
+
+    console.log(json);
+    let publication = new Publication();
+    (async () => {
+        let insertPublication = await publication.insertPublication(json);
         if (typeof insertPublication !== 'undefined' && insertPublication != false) {
             res.json(insertPublication);
         }
@@ -183,6 +234,33 @@ apiController.publicationQueryById = (req, res) => {
         }
     })()
 }
+
+
+
+apiController.publicationsByUser = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    (async () => {
+        const publication = new Publication({ id_user: req.params.id });
+        const publicationQ = await publication.getPublicationsByUserId();
+        if (publicationQ != false) {
+            res.json(publicationQ);
+        } else {
+            res.json(false);
+        }
+    })()
+}
+
+
+
+
+
+
+
+
 
 apiController.usersByCountry = (req, res) => {
     const user = new User();
