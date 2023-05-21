@@ -12,6 +12,7 @@ const app_routes: Routes = [{ path: 'home', component: HomeComponent },
 { path: 'publicationlist', component: PublicationListComponent },
 { path: 'login', component: LoginComponent },
 { path: 'register', component: RegisterComponent },
+{ path: '', component: HomeComponent }
 
 ];
 

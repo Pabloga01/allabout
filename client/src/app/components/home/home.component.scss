@@ -310,7 +310,6 @@ canvas {
 }
 
 .weather-file-content {
-
     width: 105%;
     height: 337px;
 }
@@ -345,4 +344,20 @@ canvas {
 .header-reddit {
     height: 4em;
     background-color: #FF5700;
+}
+
+.header-publications {
+    height: 4em;
+    background-color: rgb(20, 5, 97);
+}
+
+.publication-icon {
+    color: rgb(246, 246, 227) !important;
+    transition: transform 0.3s ease-in-out;
+}
+
+.publication-icon :hover {
+    transform: scale(1.2);
+    color: rgb(31, 14, 116);
+    cursor: pointer;
 }

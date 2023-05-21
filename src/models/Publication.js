@@ -140,6 +140,23 @@ class Publication {
         });
     }
 
+
+    async getPublicationByCountry() {
+        return new Promise((resolve, reject) => {
+            let selectQuery = "SELECT * FROM `publication` inner join user on (publication.id_user=user.id_user) inner join category on(publication.id_category=category.id_category) where publication.country='" + this._country + "'";
+            const result = connection.query(selectQuery, async function (err, result) {
+                if (err) return reject(err);
+                try {
+                    if (result.length > 0) {
+                        resolve(result);
+                    } else resolve(false);
+                } catch (ex) {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
     async getPublicationsByUserId() {
         return new Promise((resolve, reject) => {
             let selectQuery = "SELECT * from publication where id_user=" + this._id_user;

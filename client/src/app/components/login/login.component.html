@@ -12,16 +12,16 @@
         <form>
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
-                <input matInput placeholder="Add your mail" />
+                <input class="input-mail" matInput placeholder="Add your mail" />
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
-                <input matInput type="password" placeholder="Add your password" />
+                <input class="input-password" matInput type="password" placeholder="Add your password" />
             </mat-form-field>
             <div class="signup-container">
                 <a href="#" class="signup">Don't have an account?</a>
             </div>
-            <button mat-raised-button color="primary">SIGN IN</button>
+            <button (click)="signIn()" mat-raised-button color="primary">SIGN IN</button>
         </form>
     </mat-card-content>
 </mat-card>

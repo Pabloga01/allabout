@@ -12,6 +12,35 @@ const geoJson = require('../rsc/geojson.json')
 const storage = require('node-sessionstorage')
 
 
+
+apiController.checkLogin = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    const json = JSON.parse(req.params.data);
+    let user = new User(json);
+    (async () => {
+        let userQ = await user.checkLogin();
+        if (userQ != false) {
+            console.log(userQ)
+            res.json(userQ);
+        } else {
+            console.log(userQ)
+            res.json(false);
+        }
+    })()
+}
+
+
+
+
+
+
+
+
+
+
 //select queries all tables
 apiController.getAllUsers = (req, res) => {
     let user = new User();
@@ -117,7 +146,6 @@ apiController.insertPublication2 = (req, res) => {
     console.log('dentro');
     const json = JSON.parse(req.params.data);
 
-    console.log(json);
     let publication = new Publication();
     (async () => {
         let insertPublication = await publication.insertPublication(json);
@@ -185,6 +213,10 @@ apiController.deleteEvent = (req, res) => {
     })()
 };
 apiController.deletePublication = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
     let publication = new Publication({ _id_publication: req.params.id });
     (async () => {
         let deletedUser = await publication.deletePublication(req.params.id);
@@ -285,7 +317,21 @@ apiController.publicationsByCategory = (req, res) => {
         }
     })()
 }
-
+apiController.publicationsByCountry = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    const publication = new Publication({ country: req.params.country });
+    (async () => {
+        const publicationQ = await publication.getPublicationByCountry();
+        if (publicationQ != false) {
+            res.json(publicationQ);
+        } else {
+            res.json(false);
+        }
+    })()
+}
 
 
 apiController.geoJson = async (req, res) => {

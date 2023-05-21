@@ -34,7 +34,7 @@ export class HomeComponent {
   public channels: {} = [];
   public categories: { category: string }[] = [];
   public redditPosts: { title: string, author: string, thumbnail: string, url: string, score: string }[] = [];
-
+  public publications: { title: string, description: string, date: string, category: string, country: string, usertag: string }[] = [];
 
   loadedState: boolean = true;
 
@@ -92,8 +92,8 @@ export class HomeComponent {
         }
 
         let capital = data[0].capital;
-        if (capital == undefined) capital ='';
-          countryResume!.innerHTML = capital;
+        if (capital == undefined) capital = '';
+        countryResume!.innerHTML = capital;
         capital = this.removeAccents(capital);
         if (capital === 'Washington, D.C.') capital = 'New_york';
         else if (capital === 'Ottawa') capital = 'Toronto';
@@ -791,7 +791,33 @@ export class HomeComponent {
     this.section = 'reddit_grid';
   }
 
+  getPublications() {
+    this.publications = [];
+    fetch('http://localhost:3000/backend/api/publicationsbycountry/' + this.countryName, {
+      mode: 'cors'
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        data.forEach((element: any) => {
+          const title = element.content;
+          const country = element.country;
+          const description = element.description;
+          const date = element.date.substring(0, 10);
+          const usertag = element.usertag;
+          const category = element.cat_name;
+          const json = { title: title, description: description, date: date, category: category, country: country, usertag: usertag }
+          this.publications.push(json);
+        })
+        this.divContent = 'publications';
+        this.section = 'publications_grid';
+      })
+      .catch(function (error) {
+      });
 
+
+
+  }
 
 }
 

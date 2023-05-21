@@ -22,7 +22,7 @@
         <div class="pt-2 user-icon">
             <mat-icon>person</mat-icon>
             <a href="" class="">
-                <mat-icon class="mx-2  ">exit_to_app</mat-icon>
+                <mat-icon (click)="logout()" class="mx-2  ">exit_to_app</mat-icon>
             </a>
         </div>
     </nav>
@@ -80,15 +80,17 @@
                         </mat-select>
                     </mat-form-field>
                 </div>
-                <div class=" image-container form-field">
+
+                <!-- <div class=" image-container form-field">
                     <div class="label-container ">
                         <label for="imagen">Image:</label>
                     </div>
-                    <div class="drag-drop">
-                        <!-- (dragover)="allowDrop($event)" (drop)="handleDrop($event)"> -->
-                        Drag an image here
-                    </div>
-                </div>
+                    <div class="drag-drop drop-zone">
+                         (dragover)="allowDrop($event)" (drop)="handleDrop($event)"> -->
+                <!--   Drag an image here -->
+                <!-- </div>
+                    <img id="image-preview" src="" alt="Vista previa de la imagen">
+                </div>  -->
                 <button (click)="submitForm()" class="mt-5" type="submit">Add Publication</button>
             </div>
         </form>

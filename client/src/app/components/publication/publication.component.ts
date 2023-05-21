@@ -16,6 +16,9 @@ export class PublicationComponent {
 
 
   ngOnInit() {
+    if (sessionStorage.getItem('loginIn') == null) {
+      window.location.href = 'http://localhost:4200/login';
+    }
     this.loadCountryOptions();
     this.loadCategoryOptions();
   }
@@ -24,7 +27,6 @@ export class PublicationComponent {
       .then(response => response.json())
       .then(data => {
         const countryNames = data.map((country: { name: any; }) => country.name);
-        console.log(countryNames);
         this.countryOptions = countryNames;
       })
       .catch(error => {
@@ -51,56 +53,24 @@ export class PublicationComponent {
   };
 
 
-
-  submitForm2() {
-    const title: any = document.querySelector('.input-title');
-    const description: any = document.querySelector('.input-content');
-    const content: any = document.querySelector('.input-content');
-    const date: any = document.querySelector('.input-date');
-    const category: any = document.querySelector('.input-category');
-    const country: any = document.querySelector('.input-country');
-
-    const user: any = 'pablo';
-    const data = {
-      title: title.value,
-      content: title.value,
-      description: description.value,
-      date: date.value,
-      id_user: user,
-      id_category: category.value,
-      country: country.value
-    }
-
-    fetch('http://localhost:3000/backend/api/insertpublication2')
-      .then(response => response.json())
-      .then(data => {
-        this.options = [];
-        console.log(data);
-      })
-      .catch(error => {
-        console.log('Error:', error);
-      });
-  }
-
   submitForm() {
     const title: any = document.querySelector('.input-title');
-    const description: any = document.querySelector('.input-content');
     const content: any = document.querySelector('.input-content');
     const date: any = document.querySelector('.input-date');
     const category: any = document.querySelector('.input-category');
     const country: any = document.querySelector('.input-country');
 
-    const user: any = 'pablo';
+    const user: any = sessionStorage.getItem('loginIn');
 
     (async () => {
       const publication = {
         title: title.value,
-        content: content.value,
-        description: description.value,
+        content: title.value,
+        description: content.value,
         date: date.value,
         latitude: 0,
         longitude: 0,
-        id_user: 1,
+        id_user: user,
         id_category: category.textContent.substring(0, 1),
         country: country.textContent,
       };
@@ -138,4 +108,17 @@ export class PublicationComponent {
     const category: any = document.querySelector('.input-category');
   }
 
+
+  logout() {
+    sessionStorage.removeItem('loginIn');
+    sessionStorage.clear();
+  }
 }
+
+
+
+
+
+
+
+

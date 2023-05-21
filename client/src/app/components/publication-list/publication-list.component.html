@@ -17,24 +17,27 @@
     <nav class="nav-menu">
         <ul>
             <li><a routerLink="/home">Home</a></li>
-            <li><a routerLink="/publication">Add your publication</a></li>
+            <li><a routerLink="/publication">Add publication</a></li>
         </ul>
         <div class="pt-2 user-icon">
             <mat-icon>person</mat-icon>
             <a href="" class="">
-                <mat-icon class="mx-2  ">exit_to_app</mat-icon>
+                <mat-icon (click)="logout()" class="logout-button mx-2  ">exit_to_app</mat-icon>
             </a>
         </div>
     </nav>
     <mat-card class="mt-4">
         <mat-card-content>
             <div class="publications-container">
-                <div class="publication" *ngFor="let publication of publications">
-                    <div class="image-container">
-                        <img [src]="" alt="Publication Image">
+                <div class="publication" *ngFor="let publication of publications" id='{{publication.id}}'>
+                    <div class="date-container mx-4">
+                        <p class="publication-title date-text">{{ publication.date }}</p>
                     </div>
                     <div class="publication-content">
-                        <h3 class="publication-title">{{ publication.title }}</h3>
+                        <div class="d-flex justify-content-between">
+                            <h3 class="publication-title">{{ publication.content }}</h3>
+                            <mat-icon (click)="deletePublication()" class="button-delete mx-3">delete_forever</mat-icon>
+                        </div>
                         <p class="publication-description">{{ publication.description }}</p>
                     </div>
                 </div>

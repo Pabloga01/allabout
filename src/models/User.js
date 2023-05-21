@@ -70,6 +70,33 @@ class User {
         });
     }
 
+    async checkLogin() {
+        return new Promise((resolve, reject) => {
+            let selectQuery = "select * from user where mail='" + this._mail + "' and password='" + this._password + "'";
+            connection.query(selectQuery, async function (err, result) {
+                if (err) return reject(err);
+                const user = new User();
+                try {
+                    user._id_user = result[0].id_user;
+                    user._mail = result[0].mail;
+                    user._password = result[0].password;
+                    user._usertag = result[0].usertag;
+                    user._name = result[0].name;
+                    user._nationality = result[0].nationality;
+                    user._surname = result[0].surname;
+                    user._admin = result[0].admin;
+                    user._rank = result[0].rank;
+                    user._address = result[0].address;
+                    if (result.length > 0) {
+                        resolve(user);
+                    } else resolve(false);
+                } catch (ex) {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
 
     async getUserByMail() {
         return new Promise((resolve, reject) => {
