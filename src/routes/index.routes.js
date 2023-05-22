@@ -40,7 +40,6 @@ router.get('/backend/eventedit/:id', controller.editEvent);
 router.get('/backend/publicationedit/:id', controller.editPublication);
 
 //api routes
-router.get('/backend/api/users', apicontroller.checkLogin)
 router.get('/backend/api/users', apicontroller.getAllUsers)
 router.get('/backend/api/events', apicontroller.getAllEvents)
 router.get('/backend/api/publications', apicontroller.getAllPublications)
@@ -49,6 +48,7 @@ router.get('/backend/api/categories', apicontroller.getAllCategories)
 
 //api queries
 router.get('/backend/api/checklogin/:data', apicontroller.checkLogin);
+router.get('/backend/api/registeruser/:data', apicontroller.registerUser)
 
 
 router.get('/backend/api/userquerybymail/:mail', apicontroller.userquerybymail);

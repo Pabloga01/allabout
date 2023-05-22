@@ -34,7 +34,7 @@ apiOpenWeatherMap.getCitiesByCountry = (req, res) => {
                     return;
                 }
             });
-        });
+        }).catch(error => console.error(error));;
 
 }
 
@@ -52,7 +52,7 @@ apiOpenWeatherMap.getWeatherByCity = (req, res) => {
         .then(response => response.json())
         .then(data => {
             res.json(data);
-        });
+        }).catch(error => console.error(error));
 }
 
 

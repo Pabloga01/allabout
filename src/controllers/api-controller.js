@@ -33,7 +33,24 @@ apiController.checkLogin = (req, res) => {
 }
 
 
-
+//insert operations all tables
+apiController.registerUser = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    const json = JSON.parse(req.params.data);
+    let user = new User();
+    (async () => {
+        let insert = await user.insertUser(json);
+        if (typeof insert !== 'undefined' && insert != false) {
+            res.json(insert);
+        } else {
+            console.log(userQ)
+            res.json(false);
+        }
+    })()
+};
 
 
 

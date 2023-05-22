@@ -23,10 +23,7 @@ export class LoginComponent {
         sessionStorage.setItem("loginIn", data._id_user);
         window.location.href = 'http://localhost:4200/publicationlist';
       }
-
     })()
-
-
 
   }
 

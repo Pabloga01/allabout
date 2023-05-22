@@ -29,6 +29,11 @@
     <mat-card class="mt-4">
         <mat-card-content>
             <div class="publications-container">
+                
+                <div class="d-flex justify-content-center mt-4" *ngIf="visible === false">
+                    <h3>El usuario no tiene publicaciones</h3>
+                </div>
+
                 <div class="publication" *ngFor="let publication of publications" id='{{publication.id}}'>
                     <div class="date-container mx-4">
                         <p class="publication-title date-text">{{ publication.date }}</p>

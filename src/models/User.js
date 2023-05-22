@@ -182,6 +182,7 @@ class User {
 
     async insertUser(object) {
         return new Promise((resolve, reject) => {
+            if (object.admin == null) object.admin = 0;
             let selectQuery = "insert into user(name,surname,usertag,admin,mail,password,address) values('" + object.name + "','" + object.surname + "','" + object.usertag + "'," + object.admin + ",'" + object.mail + "','" + object.password + "','" + object.address + "')";
             connection.query(selectQuery, async function (err, result) {
                 if (err) return reject(err);

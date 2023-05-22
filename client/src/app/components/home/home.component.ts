@@ -112,7 +112,8 @@ export class HomeComponent {
               const hour = data.datetime;
               countryHour!.innerHTML = hour.substring(11, 16);
             }
-          });
+          }).catch(error => console.error(error));
+        ;
       })
       .catch(error => console.error(error));
   }
@@ -170,8 +171,6 @@ export class HomeComponent {
         else if (type === 'playlists') this.loadSpotifyPlaylistsPane(data);
         else if (type === 'artists') this.loadSpotifyArtistsPane(data);
         else this.loadSpotifyGenresPane(data);
-
-
       })
       .catch(function (error) {
       });

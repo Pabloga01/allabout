@@ -110,7 +110,9 @@ class Publication {
 
     async updatePublication(object) {
         return new Promise((resolve, reject) => {
-            let selectQuery = "update publication set content='" + object.content + "',id_category=" + object.id_category + ",id_user=" + object.id_user + ",date='" + object.date + "',description='" + object.description + "',latitude=" + object.latitude + ",longitude=" + object.longitude + " where id_publication = " + object.id_publication + " where country = '" + object.country + "'";
+            if (object.country == null) object.country = '';
+            let selectQuery = "update publication set content='" + object.content + "',id_category=" + object.id_category + ",id_user=" + object.id_user + ",date='" + object.date + "',description='" + object.description + "',latitude=" + object.latitude + ",longitude=" + object.longitude + " where id_publication = " + object.id_publication;
+            console.log(selectQuery)
             connection.query(selectQuery, async function (err, result) {
                 if (err) return reject(err);
                 try {

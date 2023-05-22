@@ -3,7 +3,7 @@ head
   // Required meta tags
   meta(charset='utf-8')
   meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-  title Star Admin2 
+  title Admin AllAbout 
   // plugins:css
   link(rel='stylesheet' href='../vendors/feather/feather.css')
   link(rel='stylesheet' href='../vendors/mdi/css/materialdesignicons.min.css')
@@ -17,7 +17,8 @@ head
   // inject:css
   link(rel='stylesheet' href='../css/style.css')
   // endinject
-  link(rel='shortcut icon' href='../images/favicon.png')
+  link(rel='shortcut icon' href='../images/allaboutlogo.png')
+  link(rel="icon", type="image/png", href="../images/allaboutlogo.png")
 .container-scroller
   .container-fluid.page-body-wrapper.full-page-wrapper
     .content-wrapper.d-flex.align-items-center.auth.px-0
@@ -26,9 +27,9 @@ head
           div.mx-auto.text-danger.text-center.mt-3= message
           .auth-form-light.text-left.py-5.px-4.px-sm-5
             .brand-logo
-              img(src='../images/logo.svg' alt='logo')
-            h4 Hello! let&apos;s get started
-            h6.fw-light Sign in to continue.
+              img(src='../images/allaboutletter.png' style="width:135px;"  alt='logo')
+            h4 Hello! Welcome to AllAbout backend
+            h6.fw-light Sign in to access administration panel.
             form.pt-3(action='/backend/logincheck', method='post' , id='form1')
               .form-group
                 input#exampleInputEmail1.form-control.form-control-lg(type='email', name='mail', placeholder='mail address')
@@ -41,11 +42,8 @@ head
                   label.form-check-label.text-muted
                     input.form-check-input(type='checkbox')
                     |                       Keep me signed in
-                a.auth-link.text-black(href='#') Forgot password?
               .mb-2
-                button.btn.btn-block.btn-facebook.auth-form-btn(type='button')
-                  i.ti-facebook.me-2
-                  | Connect using facebook
+         
               .text-center.mt-4.fw-light
                 | Don&apos;t have an account? 
                 a.text-primary(href='register.html') Create

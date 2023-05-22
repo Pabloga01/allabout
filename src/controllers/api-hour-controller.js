@@ -33,7 +33,8 @@ apiHourController.getHourByCountry = async (req, res) => {
         },
         method,
         body: JSON.stringify(body)
-    });
+    }).catch(error => console.error(error));
+    ;
     return await res.json();
 
 }

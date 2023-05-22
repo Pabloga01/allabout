@@ -52,6 +52,10 @@ if (btnAddPublication != null) {
         const user = document.querySelector('.id_user');
 
         (async () => {
+
+            const parts = window.location.href.split("/");
+            const lastPart = parts.pop();
+
             const publication = {
                 content: content.value,
                 description: description.value,
@@ -60,7 +64,7 @@ if (btnAddPublication != null) {
                 date: date.value,
                 id_user: user.value,
                 id_category: category.value,
-                id_publication: window.location.href.substring(window.location.href.length - 1),
+                id_publication: lastPart,
             };
             const settings = {
                 method: 'POST',

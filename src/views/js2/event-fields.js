@@ -53,6 +53,8 @@ if (btnAddEvent != null) {
         const category = document.querySelector('.category');
 
         (async () => {
+            const parts = window.location.href.split("/");
+            const lastPart = parts.pop();
             const event = {
                 title: title.value,
                 description: description.value,
@@ -61,7 +63,7 @@ if (btnAddEvent != null) {
                 longitude: longitude.value,
                 date: date.value,
                 id_category: category.value,
-                id_event: window.location.href.substring(window.location.href.length - 1),
+                id_event:lastPart,
             };
             const settings = {
                 method: 'POST',
