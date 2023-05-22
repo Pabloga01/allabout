@@ -37,7 +37,7 @@ export class HomeComponent {
   public publications: { title: string, description: string, date: string, category: string, country: string, usertag: string }[] = [];
 
   loadedState: boolean = true;
-
+  public musicPlaying = true;
 
   constructor() {
     this.title = 'Titulo de la pantalla home';
@@ -543,7 +543,25 @@ export class HomeComponent {
   playPreview() {
     const element: any = event?.target;
     const previewUrl = element.parentNode.id;
-    this.audio.play(previewUrl);
+
+    const play: any = element.parentElement.firstElementChild;
+    const allPlayButtons = document.querySelectorAll('.play-button');
+    allPlayButtons.forEach(button => { 
+      button.classList.add("fa-play");
+    })
+
+    if (this.musicPlaying) {
+      play.classList.add("fa-play");
+      play.classList.remove('fa-pause');
+      this.audio.stopAudio();
+      this.musicPlaying = false;
+    } else {
+      play.classList.add('fa-pause');
+      play.classList.remove("fa-play");
+      this.audio.play(previewUrl);
+      this.musicPlaying = true;
+    }
+
   }
 
 
