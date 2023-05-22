@@ -49,10 +49,6 @@
                         height="30" alt="">
                 </div>
                 <div class=" elm">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/1024px-Instagram_logo_2016.svg.png"
-                        width="29" height="26" alt="">
-                </div>
-                <div class=" elm">
                     <img (click)="loadYoutubeOption()"
                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/1024px-YouTube_social_red_circle_%282017%29.svg.png"
                         width="29" height="26" alt="">
@@ -64,6 +60,10 @@
                     <img (click)="getPublications()"
                         src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Soccer_ball.svg" width="50" height="30"
                         alt="">
+                </div>
+                <div class=" elm">
+                    <img (click)="goPublicationList()" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ei-user.svg/2048px-Ei-user.svg.png"
+                        width="38" height="38" alt="">
                 </div>
             </a>
         </nav>
@@ -266,7 +266,7 @@
                             <i class="fas fa-arrow-left"></i>
                         </div>
                         <input type="text" (keyup)="loadSpecificCity()" id="search-weather-input" name="q"
-                            placeholder="Search...">
+                            placeholder="Search a city...">
                     </div>
                     <section class="scrollableSection">
                         <div id="item-song" class="song-grid col-12">
@@ -360,12 +360,12 @@
                             style="color:rgb(29, 29, 208)">
                             <i class="fas fa-arrow-left"></i>
                         </div>
-                        <input type="text" (keyup)="loadSpecificCity()" id="search-weather-input" name="q"
-                            placeholder="Search...">
+                        <input type="text" (keyup)="loadSpecificNew()" id="search-weather-input" name="q"
+                            placeholder="Search a new...">
                     </div>
                     <section class="scrollableSection">
                         <div id="item-song" class="song-grid col-12">
-                            <div *ngFor="let new of news"
+                            <div *ngFor="let new of newsSelected"
                                 class="weather-item song-item d-flex justify-content-center col-12 row">
                                 <div class="pt-2 col-9 d-flex row text-start justify-content-start align-items-start">
                                     <h6 class="title_song px-1">{{new.title}}</h6>
@@ -494,10 +494,10 @@
                             style="color:rgb(255, 255, 255)">
                             <i class="fas fa-arrow-left"></i>
                         </div>
-                        <select class="reddit-select form-select w-50 pt-2" id="spotifyQuery"
-                            aria-label="Default select example">
-                            <option value="month"><strong>Month</strong></option>
+                        <select (change)="fetchRedditPosts()" class="reddit-select form-select w-50 pt-2"
+                            id="spotifyQuery" aria-label="Default select example">
                             <option value="week"><strong>Week</strong></option>
+                            <option value="month"><strong>Month</strong></option>
                             <option value="year"><strong>Year</strong></option>
                         </select>
                     </div>
@@ -532,8 +532,8 @@
                             style="color:rgb(255, 255, 255)">
                             <i class="fas fa-arrow-left"></i>
                         </div>
-                        <select class="reddit-select form-select w-50 pt-2" id="spotifyQuery"
-                            aria-label="Default select example">
+                        <select (change)="getPublications()" class="publication-select form-select w-50 pt-2"
+                            id="spotifyQuery" aria-label="Default select example">
                             <option value="relevance"><strong>Relevance</strong></option>
                             <option value="date"><strong>Date</strong></option>
                         </select>
@@ -550,8 +550,9 @@
                                     </div>
                                 </div>
                                 <div class="weather-icon pt-4 col-2 text-start">
-                                    <a href="#" class="publication-icon">
-                                        <i class="fas fa-thumbs-up"></i> </a>
+                                    <div class="publication-icon">
+                                        {{post.popularity}} <i (click)="likePublication()" id="{{post.id}}"
+                                            class="fas fa-thumbs-up"></i> </div>
                                 </div>
                             </div>
                         </div>

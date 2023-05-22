@@ -349,11 +349,44 @@ apiController.publicationsByCountry = (req, res) => {
         }
     })()
 }
+apiController.publicationsByCountryDate = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    const publication = new Publication({ country: req.params.country });
+    (async () => {
+        const publicationQ = await publication.getPublicationByCountryDate();
+        if (publicationQ != false) {
+            res.json(publicationQ);
+        } else {
+            res.json(false);
+        }
+    })()
+}
 
 
 apiController.geoJson = async (req, res) => {
     res.send(geoJson);
 }
+
+
+apiController.likePublication = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    const publication = new Publication({ id_publication: req.params.id });
+    (async () => {
+        const publicationQ = await publication.addLike();
+        if (publicationQ != false) {
+            res.json(publicationQ);
+        } else {
+            res.json(false);
+        }
+    })()
+}
+
 
 
 module.exports = apiController

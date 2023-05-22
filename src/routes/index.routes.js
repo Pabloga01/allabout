@@ -12,6 +12,7 @@ const apiReddit = require('../controllers/api-reddit-controller');
 const bodyParser = require('body-parser');
 const path = require("path");
 const apiTwitterController = require('../controllers/api-reddit-controller');
+const apiController = require('../controllers/api-controller');
 const app = express();
 
 router.use(bodyParser.urlencoded({ extended: false }))
@@ -58,6 +59,7 @@ router.get('/backend/api/usersbycountry', apicontroller.usersByCountry);
 router.get('/backend/api/publicationsbycategory', apicontroller.publicationsByCategory);
 router.get('/backend/api/publicationsbyuser/:id', apicontroller.publicationsByUser);
 router.get('/backend/api/publicationsbycountry/:country', apicontroller.publicationsByCountry);
+router.get('/backend/api/publicationsbycountrydate/:country', apicontroller.publicationsByCountryDate);
 
 //'/users/:userId/books/:bookId'
 router.get('/backend/api/insertpublication2/:data', apicontroller.insertPublication2)
@@ -107,8 +109,14 @@ router.get('/backend/api/youtube/topcategories/:country', apiYoutube.getPopularC
 
 
 //twitter api request
+router.get('/backend/api/reddit/posts/:country/time/:time', apiReddit.getRedditCountryPopularPosts);
 router.get('/backend/api/reddit/posts/:country', apiReddit.getRedditCountryPopularPosts);
+
 router.get('/backend/api/reddit/categories/:country', apiReddit.getRedditCountryPopularCategories);
+
+
+//publication operation
+router.get('/backend/api/publication/like/:id', apiController.likePublication);
 
 
 

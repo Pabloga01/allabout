@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class PublicationListComponent {
   item = { content: 'pub1', description: 'a description', date: 'a', id: 'id' }
-  publications = [this.item, this.item, this.item, this.item, this.item];
+  publications: any[] = [];
   visible = false;
 
   ngOnInit() {
@@ -34,6 +34,7 @@ export class PublicationListComponent {
           this.publications.push({ content: element.content, description: element.description, date: element.date.substring(0, 10), id: element.id_publication });
           this.options = data;
         })
+
         this.visible = true;
       })
   }

@@ -8,8 +8,9 @@ apiRedditController.getRedditCountryPopularPosts = (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     const country = req.params.country;
+    const time= req.params.time;
 
-    fetch("https://www.reddit.com/r/" + country + "/top.json?t=month&limit=20", {
+    fetch("https://www.reddit.com/r/" + country + "/top.json?t=" + time+"&limit=20", {
         headers: {
             "User-Agent": "myBot/0.0.1",
         },

@@ -140,7 +140,7 @@ canvas {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 377px;
+    height: 372px;
     overflow: scroll;
 }
 
@@ -364,3 +364,6 @@ canvas {
 
 
 
+.publication-select {
+    cursor: pointer;
+}

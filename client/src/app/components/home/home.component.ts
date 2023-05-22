@@ -28,13 +28,15 @@ export class HomeComponent {
   public audio = new AudioPreview();
   public cities: any[] | undefined = [];
   public citiesSelected: any[] | undefined = [];
+  public newsSelected: any[] | undefined = [];
+
   public weatherFile!: any;
   public news: { author: string, url: string, source: string, title: string, published: string, country: string }[] = []
   public videos: { channel: string, title: string, description: string, thumbnails: string }[] = [];
   public channels: {} = [];
   public categories: { category: string }[] = [];
   public redditPosts: { title: string, author: string, thumbnail: string, url: string, score: string }[] = [];
-  public publications: { title: string, description: string, date: string, category: string, country: string, usertag: string }[] = [];
+  public publications: { id: string, popularity: number, title: string, description: string, date: string, category: string, country: string, usertag: string }[] = [];
 
   loadedState: boolean = true;
   public musicPlaying = true;
@@ -87,8 +89,7 @@ export class HomeComponent {
           else if (this.divContent == 'youtube') this.loadYoutubeOption();
           else if (this.divContent == 'reddit') this.fetchRedditPosts();
           else if (this.divContent == 'weather') this.loadCitiesByCountry();
-
-
+          else if (this.divContent == 'publications') this.getPublications();
         }
 
         let capital = data[0].capital;
@@ -546,7 +547,7 @@ export class HomeComponent {
 
     const play: any = element.parentElement.firstElementChild;
     const allPlayButtons = document.querySelectorAll('.play-button');
-    allPlayButtons.forEach(button => { 
+    allPlayButtons.forEach(button => {
       button.classList.add("fa-play");
     })
 
@@ -641,6 +642,7 @@ export class HomeComponent {
   loadNewsByCountry() {
     console.log(this.countryCodeSelected);
     this.news = [];
+    this.newsSelected = [];
     const countryCode = this.countryCodeSelected;
     fetch('http://localhost:3000/backend/api/news/topnews/' + countryCode, {
       mode: 'cors'
@@ -648,6 +650,7 @@ export class HomeComponent {
       .then(response => response.json())
       .then((data) => {
         console.log(data);
+
         this.loadNews(data, countryCode);
 
       })
@@ -669,9 +672,18 @@ export class HomeComponent {
       const json = { author: author, url: url, source: source, title: title, published: publishedDate, country: country }
       this.news.push(json);
     });
-
+    this.newsSelected = this.news;
     this.divContent = 'news';
     this.section = 'news_grid';
+  }
+
+  loadSpecificNew() {
+    this.newsSelected = this.news;
+    const input: any = event?.target;
+    const valueInput = input.value.toLowerCase();
+    if (valueInput != '') {
+      this.newsSelected = this.news?.filter(item => item.title.toLowerCase().includes(valueInput));
+    }
   }
 
 
@@ -777,8 +789,14 @@ export class HomeComponent {
 
 
 
+
   fetchRedditPosts() {
-    fetch('http://localhost:3000/backend/api/reddit/posts/' + this.countryCodeSelected, {
+
+    const selectElement: any = document.querySelector('.reddit-select');
+    let value = 'month';
+    if (selectElement != null) value = selectElement.value;
+
+    fetch('http://localhost:3000/backend/api/reddit/posts/' + this.countryCodeSelected + "/time/" + value, {
       mode: 'cors'
     })
       .then(response => response.json())
@@ -808,9 +826,25 @@ export class HomeComponent {
     this.section = 'reddit_grid';
   }
 
+
+
+
   getPublications() {
     this.publications = [];
-    fetch('http://localhost:3000/backend/api/publicationsbycountry/' + this.countryName, {
+
+    let urlFetch = '';
+    const selectElement: any = document.querySelector('.publication-select');
+    let value = 'relevance';
+    if (selectElement != null) value = selectElement.value;
+    if (value === 'relevance') {
+      urlFetch = 'http://localhost:3000/backend/api/publicationsbycountry/'
+    } else {
+      urlFetch = 'http://localhost:3000/backend/api/publicationsbycountrydate/'
+    }
+
+
+
+    fetch(urlFetch + this.countryName, {
       mode: 'cors'
     })
       .then(response => response.json())
@@ -823,7 +857,9 @@ export class HomeComponent {
           const date = element.date.substring(0, 10);
           const usertag = element.usertag;
           const category = element.cat_name;
-          const json = { title: title, description: description, date: date, category: category, country: country, usertag: usertag }
+          const id = element.id_publication;
+          const popularity = element.popularity;
+          const json = { id: id, title: title, popularity: popularity, description: description, date: date, category: category, country: country, usertag: usertag }
           this.publications.push(json);
         })
         this.divContent = 'publications';
@@ -831,9 +867,28 @@ export class HomeComponent {
       })
       .catch(function (error) {
       });
+  }
 
 
+  likePublication() {
+    const element: any = event?.target;
+    if (sessionStorage.getItem('loginIn') != null) {
+      fetch('http://localhost:3000/backend/api/publication/like/' + element.id, {
+        mode: 'cors'
+      }).catch(function (error) {
+      });
+    } else {
+      window.location.href = 'http://localhost:4200/login';
+    }
+  }
 
+
+  goPublicationList() {
+    if (sessionStorage.getItem('loginIn') != null) {
+      window.location.href = 'http://localhost:4200/publicationlist';
+    } else {
+      window.location.href = 'http://localhost:4200/login';
+    }
   }
 
 }
