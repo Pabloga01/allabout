@@ -33,16 +33,17 @@
 
         <nav class="navbar navbar-light d-flex justify-content-center">
             <a class="d-flex navbar-brand mx-2">
-                <div class="   elm ">
-                    <img src=" https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="50"
+                <div class="elm ">
+                    <img (click)="loadSpotifyOption()"
+                        src=" https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="50"
                         height="30" alt="" id="spotifyButton">
                 </div>
                 <div class=" elm">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/GNOME_Weather_icon_2018.svg"
+                    <img (click)="loadCitiesByCountry()" src="https://upload.wikimedia.org/wikipedia/commons/8/80/GNOME_Weather_icon_2018.svg"
                         width="50" height="30" alt="">
                 </div>
                 <div class=" elm">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/News_Paper_Flat_Icon.svg" width="50"
+                    <img (click)="loadNewsByCountry()" src="https://upload.wikimedia.org/wikipedia/commons/d/d8/News_Paper_Flat_Icon.svg" width="50"
                         height="30" alt="">
                 </div>
                 <div class=" elm">
@@ -50,14 +51,14 @@
                         width="29" height="26" alt="">
                 </div>
                 <div class=" elm">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/1024px-YouTube_social_red_circle_%282017%29.svg.png"
+                    <img (click)="loadYoutubeOption()" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/YouTube_social_red_circle_%282017%29.svg/1024px-YouTube_social_red_circle_%282017%29.svg.png"
                         width="29" height="26" alt="">
                 </div>
                 <div class=" elm">
-                    <img src="http://svgur.com/i/2SL.svg" width="50" height="30" alt="">
+                    <img (click)="fetchRedditPosts()" src="http://svgur.com/i/2SL.svg" width="50" height="30" alt="">
                 </div>
                 <div class=" elm">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Soccer_ball.svg" width="50"
+                    <img (click)="getPublications()" src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Soccer_ball.svg" width="50"
                         height="30" alt="">
                 </div>
             </a>
