@@ -76,6 +76,25 @@ head
                         th Country
                     tbody#bodyPublicationContent
 
+
+          .col-lg-12.grid-margin.stretch-card
+            .card
+              .card-body
+                button#categoryAdd.button.btn.btn-primary.btn-lg.text-white.mb-3.me-3(type='button')
+                  | Add category
+                h4.card-title Category Table
+                p.card-description
+                  | Category Data 
+                .table-responsive
+                  table.table.table-hover
+                    thead
+                      tr
+                        th Id
+                        th Category name 
+                        th Description 
+                        th Popularity 
+                    tbody#bodyCategoryContent
+
           .container.mt-5
   // Button trigger modal
   // page-body-wrapper ends

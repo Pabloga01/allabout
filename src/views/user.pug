@@ -24,7 +24,7 @@ head
           div.col-4.d-flex.justify-content-center
             h4 Nationality
           div.col-8.text-center   
-            input#inputField.w-50.nationality(type="text", name="",value= user ? user._nationality : '')
+            select#inputField.w-50.nationality(type="text", name= user ? user._nationality : '',value= user ? user._nationality : '')
         div.d-flex
           div.col-4.d-flex.justify-content-center
             h4 Usertag

@@ -7,6 +7,7 @@ const apiOpenWeatherMap = require('../controllers/api-openweathermap-controller'
 const apiNews = require('../controllers/api-newsapi-controller');
 const apiYoutube = require('../controllers/api-youtube-controller');
 const apiReddit = require('../controllers/api-reddit-controller');
+const apiCountries = require('../controllers/api-country-controller');
 
 
 const bodyParser = require('body-parser');
@@ -33,6 +34,9 @@ router.get('/backend/charts', controller.charts);
 router.get('/backend/useradd', controller.addUser);
 router.get('/backend/eventadd', controller.addEvent);
 router.get('/backend/publicationadd', controller.addPublication);
+router.get('/backend/categoryadd', controller.addCategory);
+
+
 router.get('/backend/logout', controller.logout);
 
 
@@ -57,6 +61,7 @@ router.get('/backend/api/eventquerybyid/:id', apicontroller.eventQueryById);
 router.get('/backend/api/publicationquerybyid/:id', apicontroller.publicationQueryById);
 router.get('/backend/api/usersbycountry', apicontroller.usersByCountry);
 router.get('/backend/api/publicationsbycategory', apicontroller.publicationsByCategory);
+router.get('/backend/api/allpublicationsbycountry', apicontroller.allPublicationsByCountry);
 router.get('/backend/api/publicationsbyuser/:id', apicontroller.publicationsByUser);
 router.get('/backend/api/publicationsbycountry/:country', apicontroller.publicationsByCountry);
 router.get('/backend/api/publicationsbycountrydate/:country', apicontroller.publicationsByCountryDate);
@@ -68,6 +73,7 @@ router.get('/backend/api/insertpublication2/:data', apicontroller.insertPublicat
 router.post('/backend/api/insertuser', apicontroller.insertUser)
 router.post('/backend/api/insertevent', apicontroller.insertEvent)
 router.post('/backend/api/insertpublication', apicontroller.insertPublication)
+router.post('/backend/api/insertcategory', apicontroller.insertCategory);
 
 
 
@@ -78,6 +84,7 @@ router.post('/backend/api/updatepublication', apicontroller.updatePublication)
 router.get('/backend/api/userdelete/:mail', apicontroller.deleteUser)
 router.get('/backend/api/eventdelete/:id', apicontroller.deleteEvent)
 router.get('/backend/api/publicationdelete/:id', apicontroller.deletePublication)
+router.get('/backend/api/categorydelete/:id', apicontroller.deleteCategory)
 
 //api rsc operations
 router.get('/backend/api/geodata', apicontroller.geoJson)
@@ -119,6 +126,9 @@ router.get('/backend/api/reddit/categories/:country', apiReddit.getRedditCountry
 router.get('/backend/api/publication/like/:id', apiController.likePublication);
 
 
+//countries api query
+router.get('/backend/api/countrycode/:country', apiCountries.getCountryCodes);
+router.get('/backend/api/allcountries', apiCountries.getAllCountries);
 
 
 module.exports = router;

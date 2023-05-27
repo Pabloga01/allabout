@@ -1,13 +1,5 @@
 const apiOpenWeatherMap = {};
-const { select } = require('../models/operations');
-const { querySelectAllUsers } = require('../models/User');
-const express = require("express");
-const app = express();
-const User = require('../models/User');
-const Event = require('../models/Event');
-const Publication = require('../models/Publication');
-const fs = require('fs');
-const geoJson = require('../rsc/geojson.json')
+
 
 
 const storage = require('node-sessionstorage')
@@ -23,7 +15,8 @@ apiOpenWeatherMap.getCitiesByCountry = (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
 
     const country = req.params.country;
-    fetch('https://countriesnow.space/api/v0.1/countries')
+
+    fetchRetry('https://countriesnow.space/api/v0.1/countries',50,250)
         .then(response => response.json())
         .then(data => {
             if (data.data.country === country) res.json(element.cities);
@@ -48,7 +41,8 @@ apiOpenWeatherMap.getWeatherByCity = (req, res) => {
     const apiKey = 'f55dc6f3eb5aaa59ee508d71cdffa0c8';
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-    fetch(apiUrl)
+
+    fetchRetry(apiUrl, 50, 250)
         .then(response => response.json())
         .then(data => {
             res.json(data);
@@ -56,6 +50,21 @@ apiOpenWeatherMap.getWeatherByCity = (req, res) => {
 }
 
 
+
+function wait(delay) {
+    return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+function fetchRetry(url, delay, tries, fetchOptions = {}) {
+    function onError(err) {
+        triesLeft = tries - 1;
+        if (!triesLeft) {
+            throw err;
+        }
+        return wait(delay).then(() => fetchRetry(url, delay, triesLeft, fetchOptions));
+    }
+    return fetch(url, fetchOptions).catch(onError);
+}
 
 
 module.exports = apiOpenWeatherMap;

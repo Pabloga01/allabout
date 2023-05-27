@@ -8,17 +8,14 @@ apiRedditController.getRedditCountryPopularPosts = (req, res) => {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
     const country = req.params.country;
-    const time= req.params.time;
+    const time = req.params.time;
 
-    fetch("https://www.reddit.com/r/" + country + "/top.json?t=" + time+"&limit=20", {
-        headers: {
-            "User-Agent": "myBot/0.0.1",
-        },
+    fetchRetry("https://www.reddit.com/r/" + country + "/top.json?t=" + time + "&limit=20", 50, 250, {
+        headers: { "User-Agent": "myBot/0.0.1", }
     })
         .then((response) => response.json())
         .then((data) => {
             res.json(data);
-
         })
         .catch((error) => console.log(error));
 
@@ -31,10 +28,8 @@ apiRedditController.getRedditCountryPopularCategories = (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true);
     const country = req.params.country;
 
-    fetch("https://www.reddit.com/r/" + country + "/about.json", {
-        headers: {
-            "User-Agent": "myBot/0.0.1",
-        },
+    fetchRetry("https://www.reddit.com/r/" + country + "/about.json", 50, 250, {
+        headers: { "User-Agent": "myBot/0.0.1", }
     })
         .then((response) => response.json())
         .then((data) => {
@@ -46,6 +41,23 @@ apiRedditController.getRedditCountryPopularCategories = (req, res) => {
         .catch((error) => console.log(error));
 
 }
+
+
+function wait(delay) {
+    return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+function fetchRetry(url, delay, tries, fetchOptions = {}) {
+    function onError(err) {
+        triesLeft = tries - 1;
+        if (!triesLeft) {
+            throw err;
+        }
+        return wait(delay).then(() => fetchRetry(url, delay, triesLeft, fetchOptions));
+    }
+    return fetch(url, fetchOptions).catch(onError);
+}
+
 
 
 

@@ -21,29 +21,25 @@ head
             textarea#inputField.w-50.description(type="text", name="")= publication ? publication._description : ''
         div.d-flex
           div.col-4.d-flex.justify-content-center
-            h4 Latitude
+            h4 Country
           div.col-8.text-center   
-            input#inputField.w-50.latitude(type="text", name="",value= publication ? publication._latitude : '')
-        div.d-flex
-          div.col-4.d-flex.justify-content-center
-            h4 Longitude
-          div.col-8.text-center   
-            input#inputField.w-50.longitude(type="text", name="",value= publication ? publication._longitude : '')
+            select#inputField.w-50.country(type="text", name= publication ? publication._country : '', value= publication ? publication._country : '')
+
         div.d-flex
           div.col-4.d-flex.justify-content-center
             h4 Date
           div.col-8.text-center   
-            input#inputField.w-50.date(type="date", name="",value= publication ? publication._date : '')
+            input#inputField.w-50.date(type="date",  name= publication ? publication._date : '', value= publication ? publication._date : '')
         div.d-flex
           div.col-4.d-flex.justify-content-center
             h4 User creator
           div.col-8.text-center   
-            input#inputField.w-50.id_user(type="text", name="",value= publication ? publication._id_user : '')    
+            select#inputField.selectUsers.w-50.id_user(type="text", name= publication ? publication._id_user : '' ,value= publication ? publication._id_user : '')   
         div.d-flex
           div.col-4.d-flex.justify-content-center
             h4 Category
           div.col-8.text-center   
-            input#inputField.w-50.id_category(type="text", name="",value= publication ? publication._id_category : '')    
+            select#inputField.selectCategories.w-50.id_category(type="text", name= publication ? publication._id_category : '' ,value= publication ? publication._id_category : '')    
         div#buttonsDiv.d-flex.justify-content-center
           button#button.btnBack.btn-dark.btn Go back
           if mode== add

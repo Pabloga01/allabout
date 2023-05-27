@@ -4,6 +4,43 @@ const btnBack = document.querySelector('.btnBack');
 const btnAddUser = document.querySelector('.btnAdd');
 const btnEditUser = document.querySelector('.btnEdit');
 
+const selectCountries = document.querySelector('.nationality');
+
+
+
+fetch('http://localhost:3000/backend/api/allcountries')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+
+        data.forEach(element => {
+            const option = document.createElement('option');
+            option.value = element.name;
+            option.textContent = element.name;
+            selectCountries.appendChild(option);
+        });
+        selectCountries.value = selectCountries.name;
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 btnBack.addEventListener('click', () => {
     window.location.href = 'http://localhost:3000/backend/tables'

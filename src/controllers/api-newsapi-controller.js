@@ -4,13 +4,6 @@ const express = require("express");
 const app = express();
 
 
-
-const storage = require('node-sessionstorage')
-
-let accessToken = "";
-
-
-
 apiNewsapi.getNewsByCountry = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -22,7 +15,10 @@ apiNewsapi.getNewsByCountry = (req, res) => {
 
     const apiUrl = 'https://newsapi.org/v2/top-headlines?country=' + country + '&apiKey=' + accessKey;
 
-    fetch(apiUrl)
+    fetchRetry('https://countriesnow.space/api/v0.1/countries', 50, 250)
+
+
+    fetchRetry(apiUrl, 50, 250)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -37,5 +33,25 @@ apiNewsapi.getNewsByCountry = (req, res) => {
             console.error('Fetch error:', error);
         });
 }
+
+
+function wait(delay) {
+    return new Promise((resolve) => setTimeout(resolve, delay));
+}
+
+function fetchRetry(url, delay, tries, fetchOptions = {}) {
+    function onError(err) {
+        triesLeft = tries - 1;
+        if (!triesLeft) {
+            throw err;
+        }
+        return wait(delay).then(() => fetchRetry(url, delay, triesLeft, fetchOptions));
+    }
+    return fetch(url, fetchOptions).catch(onError);
+}
+
+
+
+
 
 module.exports = apiNewsapi;

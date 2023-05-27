@@ -33,8 +33,9 @@
             <div class="inner-size">
                 <div class="form-field">
                     <div class="label-container">
-                        <label for="contenido">Title:</label>
+                        <label for="contenido">Title</label>
                     </div>
+                    <mat-error *ngIf="titleError!==undefined">{{titleError}}</mat-error>
                     <mat-form-field class="form-field">
                         <mat-label>Add a title </mat-label>
                         <input id="titulo" class="input-title" name="titulo" matInput>
@@ -42,8 +43,9 @@
                 </div>
                 <div class="form-field">
                     <div class="label-container">
-                        <label for="contenido">Content:</label>
+                        <label for="contenido">Content</label>
                     </div>
+                    <mat-error *ngIf="contentError!==undefined">{{contentError}}</mat-error>
                     <mat-form-field class="form-field">
                         <textarea class="input-content" matInput placeholder="Publication content" id="contenido"
                             name="contenido"></textarea>
@@ -51,8 +53,9 @@
                 </div>
                 <div class="form-field">
                     <div class="label-container">
-                        <label for="contenido">Category:</label>
+                        <label for="contenido">Category</label>
                     </div>
+                    <mat-error *ngIf="categoryError!==undefined">{{categoryError}}</mat-error>
                     <mat-form-field class="form-field">
                         <mat-label>Select a category</mat-label>
                         <mat-select class="input-category">
@@ -63,16 +66,18 @@
                 </div>
                 <div class="form-field">
                     <div class="label-container">
-                        <label for="contenido">Date:</label>
+                        <label for="contenido">Date</label>
                     </div>
+                    <mat-error *ngIf="dateError!==undefined">{{dateError}}</mat-error>
                     <div class="div-date">
                         <input type="date" id="date" class="date-field input-date" name="date">
                     </div>
                 </div>
                 <div class="form-field description-container">
                     <div class="label-container">
-                        <label for="contenido">Country:</label>
+                        <label for="contenido">Country</label>
                     </div>
+                    <mat-error *ngIf="countryError!==undefined">{{countryError}}</mat-error>
                     <mat-form-field class="form-field">
                         <mat-label>Select a country</mat-label>
                         <mat-select class="input-country">
@@ -91,6 +96,7 @@
                 <!-- </div>
                     <img id="image-preview" src="" alt="Vista previa de la imagen">
                 </div>  -->
+                <mat-error *ngIf="formError!==undefined">{{formError}}</mat-error>
                 <button (click)="submitForm()" class="mt-5" type="submit">Add Publication</button>
             </div>
         </form>

@@ -1,0 +1,53 @@
+doctype html
+head
+  // Required meta tags
+  meta(charset='utf-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  base(href="http://localhost:3000/")
+  link(rel='stylesheet' href='/css/categoryFields.css')
+
+  title Tables 
+  include template.pug
+    .content-wrapper.d-flex.justify-content-center
+      .row#row.col-8.mt-4
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Name
+          div.col-8.text-center   
+            input#inputField.name.w-50.name(type="text", name="", value= user ? user._name : '')
+        div.d-flex
+          div.col-4.d-flex.justify-content-center
+            h4 Description
+          div.col-8.text-center   
+            textarea#inputField.desc.w-50.description(type="textarea", name="",value= user ? user._surname : '')
+        div#buttonsDiv.d-flex.justify-content-center
+          button#button.btnBack.btn-dark.btn Go back
+          if mode== add
+            button#button.btnAdd.btn-primary.btn Add category
+          else
+            button#button.btnEdit.btn-primary.btn Edit category
+
+
+
+
+
+// Button trigger modal
+// page-body-wrapper ends
+// container-scroller
+// plugins:js
+script(src='../vendors/js/vendor.bundle.base.js')
+
+// endinject
+// Plugin js for this page
+script(src='../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')
+// End plugin js for this page
+// inject:js
+script(src='../../js/off-canvas.js')
+script(src='../../js/hoverable-collapse.js')
+script(src='../../js/template.js')
+script(src='../../js/settings.js')
+script(src='../../js/todolist.js')
+script(type='module' src='../js2/category-fields.js')
+// endinject
+// Custom js for this page
+// End custom js for this page

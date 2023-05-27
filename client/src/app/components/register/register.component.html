@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="main-form">
     <mat-card-header>
         <div class="container-logo">
             <img class='img-logo' src="../../../assets/img/allaboutletter.png">
@@ -10,31 +10,38 @@
     </mat-card-header>
     <mat-card-content>
         <form>
+            <mat-error *ngIf="nameError!==undefined">{{nameError}}</mat-error>
             <mat-form-field appearance="fill">
                 <mat-label>Name</mat-label>
                 <input matInput class="name-input" type="text" placeholder="Enter your name" />
             </mat-form-field>
+            <mat-error *ngIf="surnameError!==undefined">{{surnameError}}</mat-error>
             <mat-form-field appearance="fill">
                 <mat-label>Surname</mat-label>
                 <input matInput class="surname-input" type="text" placeholder="Enter your surname" />
             </mat-form-field>
+            <mat-error *ngIf="usertagError!==undefined">{{usertagError}}</mat-error>
             <mat-form-field appearance="fill">
                 <mat-label>Usertag</mat-label>
                 <input matInput class="usertag-input" type="text" placeholder="Enter your usertag" />
             </mat-form-field>
+            <mat-error *ngIf="passwordError!==undefined">{{passwordError}}</mat-error>
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
                 <input matInput class="password-input" type="password" placeholder="Add your password" />
             </mat-form-field>
+            <mat-error *ngIf="countryError!==undefined">{{countryError}}</mat-error>
             <mat-form-field class="form-field">
                 <mat-select class="country-select" placeholder="Country">
                     <mat-option *ngFor="let option of options" [value]="option">{{ option }}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <mat-error *ngIf="mailError!==undefined">{{mailError}}</mat-error>
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
                 <input class="mail-input" matInput placeholder="Add your mail" />
             </mat-form-field>
+            <mat-error *ngIf="formError!==undefined">{{formError}}</mat-error>
             <div class="signup-container">
                 <a routerLink="/login" class="signup">You already have an account?</a>
             </div>

@@ -33,10 +33,12 @@ export class HomeComponent {
   public weatherFile!: any;
   public news: { author: string, url: string, source: string, title: string, published: string, country: string }[] = []
   public videos: { channel: string, title: string, description: string, thumbnails: string }[] = [];
-  public channels: {} = [];
+  public channels: { channel: string, susbcribers: string, description: string, thumbnail: string }[] = [];
+
   public categories: { category: string }[] = [];
   public redditPosts: { title: string, author: string, thumbnail: string, url: string, score: string }[] = [];
   public publications: { id: string, popularity: number, title: string, description: string, date: string, category: string, country: string, usertag: string }[] = [];
+
 
   loadedState: boolean = true;
   public musicPlaying = true;
@@ -59,7 +61,10 @@ export class HomeComponent {
     const countryName = document.querySelector('#countryName');
     let dataCountry = data.NAME;
     this.countryName = data.NAME;
-    if (dataCountry === 'United States of America') dataCountry = 'USA'
+    if (dataCountry === 'United States of America') {
+      dataCountry = 'USA'
+      this.countryName = 'United States';
+    }
     countryName!.innerHTML = dataCountry;
     let continent = data.REGION_UN;
     if (continent === 'Americas') continent = 'America';
@@ -82,8 +87,18 @@ export class HomeComponent {
         this.loadFlag(data[0].flags.png);
         console.log(data[0].capital);
 
+        const urlLink = 'http://localhost:3000/backend/api/countrycode/' + countryName;
+        fetch(urlLink)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            this.countryCodeSelected = data;
+          });
+
+
         if (this.countryCodeSelected.toUpperCase() !== data[0].alpha2Code) {
           this.countryCodeSelected = data[0].alpha2Code;
+          console.log(this.countryCodeSelected);
           if (this.divContent == 'spotify') this.loadSpotifyOption();
           else if (this.divContent == 'news') this.loadNewsByCountry();
           else if (this.divContent == 'youtube') this.loadYoutubeOption();
@@ -101,6 +116,10 @@ export class HomeComponent {
         else if (capital === 'Brasilia') capital = 'Sao_Paulo'
         else if (capital === 'Canberra') capital = 'Melbourne'
         else if (capital === 'Beijing') capital = 'Shanghai'
+        else if (capital === 'Diego Garcia') capital = 'New Delhi'
+
+
+
         capital = capital.replaceAll("'", '').replaceAll(" ", '_');
 
         if (continent === 'Oceania') continent = 'Australia';
@@ -135,6 +154,7 @@ export class HomeComponent {
   //   loadSpotifyData(hc.countryCodeSelected)
   //   createCells();
   // })
+
 
 
   loadSpotifyOption() {
@@ -759,18 +779,19 @@ export class HomeComponent {
 
   loadChannelsData(data: any) {
     console.log(data);
-    data.items.forEach((item: any) => {
-      const channel = item.snippet.channelTitle;
-      const title = item.snippet.title;
-      const thumbnails = item.snippet.thumbnails.standard.url;
-      const description = item.snippet.description;
+    data.forEach((item: any) => {
+      console.log(item);
+      const channel = item.items[0].snippet.title;
+      const susbcribers = item.items[0].statistics.subscriberCount;
+      const thumbnail = item.items[0].snippet.thumbnails.default.url;
+      const description = item.items[0].snippet.description;
 
-      // const json = { channel: channel, title: title, description: description, thumbnails: thumbnails }
-      // this.channels.push(json);
+      const json = { channel: channel, susbcribers: susbcribers, description: description, thumbnail: thumbnail }
+      this.channels.push(json);
     });
 
     this.divContent = 'youtube';
-    this.section = 'youtube_videos';
+    this.section = 'youtube_channels';
   }
 
 

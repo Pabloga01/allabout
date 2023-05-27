@@ -183,7 +183,10 @@ class User {
     async insertUser(object) {
         return new Promise((resolve, reject) => {
             if (object.admin == null) object.admin = 0;
-            let selectQuery = "insert into user(name,surname,usertag,admin,mail,password,address) values('" + object.name + "','" + object.surname + "','" + object.usertag + "'," + object.admin + ",'" + object.mail + "','" + object.password + "','" + object.address + "')";
+            if (object.address == null) object.address = '';
+            if (object.nationality == null) object.nationality = '';
+
+            let selectQuery = "insert into user(name,surname,usertag,admin,mail,password,nationality,address) values('" + object.name + "','" + object.surname + "','" + object.usertag + "'," + object.admin + ",'" + object.mail + "','" + object.password + "','" + object.nationality + "','" + object.address + "')";
             connection.query(selectQuery, async function (err, result) {
                 if (err) return reject(err);
                 try {
@@ -200,8 +203,7 @@ class User {
 
     async updateUser(object) {
         return new Promise((resolve, reject) => {
-            let selectQuery = "update user set name='" + object.name + "',surname='" + object.surname + "',usertag='" + object.usertag + "',admin=" + object.admin + ",mail='" + object.mail + "',password='" + object.password + "',address='" + object.address + "' where id_user = " + object.id_user;
-            connection.query(selectQuery, async function (err, result) {
+            let selectQuery = "update user set name='" + object.name + "',nationality='" + object.nationality + "',surname='" + object.surname + "',usertag='" + object.usertag + "',admin=" + object.admin + ",mail='" + object.mail + "',password='" + object.password + "',address='" + object.address + "' where id_user = " + object.id_user;            connection.query(selectQuery, async function (err, result) {
                 if (err) return reject(err);
                 try {
                     if (result) {

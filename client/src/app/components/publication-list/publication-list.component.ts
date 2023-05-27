@@ -29,13 +29,14 @@ export class PublicationListComponent {
       .then(response => response.json())
       .then(data => {
         this.publications = [];
-        console.log(data);
-        data.forEach((element: any) => {
-          this.publications.push({ content: element.content, description: element.description, date: element.date.substring(0, 10), id: element.id_publication });
-          this.options = data;
-        })
+        if (data != false) {
+          data.forEach((element: any) => {
+            this.publications.push({ content: element.content, description: element.description, date: element.date.substring(0, 10), id: element.id_publication });
+            this.options = data;
+          })
 
-        this.visible = true;
+          this.visible = true;
+        }
       })
   }
 

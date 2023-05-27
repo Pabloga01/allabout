@@ -29,7 +29,7 @@ controller.loginCheck = (req, res) => {
             const userId = user._id_user;
             if (user != false) {
                 storage.setItem('id_user', userId);
-                res.redirect('/backend/home');
+                res.redirect('/backend/tables');
             } else {
                 storage.setItem('msj_error_login', 'error');
                 res.redirect('/backend/login');
@@ -142,6 +142,11 @@ controller.addEvent = (req, res) => {
 
 controller.addPublication = (req, res) => {
     if (typeof storage.getItem('id_user') !== 'undefined') res.render('publication');
+    else res.redirect('/backend/login');
+};
+
+controller.addCategory = (req, res) => {
+    if (typeof storage.getItem('id_user') !== 'undefined') res.render('category');
     else res.redirect('/backend/login');
 };
 

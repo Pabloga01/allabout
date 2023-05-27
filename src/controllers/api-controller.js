@@ -42,11 +42,17 @@ apiController.registerUser = (req, res) => {
     const json = JSON.parse(req.params.data);
     let user = new User();
     (async () => {
-        let insert = await user.insertUser(json);
-        if (typeof insert !== 'undefined' && insert != false) {
-            res.json(insert);
-        } else {
-            console.log(userQ)
+        try {
+            let insert = await user.insertUser(json);
+            console.log(insert);
+            if (insert) {
+                res.json(true);
+            } else {
+                console.log(userQ)
+                res.json(false);
+            }
+        } catch (Ex) {
+            console.log(Ex);
             res.json(false);
         }
     })()
@@ -247,6 +253,41 @@ apiController.deletePublication = (req, res) => {
 
 
 
+
+apiController.insertCategory = (req, res) => {
+    console.log('Inserting category');
+    let category = new Category();
+    (async () => {
+        console.log(req.body)
+        let insertCat = await category.insertCategory(req.body);
+        if (typeof insertCat !== 'undefined' && insertCat != false) {
+            res.json(insertCat);
+        }
+    })()
+};
+
+
+
+
+
+
+apiController.deleteCategory = (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    let category = new Category({ id_category: req.params.id });
+    (async () => {
+        let deletedCat = await category.deleteCategory({ id_category: req.params.id });
+        if (deletedCat != false) {
+            res.json(true);
+        } else {
+            res.json(false);
+        }
+    })()
+};
+
+
 //queries
 apiController.userquerybymail = (req, res) => {
     const user = new User({ mail: req.params.mail });
@@ -334,6 +375,19 @@ apiController.publicationsByCategory = (req, res) => {
         }
     })()
 }
+
+apiController.allPublicationsByCountry = (req, res) => {
+    const publication = new Publication();
+    (async () => {
+        const publicationQ = await publication.getPublicationCountryCount();
+        if (publicationQ != false) {
+            res.json(publicationQ);
+        } else {
+            res.json(false);
+        }
+    })()
+}
+
 apiController.publicationsByCountry = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');

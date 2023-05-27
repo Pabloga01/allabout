@@ -28,6 +28,42 @@ class Category {
             });
         });
     }
+
+
+    async insertCategory(object) {
+        return new Promise((resolve, reject) => {
+            let selectQuery = "insert into category (cat_name,description,popularity_cat) values('" + object.cat_name + "','" + object.description + "',0) ";
+            console.log(selectQuery);
+            connection.query(selectQuery, async function (err, result) {
+                if (err) return reject(err);
+                try {
+                    if (result) {
+                        resolve(true);
+                    } else resolve(false);
+                } catch (ex) {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+
+
+    async deleteCategory(object) {
+        return new Promise((resolve, reject) => {
+            let selectQuery = 'delete from category where id_category=' + object.id_category;
+            connection.query(selectQuery, async function (err, result) {
+                if (err) return reject(err);
+                try {
+                    if (result) {
+                        resolve(true);
+                    } else resolve(false);
+                } catch (ex) {
+                    resolve(false);
+                }
+            });
+        });
+    }
 }
 
 

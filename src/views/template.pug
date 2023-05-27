@@ -32,9 +32,9 @@ head
           span.icon-menu
       div
         a.navbar-brand.brand-logo(href='../../index.html')
-          img(src='../images/logo.svg' alt='logo')
+          img(src='../images/allaboutletter.png' alt='logo')
         a.navbar-brand.brand-logo-mini(href='../../index.html')
-          img(src='../images/logo-mini.svg' alt='logo')
+          img(src='../images/allaboutlogo.png' alt='logo')
     .navbar-menu-wrapper.d-flex.align-items-top
       ul.navbar-nav
         li.nav-item.font-weight-semibold.d-none.d-lg-block.ms-0
@@ -43,28 +43,7 @@ head
             span#userName.text-black.fw-bold= name
           h3.welcome-sub-text Your performance summary this week 
       ul.navbar-nav.ms-auto
-        li.nav-item.dropdown.d-none.d-lg-block
-          a#messageDropdown.nav-link.dropdown-bordered.dropdown-toggle.dropdown-toggle-split(href='#' data-bs-toggle='dropdown' aria-expanded='false')  Select Category 
-          .dropdown-menu.dropdown-menu-right.navbar-dropdown.preview-list.pb-0(aria-labelledby='messageDropdown')
-            a.dropdown-item.py-3
-              p.mb-0.font-weight-medium.float-left Select category
-            .dropdown-divider
-            a.dropdown-item.preview-item
-              .preview-item-content.flex-grow.py-2
-                p.preview-subject.ellipsis.font-weight-medium.text-dark Bootstrap Bundle 
-                p.fw-light.small-text.mb-0 This is a Bundle featuring 16 unique dashboards
-            a.dropdown-item.preview-item
-              .preview-item-content.flex-grow.py-2
-                p.preview-subject.ellipsis.font-weight-medium.text-dark Angular Bundle
-                p.fw-light.small-text.mb-0 Everything you&rsquo;ll ever need for your Angular projects
-            a.dropdown-item.preview-item
-              .preview-item-content.flex-grow.py-2
-                p.preview-subject.ellipsis.font-weight-medium.text-dark VUE Bundle
-                p.fw-light.small-text.mb-0 Bundle of 6 Premium Vue Admin Dashboard
-            a.dropdown-item.preview-item
-              .preview-item-content.flex-grow.py-2
-                p.preview-subject.ellipsis.font-weight-medium.text-dark React Bundle
-                p.fw-light.small-text.mb-0 Bundle of 8 Premium React Admin Dashboard
+
         li.nav-item
           form.search-form(action='#')
             i.icon-search
@@ -290,23 +269,16 @@ head
     // partial:../../partials/_sidebar.html
     nav#sidebar.sidebar.sidebar-offcanvas
       ul.nav
-        li.nav-item
-          a.nav-link(href='../../index.html')
-            i.mdi.mdi-grid-large.menu-icon
-            span.menu-title Dashboard
+ 
         li.nav-item.nav-category Forms and Datas
-        li.nav-item
-          a.nav-link(href='http://localhost:3000/backend/home')
-            i.menu-icon.mdi.mdi-card-text-outline
-            span.menu-title Home
-        li.nav-item
-          a.nav-link(href='http://localhost:3000/backend/charts')
-            i.menu-icon.mdi.mdi-chart-line
-            span.menu-title Charts
         li.nav-item
           a.nav-link(href='http://localhost:3000/backend/tables')
             i.menu-icon.mdi.mdi-table
             span.menu-title Tables
+        li.nav-item
+          a.nav-link(href='http://localhost:3000/backend/charts')
+            i.menu-icon.mdi.mdi-chart-line
+            span.menu-title Charts
 
         li.nav-item.nav-category pages
         li.nav-item
@@ -319,7 +291,6 @@ head
               li.nav-item
                 a.nav-link(href='http://localhost:3000/backend/logout')  Logout 
 
-            span.menu-title Documentation
     .main-panel
     
         div.border-top

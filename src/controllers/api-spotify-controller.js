@@ -53,7 +53,7 @@ apiSpotifyController.getPopularSongs = (req, res) => {
                 headers: { 'Authorization': 'Bearer ' + token }
             };
             const country = req.params.country;
-            fetchRetry('https://api.spotify.com/v1/browse/categories/toplists/playlists?country=' + country, 10, 250, options)
+            fetchRetry('https://api.spotify.com/v1/browse/categories/toplists/playlists?country=' + country, 100, 250, options)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data)

@@ -62,7 +62,8 @@
                         alt="">
                 </div>
                 <div class=" elm">
-                    <img (click)="goPublicationList()" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ei-user.svg/2048px-Ei-user.svg.png"
+                    <img (click)="goPublicationList()"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Ei-user.svg/2048px-Ei-user.svg.png"
                         width="38" height="38" alt="">
                 </div>
             </a>
@@ -397,7 +398,7 @@
                     <select (change)="loadYoutubeOption()" class="youtube-select form-select w-50 pt-2"
                         id="spotifyQuery" aria-label="Default select example">
                         <option value="videos"><strong>Top videos</strong></option>
-                        <option value="channels"><strong>Top channels</strong></option>
+                        <option value="channels"><strong>Popular channels</strong></option>
                         <option value="categories"><strong>Top categories</strong></option>
                     </select>
                 </div>
@@ -462,23 +463,19 @@
                     </ng-container>
                     <ng-container *ngIf="section === 'youtube_channels'">
                         <div id="item-song" class="song-grid col-12">
-                            <div *ngFor="let artist of artists"
+                            <div *ngFor="let channel of channels"
                                 class="song-item d-flex justify-content-center col-12 row">
                                 <div class="img_div col-3">
-                                    <img class="pb-2" src="{{ artist.image }}" width="52" height="55">
+                                    <img class="pb-2" src="{{ channel.thumbnail }}" width="52" height="55">
                                 </div>
                                 <div class="pt-2 col-7 d-flex row text-start justify-content-start align-items-start">
-                                    <h6 class="title_song px-1">{{ artist.name }}</h6>
+                                    <h6 class="title_song px-1">{{ channel.channel }}</h6>
                                     <div class=" d-flex col px-1 ">
-                                        <p>{{ artist.followers }}</p>
+                                         <p>{{ channel.susbcribers }} subs.</p> 
                                         <!-- <p class="px-2">Album</p> -->
                                     </div>
                                 </div>
-                                <div class="song-preview pt-3 col-2 text-start">
-                                    <a href="{{ artist.artistPage }}" class="song-preview">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>
-                                </div>
+
                             </div>
                         </div>
                     </ng-container>

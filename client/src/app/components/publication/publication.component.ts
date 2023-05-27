@@ -12,7 +12,14 @@ export class PublicationComponent {
   countryOptions = ['Opción 1', 'Opción 2', 'Opción 3'];
   options: { name: string, id: string }[] = []
   selectedOption: string | undefined;
-  imagen = "";
+
+
+  titleError: string | undefined;
+  contentError: string | undefined;
+  categoryError: string | undefined;
+  dateError: string | undefined;
+  countryError: string | undefined;
+  formError: string | undefined;
 
 
   ngOnInit() {
@@ -27,11 +34,11 @@ export class PublicationComponent {
     this.countryOptions = []
     const countries = [
       { name: 'Afghanistan', code: 'AF' },
-      { name: 'Åland Islands', code: 'AX' },
+      { name: 'Aland Islands', code: 'AX' },
       { name: 'Albania', code: 'AL' },
       { name: 'Algeria', code: 'DZ' },
       { name: 'American Samoa', code: 'AS' },
-      { name: 'AndorrA', code: 'AD' },
+      { name: 'Andorra', code: 'AD' },
       { name: 'Angola', code: 'AO' },
       { name: 'Anguilla', code: 'AI' },
       { name: 'Antarctica', code: 'AQ' },
@@ -303,8 +310,10 @@ export class PublicationComponent {
     const date: any = document.querySelector('.input-date');
     const category: any = document.querySelector('.input-category');
     const country: any = document.querySelector('.input-country');
-
     const user: any = sessionStorage.getItem('loginIn');
+
+    const canSubmit = this.checkValidations(title, content, date, category, country);
+    if (!canSubmit) return;
 
     (async () => {
       const publication = {
@@ -325,32 +334,67 @@ export class PublicationComponent {
       })
       const data = await query.json();
       if (data !== 'false') window.location.href = 'http://localhost:4200/publicationlist';
+      else this.formError = 'Error. Publication cannot be added. Check the fields';
     })()
 
   }
 
 
 
-  checkTitle() {
-    const title: any = document.querySelector('.input_title');
-    const regex = /^[a-zA-Z\s']+$/;
+  checkValidations(title: any, content: any, date: any, category: any, country: any) {
+    let canSubmit = true;
+    this.formError = undefined;
+    console.log('valid');
+
     if (title.value === '') {
+      this.titleError = 'Please fill the title field'
+      canSubmit = false;
+    } else {
+      if (title.value.length > 50) {
+        this.titleError = 'Please enter a valid title lenght, shorter than 50 characters'
+        canSubmit = false;
+      } else this.titleError = undefined;
+    }
 
-    } else if (regex.test(title.value)) { }
+    if (content.value === '') {
+      this.contentError = 'Please fill the content field'
+      canSubmit = false;
+    } else {
+      if (content.value > 200) {
+        this.contentError = 'Please enter a valid publication description, shorter than 200 characters'
+        canSubmit = false;
+      } else this.contentError = undefined;
+    }
 
+    if (date.value === '') {
+      this.dateError = 'Please add a date'
+      canSubmit = false;
+    } else {
+      const dateRegex = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])$/;
+      if (!dateRegex.test(date.value)) {
+        this.dateError = 'Please enter a valid date format'
+        canSubmit = false;
+      } else this.dateError = undefined;
+    }
+
+
+    if (country.textContent === '') {
+      this.countryError = 'Please select a country of the list'
+      canSubmit = false;
+    } else {
+      this.countryError = undefined;
+    }
+
+    if (category.textContent === '') {
+      this.categoryError = 'Please select a category of the list'
+      canSubmit = false;
+    } else {
+      this.categoryError = undefined;
+    }
+
+    return canSubmit;
   }
-  checkDescription() {
-    const description: any = document.querySelector('.input-content');
-  }
-  checkContent() {
-    const content: any = document.querySelector('.input-content');
-  }
-  checkDate() {
-    const date: any = document.querySelector('.input-date');
-  }
-  checkCategory() {
-    const category: any = document.querySelector('.input-category');
-  }
+
 
 
   logout() {

@@ -8,6 +8,22 @@ import { Component } from '@angular/core';
 export class RegisterComponent {
   options = ['Opción 1', 'Opción 2', 'Opción 3'];
   countries: any[] | undefined;
+
+
+
+  nameError: string | undefined;
+  surnameError: string | undefined;
+  usertagError: string | undefined;
+  passwordError: string | undefined;
+  countryError: string | undefined;
+  mailError: string | undefined;
+
+  formError: string | undefined;
+
+  biggerForm: boolean = false;
+
+
+
   ngOnInit() {
     this.loadCountryOptions();
   }
@@ -269,24 +285,104 @@ export class RegisterComponent {
 
 
   submitForm() {
-    (async () => {
-      const name: any = document.querySelector('.name-input');
-      const surname: any = document.querySelector('.surname-input');
-      const usertag: any = document.querySelector('.usertag-input');
-      const password: any = document.querySelector('.password-input');
-      const country: any = document.querySelector('.country-select');
-      const mail: any = document.querySelector('.mail-input');
+    const name: any = document.querySelector('.name-input');
+    const surname: any = document.querySelector('.surname-input');
+    const usertag: any = document.querySelector('.usertag-input');
+    const password: any = document.querySelector('.password-input');
+    const country: any = document.querySelector('.country-select');
+    const mail: any = document.querySelector('.mail-input');
+
+    const canValidate = this.checkValidations(name, surname, usertag, password, country, mail);
+    if (!canValidate) return;
 
 
-      const dataJson = JSON.stringify({ name: name.value, surname: surname.value, usertag: usertag.value, country: country.textContent, mail: mail.value, password: password.value });
-      const query = await fetch('http://localhost:3000/backend/api/registeruser/' + dataJson, { mode: 'no-cors' })
-      const data = await query.json();
-      if (data != false) {
-        window.location.href = 'http://localhost:4200/login';
-      } else {
-        console.log('register failed')
-      }
-    })()
+    const dataJson = JSON.stringify({ name: name.value, surname: surname.value, usertag: usertag.value, natinality: country.textContent, mail: mail.value, password: password.value });
+    fetch('http://localhost:3000/backend/api/registeruser/' + dataJson, { mode: 'cors' })
+      .then(response => response.json())
+      .then(data => {
+        if (data != false) {
+          window.location.href = 'http://localhost:4200/login';
+          return;
+        } else {
+          this.formError = 'Error on register. User is already registered'
+          return;
+        }
+      }).catch(err => {
+        this.formError = 'Error on register. Check field values'
+      });
 
   }
+
+
+  checkValidations(name: any, surname: any, usertag: any, password: any, country: any, mail: any) {
+    let canSubmit = true;
+    this.formError = undefined;
+    console.log('valid');
+
+    if (name.value === '') {
+      this.nameError = 'Please fill the name field'
+      canSubmit = false;
+    } else {
+      const nameRegex = /^[A-Za-z\s\-']+$/;
+      if (!nameRegex.test(name.value)) {
+        this.nameError = 'Please enter a valid name'
+        canSubmit = false;
+      } else this.nameError = undefined;
+    }
+
+    if (surname.value === '') {
+      this.surnameError = 'Please fill the surname field'
+      canSubmit = false;
+    } else {
+      const surnameRegex = /^[A-Za-z\s\-']+$/;
+      if (!surnameRegex.test(surname.value)) {
+        this.surnameError = 'Please enter your first surname'
+        canSubmit = false;
+      } else this.surnameError = undefined;
+    }
+
+    if (usertag.value === '') {
+      this.usertagError = 'Please fill the usertag field'
+      canSubmit = false;
+    } else {
+      const userTagRegex = /^[a-zA-Z0-9_]+$/;
+      if (!userTagRegex.test(usertag.value)) {
+        this.usertagError = 'Please enter a valid unique usertag'
+        canSubmit = false;
+      } else this.usertagError = undefined;
+    }
+
+
+    if (country.textContent === 'Country') {
+      this.countryError = 'Please select a country of the list'
+      canSubmit = false;
+    } else {
+      this.countryError = undefined;
+    }
+
+
+
+    if (mail.value === '') {
+      this.mailError = 'Please fill the email address field'
+      canSubmit = false;
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(mail.value)) {
+        this.mailError = 'Please enter a valid email direction'
+        canSubmit = false;
+      } else this.mailError = undefined;
+    }
+    if (password.value === '') {
+      this.passwordError = 'Please fill the password field'
+      canSubmit = false;
+    } else {
+      if (password.value.length < 4) {
+        this.passwordError = 'Please enter a valid password. Minimum 4 digits required';
+        canSubmit = false;
+      } else this.passwordError = undefined;
+    }
+    return canSubmit;
+  }
+
+
 }

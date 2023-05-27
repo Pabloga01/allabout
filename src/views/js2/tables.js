@@ -2,6 +2,7 @@
 const tableUsersContent = document.querySelector('#bodyUserContent');
 const tableEventsContent = document.querySelector('#bodyEventContent');
 const tablePublicationsContent = document.querySelector('#bodyPublicationContent');
+const tableCategoriesContent = document.querySelector('#bodyCategoryContent');
 
 
 // TODO implementacion para el template con nombre de usuario
@@ -117,7 +118,7 @@ async function loadEvent() {
 //loads data publication values
 loadPublication().then(publicationList => {
     console.log(publicationList);
-    const headerList = ['id_publication', 'content', 'usertag', 'cat_name', 'date', 'upvotes', 'description', 'country']
+    const headerList = ['id_publication', 'content', 'usertag', 'cat_name', 'date', 'popularity', 'description', 'country']
     publicationList.forEach(publication => {
         let tr = document.createElement('tr');
         headerList.forEach(headerName => {
@@ -156,11 +157,68 @@ loadPublication().then(publicationList => {
     });
 });
 
+
+
+
+loadCategories().then(categoriesList => {
+    console.log(categoriesList);
+    const headerList = ['id_category', 'cat_name', 'description', 'popularity_cat']
+    categoriesList.forEach(category => {
+        let tr = document.createElement('tr');
+        headerList.forEach(headerName => {
+            let td = document.createElement('td');
+            if (typeof category[headerName] !== 'undefined') td.innerHTML = category[headerName];
+            else td.innerHTML = '';
+            tr.appendChild(td);
+        });
+        const id = 'deleteCategory';
+        const values = 'remove';
+        const types = 'btn-danger';
+        let td = document.createElement('td');
+        let button = document.createElement('button');
+        button.classList.add('rounded', types);
+        button.innerHTML = values;
+        button.id = id;
+
+        button.onclick = () => {
+            deleteCategory(button);
+        };
+
+        td.appendChild(button);
+        tr.appendChild(td);
+
+        tableCategoriesContent.appendChild(tr);
+    });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 async function loadPublication() {
     const response = await fetch('http://localhost:3000/backend/api/publications');
     const data = await response.json();
     return data;
 }
+
+
+async function loadCategories() {
+    const response = await fetch('http://localhost:3000/backend/api/categories');
+    const data = await response.json();
+    return data;
+}
+
+
 
 
 //add new user
@@ -180,6 +238,12 @@ buttonAddEvent.addEventListener('click', () => {
 const buttonAddPublication = document.querySelector('#publicationAdd');
 buttonAddPublication.addEventListener('click', () => {
     window.location.href = 'http://localhost:3000/backend/publicationadd';
+});
+
+//add new category
+const buttonAddCategory = document.querySelector('#categoryAdd');
+buttonAddCategory.addEventListener('click', () => {
+    window.location.href = 'http://localhost:3000/backend/categoryadd';
 });
 
 
@@ -220,6 +284,18 @@ async function deletePublication(button) {
     const id = button.parentNode.parentNode.children[0].innerHTML;
     (async () => {
         const response = await fetch('http://localhost:3000/backend/api/publicationdelete/' + id);
+        const data = await response.json();
+        if (data) location.reload();
+
+    })()
+}
+
+
+//delete category
+async function deleteCategory(button) {
+    const id = button.parentNode.parentNode.children[0].innerHTML;
+    (async () => {
+        const response = await fetch('http://localhost:3000/backend/api/categorydelete/' + id);
         const data = await response.json();
         if (data) location.reload();
 

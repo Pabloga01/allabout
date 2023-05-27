@@ -30,11 +30,12 @@ class Publication {
 
     async getAllPublications() {
         return new Promise((resolve, reject) => {
-            let selectQuery = 'SELECT * FROM publication inner join category on publication.id_category=category.id_category inner JOIN user on publication.id_user= user.id_user;';
+            let selectQuery = 'SELECT * FROM publication inner join user on publication.id_user=user.id_user inner join category on publication.id_category= category.id_category';
             connection.query(selectQuery, async function (err, result) {
                 if (err) return reject(err);
                 try {
                     if (result.length > 0) {
+                        console.log(result);
                         resolve(result);
                     } else resolve(false);
                 } catch (ex) {
@@ -92,8 +93,10 @@ class Publication {
     async insertPublication(object) {
         return new Promise((resolve, reject) => {
             console.log(object);
-            if (object.latitude === '') object.latitude = 0
-            if (object.longitude === '') object.longitude = 0
+            if (object.latitude === '') object.latitude = -1
+            if (object.longitude === '') object.longitude = -1
+            if (object.latitude == null) object.latitude = -1;
+            if (object.longitude == null) object.longitude = -1;
             if (object.country == undefined) object.country = '';
 
             let selectQuery = "insert into publication(content,description,latitude,longitude,date,id_category,id_user,country,popularity) values('" + object.content + "','" + object.description + "'," + object.latitude + "," + object.longitude + ",'" + object.date + "'," + object.id_category + "," + object.id_user + ",'" + object.country + "',0)";
@@ -114,7 +117,10 @@ class Publication {
     async updatePublication(object) {
         return new Promise((resolve, reject) => {
             if (object.country == null) object.country = '';
-            let selectQuery = "update publication set content='" + object.content + "',id_category=" + object.id_category + ",id_user=" + object.id_user + ",date='" + object.date + "',description='" + object.description + "',latitude=" + object.latitude + ",longitude=" + object.longitude + " where id_publication = " + object.id_publication;
+            if (object.latitude == null) object.latitude = -1;
+            if (object.longitude == null) object.longitude = -1;
+
+            let selectQuery = "update publication set content='" + object.content + "',id_category=" + object.id_category + ",id_user=" + object.id_user + ",date='" + object.date + "',description='" + object.description + "' ,country= '" + object.country + "' where id_publication = " + object.id_publication;
             console.log(selectQuery)
             connection.query(selectQuery, async function (err, result) {
                 if (err) return reject(err);
@@ -132,6 +138,22 @@ class Publication {
     async getPublicationCategoriesCount() {
         return new Promise((resolve, reject) => {
             let selectQuery = "SELECT count(*) as count,cat_name FROM `publication` inner join category on publication.id_category=category.id_category group by category.id_category;";
+            const result = connection.query(selectQuery, async function (err, result) {
+                if (err) return reject(err);
+                try {
+                    if (result.length > 0) {
+                        resolve(result);
+                    } else resolve(false);
+                } catch (ex) {
+                    resolve(false);
+                }
+            });
+        });
+    }
+
+    async getPublicationCountryCount() {
+        return new Promise((resolve, reject) => {
+            let selectQuery = "SELECT count(*) as count,country as country FROM publication group by country;";
             const result = connection.query(selectQuery, async function (err, result) {
                 if (err) return reject(err);
                 try {

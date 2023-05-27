@@ -4,7 +4,17 @@ mat-card {
     margin: auto;
     margin-top: 40px;
     padding: 16px;
-    height: 825px;
+    height: 82%;
+    z-index: 10;
+    margin-bottom: 4%;
+}
+
+mat-card2 {
+    width: 550px;
+    margin: auto;
+    margin-top: 40px;
+    padding: 16px;
+    height: 905px !important;
     z-index: 10;
 }
 
