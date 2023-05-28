@@ -64,29 +64,34 @@ export class HomeComponent {
     if (dataCountry === 'United States of America') {
       dataCountry = 'USA'
       this.countryName = 'United States';
+      dataCountry= 'United States';
+
     }
     countryName!.innerHTML = dataCountry;
     let continent = data.REGION_UN;
     if (continent === 'Americas') continent = 'America';
-    this.getCountryDetails(data.NAME, continent);
+    this.getCountryDetails(this.countryName, continent);
     // countryHour!.innerHTML = data.NAME;
   }
 
   getCountryDetails(countryName: string, continent: string) {
     const countryHour = document.querySelector('#countryHour');
     const countryResume = document.querySelector('#countryResume');
+    const token = '252|ic2dbtvQL2qOA9RtoRKYVl1ys2vGyFlrcoHAipKQ';
     const options = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      },
       method: 'GET',
     };
-    const url = 'https://restcountries.com/v2/name/' + countryName;
-
+    //const url = 'https://restcountries.com/v2/name/' + countryName;
+    const url = 'https://restfulcountries.com/api/v1/countries/' + countryName;
     fetch(url, options)
       .then(response => response.json())
       .then(data => {
         console.log(data);
-        this.loadFlag(data[0].flags.png);
-        console.log(data[0].capital);
-
+        this.loadFlag(data.data.href.flag);
+        console.log(data.data.capital);
         const urlLink = 'http://localhost:3000/backend/api/countrycode/' + countryName;
         fetch(urlLink)
           .then(response => response.json())
@@ -96,8 +101,8 @@ export class HomeComponent {
           });
 
 
-        if (this.countryCodeSelected.toUpperCase() !== data[0].alpha2Code) {
-          this.countryCodeSelected = data[0].alpha2Code;
+        if (this.countryCodeSelected.toUpperCase() !== data.data.iso2) {
+          this.countryCodeSelected = data.data.iso2;
           console.log(this.countryCodeSelected);
           if (this.divContent == 'spotify') this.loadSpotifyOption();
           else if (this.divContent == 'news') this.loadNewsByCountry();
@@ -107,7 +112,7 @@ export class HomeComponent {
           else if (this.divContent == 'publications') this.getPublications();
         }
 
-        let capital = data[0].capital;
+        let capital = data.data.capital;
         if (capital == undefined) capital = '';
         countryResume!.innerHTML = capital;
         capital = this.removeAccents(capital);
@@ -122,9 +127,13 @@ export class HomeComponent {
 
         capital = capital.replaceAll("'", '').replaceAll(" ", '_');
 
+        const options2= {
+          method: 'GET',
+        };
+
         if (continent === 'Oceania') continent = 'Australia';
         const url2 = 'http://worldtimeapi.org/api/timezone/' + continent + "/" + capital;
-        fetch(url2, options)
+        fetch(url2, options2)
           .then(response => response.json())
           .then(data => {
             console.log(data.datetime);
@@ -305,7 +314,7 @@ export class HomeComponent {
     controls.enablePan = false;
 
     function instanceCamera() {
-      controls.enableDamping = true; 
+      controls.enableDamping = true;
       controls.dampingFactor = 0.05;
       controls.screenSpacePanning = false;
       controls.minDistance = 12;
