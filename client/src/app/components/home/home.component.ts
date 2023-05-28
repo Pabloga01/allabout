@@ -304,14 +304,8 @@ export class HomeComponent {
     var controls = new OrbitControls(camera, rendered.domElement);
     controls.enablePan = false;
 
-    // controls.maxDistance = 10;
-    // controls.minDistance = 7;
-    // controls.dampingFactor = 0.1;
-    // controls.rotateSpeed = 0.1;
-
-
     function instanceCamera() {
-      controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+      controls.enableDamping = true; 
       controls.dampingFactor = 0.05;
       controls.screenSpacePanning = false;
       controls.minDistance = 12;
@@ -510,23 +504,13 @@ export class HomeComponent {
     function checkIntersect(event: any) {
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(countries);
 
-
       if (intersects.length > 0) {
-        // intersects[0].object.material.color.set(0xff0000);
-        // countryFocus(intersects[0].object);
         console.log(intersects[0].object)
         scope.countryInfo(intersects[0].object.userData)
-
       }
-      // else {
-      //   // countries.forEach(country => {
-      //   //     country.material.color.set(0xff0000);
-      //   // });
-      // }
     }
 
     var countryCode = '';

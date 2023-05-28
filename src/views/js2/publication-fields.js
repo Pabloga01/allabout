@@ -79,27 +79,29 @@ if (btnAddPublication != null) {
         const selectCountries = document.querySelector('.country');
 
 
-        (async () => {
-            const publication = {
-                content: content.value,
-                description: description.value,
-                date: date.value,
-                id_user: user.value,
-                id_category: category.value,
-                country: selectCountries.value,
-            };
-            const settings = {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(publication),
-            };
-            const updateQuery = await fetch('http://localhost:3000/backend/api/insertpublication/', settings);
-            const data = await updateQuery.json();
-            if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
-        })()
+        if (content.value != '' && description.value != '' && date.value != '' && category.value != '' && selectCountries.value != '' && user.value != '') {
+            (async () => {
+                const publication = {
+                    content: content.value,
+                    description: description.value,
+                    date: date.value,
+                    id_user: user.value,
+                    id_category: category.value,
+                    country: selectCountries.value,
+                };
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(publication),
+                };
+                const updateQuery = await fetch('http://localhost:3000/backend/api/insertpublication/', settings);
+                const data = await updateQuery.json();
+                if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
+            })()
+        }
     });
 } else {
     btnEditPublication.addEventListener('click', () => {
@@ -111,32 +113,31 @@ if (btnAddPublication != null) {
         const selectCountries = document.querySelector('.country');
 
 
-
-        (async () => {
-
-            const parts = window.location.href.split("/");
-            const lastPart = parts.pop();
-
-            const publication = {
-                content: content.value,
-                description: description.value,
-                date: date.value,
-                id_user: user.value,
-                id_category: category.value,
-                id_publication: lastPart,
-                country: selectCountries.value,
-            };
-            const settings = {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(publication),
-            };
-            const updateQuery = await fetch('http://localhost:3000/backend/api/updatepublication/', settings);
-            const data = await updateQuery.json();
-            if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
-        })()
+        if (content.value != '' && description.value != '' && date.value != '' && category.value != '' && selectCountries.value != '' && user.value != '') {
+            (async () => {
+                const parts = window.location.href.split("/");
+                const lastPart = parts.pop();
+                const publication = {
+                    content: content.value,
+                    description: description.value,
+                    date: date.value,
+                    id_user: user.value,
+                    id_category: category.value,
+                    id_publication: lastPart,
+                    country: selectCountries.value,
+                };
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(publication),
+                };
+                const updateQuery = await fetch('http://localhost:3000/backend/api/updatepublication/', settings);
+                const data = await updateQuery.json();
+                if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
+            })()
+        }
     });
 }

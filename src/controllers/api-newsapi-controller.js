@@ -26,7 +26,7 @@ apiNewsapi.getNewsByCountry = (req, res) => {
             return response.json();
         })
         .then(data => {
-            console.log(data.articles); // Los titulares de noticias están en la propiedad "articles"
+            console.log(data.articles); 
             res.json(data.articles);
         })
         .catch(error => {

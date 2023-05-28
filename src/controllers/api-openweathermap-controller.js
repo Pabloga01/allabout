@@ -41,7 +41,6 @@ apiOpenWeatherMap.getWeatherByCity = (req, res) => {
     const apiKey = 'f55dc6f3eb5aaa59ee508d71cdffa0c8';
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-
     fetchRetry(apiUrl, 50, 250)
         .then(response => response.json())
         .then(data => {

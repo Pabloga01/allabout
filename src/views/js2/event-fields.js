@@ -18,29 +18,31 @@ if (btnAddEvent != null) {
         const longitude = document.querySelector('.longitude');
         const date = document.querySelector('.date');
         const category = document.querySelector('.category');
+        if (title.value != '' && content.value != '' && description.value != ''  && category.value != '' && content.value != '' && latitude.value != '' && longitude.value != '') {
 
-        (async () => {
-            const event = {
-                title: title.value,
-                description: description.value,
-                content: content.value,
-                latitude: latitude.value,
-                longitude: longitude.value,
-                date: date.value,
-                id_category: category.value,
-            };
-            const settings = {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(event),
-            };
-            const updateQuery = await fetch('http://localhost:3000/backend/api/insertevent/', settings);
-            const data = await updateQuery.json();
-            if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
-        })()
+            (async () => {
+                const event = {
+                    title: title.value,
+                    description: description.value,
+                    content: content.value,
+                    latitude: latitude.value,
+                    longitude: longitude.value,
+                    date: date.value,
+                    id_category: category.value,
+                };
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(event),
+                };
+                const updateQuery = await fetch('http://localhost:3000/backend/api/insertevent/', settings);
+                const data = await updateQuery.json();
+                if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
+            })()
+        }
     });
 } else {
     btnEditEvent.addEventListener('click', () => {
@@ -52,30 +54,34 @@ if (btnAddEvent != null) {
         const date = document.querySelector('.date');
         const category = document.querySelector('.category');
 
-        (async () => {
-            const parts = window.location.href.split("/");
-            const lastPart = parts.pop();
-            const event = {
-                title: title.value,
-                description: description.value,
-                content: content.value,
-                latitude: latitude.value,
-                longitude: longitude.value,
-                date: date.value,
-                id_category: category.value,
-                id_event:lastPart,
-            };
-            const settings = {
-                method: 'POST',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(event),
-            };
-            const updateQuery = await fetch('http://localhost:3000/backend/api/updateevent/', settings);
-            const data = await updateQuery.json();
-            if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
-        })()
+
+        if (title.value != '' && content.value != '' && description.value != '' && category.value != '' && content.value != '' && latitude.value != '' && longitude.value != '') {
+
+            (async () => {
+                const parts = window.location.href.split("/");
+                const lastPart = parts.pop();
+                const event = {
+                    title: title.value,
+                    description: description.value,
+                    content: content.value,
+                    latitude: latitude.value,
+                    longitude: longitude.value,
+                    date: date.value,
+                    id_category: category.value,
+                    id_event: lastPart,
+                };
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(event),
+                };
+                const updateQuery = await fetch('http://localhost:3000/backend/api/updateevent/', settings);
+                const data = await updateQuery.json();
+                if (typeof data !== 'false') window.location.href = 'http://localhost:3000/backend/tables';
+            })()
+        }
     });
 }
